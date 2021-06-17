@@ -1,0 +1,42 @@
+$black: #000;
+$black-2: #19191d;
+$black-2: #0f1a4f;
+$primary-color: #006fd6;
+$grey-1: #9696a0;
+
+$header-text-color: #2e2e2e;
+$paragraph-text-color: #6c6c6c;
+
+$gray: #b4b4b4;
+$light-gray: #f6f6f6;
+$hover-color: #f3efef;
+$white: #fff;
+
+$bg-left-color: $light-gray;
+$group-active-bg-color: $gray;
+$group-active-border-color: $primary-color;
+
+@mixin media-sm {
+  @media screen and (min-width: 500px) {
+    @content;
+  }
+}
+@mixin media-md {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+@mixin media-lg {
+  @media screen and (min-width: 1100px) {
+    @content;
+  }
+}
+@mixin media-xl {
+  @media screen and (min-width: 1600px) {
+    @content;
+  }
+}
+
+@mixin transition-ease {
+  transition: all 0.5s ease-in-out;
+}

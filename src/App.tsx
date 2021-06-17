@@ -1,26 +1,31 @@
-import './App.css';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import logo from './logo.svg';
+import Dashboard from './pages/Dashboard';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const url = '/api/tests';
+    dispatch({
+      type: {
+        progress: 'IN_PROGRESS_GET_USER',
+        success: 'SUCCESS_GET_USER',
+        failure: 'FAILURE_GET_USER',
+      },
+      url,
+      api: (apiClient: any) => apiClient.get(url),
+    });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
