@@ -21,7 +21,6 @@
   "plugins": ["react", "@typescript-eslint", "prettier", "simple-import-sort"],
   "rules": {
     "prettier/prettier": "error",
-    "linebreak-style": ["error", "unix"],
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
     "require-jsdoc": 0,

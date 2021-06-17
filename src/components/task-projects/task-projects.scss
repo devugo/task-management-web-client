@@ -1,0 +1,14 @@
+@import '../../scss/variable';
+
+.task-projects {
+  margin-top: 40px;
+  &__content {
+    height: 0;
+    overflow: hidden;
+    @include transition-ease;
+
+    &.open {
+      height: 200px;
+    }
+  }
+}

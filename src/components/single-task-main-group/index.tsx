@@ -1,21 +1,20 @@
-import './style.scss';
+import './single-task-main-group.scss';
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SingleTaskMainGroup = (props: { title: string; icon: string }) => {
-  const { title, icon } = props;
+const SingleTaskMainGroup = (props: { title: string; icon: string; bg: boolean }) => {
+  const { title, icon, bg } = props;
   return (
-    <div className={`single-task-main-group${title === 'Home' ? ' active' : ''}`}>
-      <Link to="/">
-        <div className="icon">
+    <Link to="/" className={`single-task-main-group${title === 'Home' ? ' active' : ''}`}>
+      <div className="single-task-main-group__content">
+        <div className={`icon${!bg ? ' hide-bg' : ''}`}>
           <i className={icon}></i>
         </div>
         <div className="title">
           <p>{title}</p>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

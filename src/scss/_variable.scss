@@ -1,20 +1,59 @@
-$black: #000;
-$black-2: #19191d;
-$black-2: #0f1a4f;
-$primary-color: #006fd6;
-$grey-1: #9696a0;
+//  LIGHT THEME
+html {
+  --black: #000;
+  --black-2: #19191d;
+  --black-2: #0f1a4f;
+  --primary-color: #006fd6;
+  --secondary-color: red;
 
-$header-text-color: #2e2e2e;
-$paragraph-text-color: #6c6c6c;
+  --gray: #b4b4b4;
+  --light-gray: #f6f6f6;
+  --white: #fff;
 
-$gray: #b4b4b4;
-$light-gray: #f6f6f6;
-$hover-color: #f3efef;
-$white: #fff;
+  --header-text-color: #2e2e2e;
+  --paragraph-text-color: #6c6c6c;
 
-$bg-left-color: $light-gray;
-$group-active-bg-color: $gray;
-$group-active-border-color: $primary-color;
+  // ICONS
+  --icon-bg-color: var(--primary-color);
+  --icon-color: var(--white);
+
+  // LEFT SIDEBAR
+  --group-active-bg-color: var(--gray);
+  --group-active-border-color: var(--secondary-color);
+  --sidebar-title-border-color: var(--secondary-color);
+  // MAIN GROUP
+  --task-main-group-border-color: var(--secondary-color);
+  --task-main-group-bg-color: var(--light-gray);
+  --main-group-icon-bg-color: var(--icon-bg-color);
+  --main-group-icon-color: var(--icon-color);
+  //  PROJECT GROUP
+}
+
+//  DARK THEME
+html[data-theme='dark'] {
+}
+
+$border: 2px solid;
+
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin border($color, $position) {
+  @if $position == top {
+    border-top: 2px solid $color;
+  } @else if $position == bottom {
+    border-bottom: 2px solid $color;
+  } @else if $position == left {
+    border-left: 2px solid $color;
+  } @else if $position == right {
+    border-right: 2px solid $color;
+  } @else {
+    border: 2px solid $color;
+  }
+}
 
 @mixin media-sm {
   @media screen and (min-width: 500px) {
