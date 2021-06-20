@@ -1,18 +1,31 @@
 import './auth.scss';
 
+import { LoadingOutlined } from '@ant-design/icons';
 import { Alert } from 'antd';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-// import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from '../../components/button';
 import RenderIcon from '../../components/icons/RenderIcon';
 import Input from '../../components/input';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { showMessage } from '../../helpers/functions/showMessage';
 import { signup } from '../../store/actions/auth';
-import { SignupType } from '../../types.d';
+import { SIGNUP_USER } from '../../store/actions/types';
+import { LoaderType, RootStateType, SignupType } from '../../types.d';
+
+const renderServerMessage = (messageObj: LoaderType): string => {
+  const message = messageObj?.response?.data?.message as string | string[];
+  if (typeof message === 'string') {
+    return message;
+  } else if (typeof message === 'object') {
+    return message[0];
+  }
+  return '';
+};
 
 const initialFormValues: SignupType = {
   email: EMPTY_STRING,
@@ -31,11 +44,24 @@ const validationSchema = Yup.object({
 
 const Register = () => {
   const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const loaders = useSelector((state: RootStateType) => state.loader);
+  const loading = loaders.find((x) => x.type === SIGNUP_USER.IN_PROGRESS) as LoaderType;
+  const errorData = loaders.find((x) => x.type === SIGNUP_USER.FAILURE) as LoaderType;
+  const successData = loaders.find((x) => x.type === SIGNUP_USER.SUCCESS) as LoaderType;
+
   const signUpWithEmailAndPasswordHandler = (values: SignupType) => {
     const { email, password, username } = values;
     dispatch(signup({ email, password, username }));
   };
+
+  useEffect(() => {
+    if (successData?.response?.status == 201) {
+      showMessage('success', 'Registration was successfully', 4);
+      history.replace('/login');
+    }
+  }, [successData]);
   return (
     <div className="auth">
       <div className="devugo-card">
@@ -47,26 +73,22 @@ const Register = () => {
         <Formik
           initialValues={initialFormValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            // setLoading({
-            //     ...loading,
-            //     form: true
-            // })
-
-            // processLogin(values);
+          onSubmit={(values) => {
             signUpWithEmailAndPasswordHandler(values);
           }}
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-              <div className="server-message mb-2 mt-2">
-                <Alert
-                  message="Error"
-                  description="This is an error message about copywriting."
-                  type="error"
-                  showIcon
-                />
-              </div>
+              {renderServerMessage(errorData).length > 0 && (
+                <div className="server-message mb-2 mt-2">
+                  <Alert
+                    message="Error"
+                    description={renderServerMessage(errorData)}
+                    type="error"
+                    showIcon
+                  />
+                </div>
+              )}
               <div className="input-container">
                 <label>
                   <RenderIcon title="mdi mdi-email" /> Email
@@ -128,7 +150,10 @@ const Register = () => {
                   {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                 </small>
               </div>
-              <Button type="submit">Register</Button>
+              <Button type="submit">
+                Register
+                {loading && <LoadingOutlined spin />}
+              </Button>
 
               <div className="center mt-2">
                 <p>

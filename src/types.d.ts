@@ -10,3 +10,9 @@ export type SignupType = {
   password: string;
   confirmPassword: string;
 };
+
+export type LoaderType = { type: string; response: any };
+
+export type RootStateType = {
+  loader: LoaderType[];
+};

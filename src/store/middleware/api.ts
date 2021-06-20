@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { ActionType } from '../../types.d';
 
-const axiosClient = axios.create({
+const axiosClient: any = axios.create({
   baseURL: 'http://localhost:4000/',
   // headers: { Authorization: `Bearer ${'token'}` },
 });
@@ -15,20 +15,16 @@ type ActionObject = {
 
 const apiMiddleware = (store: any) => (next: any) => async (action: ActionObject) => {
   const { api, type } = action;
-  console.log(action);
-  try {
-    next({ type: type.IN_PROGRESS });
-    await api(axiosClient);
-    next({ type: type.SUCCESS });
-  } catch (err) {
-    // console.log(err.message);
-    console.log(err.response);
-    next({ type: type.FAILURE });
-  }
-  // console.log('customMiddleware', action);
-  // console.log('store', store.getState());
-  // console.log('next', next);
-  // next({ name: 'mike', type: 'new' });
+  next({ type: type.IN_PROGRESS, response: null });
+
+  const promise = api(axiosClient) as any;
+  promise
+    .then((response: any) => {
+      next({ type: type.SUCCESS, response: response });
+    })
+    .catch((error: any) => {
+      next({ type: type.FAILURE, response: error.response });
+    });
 };
 
 export default apiMiddleware;
