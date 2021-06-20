@@ -1,0 +1,10 @@
+@import '../../scss/variable';
+
+.right-sidebar {
+  width: 200px;
+  position: fixed;
+  top: 80px;
+  pointer-events: all;
+  right: calc((100vw - 1215px) / 2);
+  background: var(--task-main-group-bg-color);
+}

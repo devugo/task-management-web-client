@@ -1,4 +1,4 @@
-import './style.scss';
+import './task-main-group.scss';
 
 import { Fragment } from 'react';
 

@@ -2,5 +2,8 @@
 
 .left-sidebar {
   width: 200px;
+  position: fixed;
+  pointer-events: all;
+  top: 80px;
   background: var(--task-main-group-bg-color);
 }

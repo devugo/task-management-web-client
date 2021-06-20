@@ -1,4 +1,6 @@
+import 'antd/dist/antd.css';
 import './index.css';
+import './scss/general.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

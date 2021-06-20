@@ -1,0 +1,16 @@
+@import '../../scss/variable';
+
+.page-header {
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  background-image: var(--gradient);
+  z-index: 5;
+  @include flex-center-center;
+
+  h1 {
+    font-size: 30px;
+    color: var(--page-header-text-color);
+    text-shadow: $text-shadow;
+  }
+}

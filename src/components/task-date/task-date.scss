@@ -1,0 +1,17 @@
+@import '../../scss/variable';
+
+.task-date {
+  height: 20px;
+  color: var(--task-date-color);
+  border: 1px solid var(--task-date-border-color);
+  background-color: var(--task-date-bg-color);
+  width: 50px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 10px;
+  }
+}

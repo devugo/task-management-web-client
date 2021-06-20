@@ -1,0 +1,19 @@
+@import '../../scss/variable';
+
+.task-label {
+  padding: 0 3px;
+  margin-right: 5px;
+  height: 20px;
+  color: var(--task-label-color);
+  border: 1px solid var(--task-label-border-color);
+  background-color: var(--task-label-bg-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 10px;
+    margin-left: 3px;
+  }
+}

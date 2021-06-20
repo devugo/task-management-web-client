@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Dashboard from './pages/Dashboard';
+import PageHeader from './components/page-header';
+import Login from './pages/auth/Login';
+import Dashboard from './pages/dashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,8 +23,10 @@ const App = () => {
   }, []);
   return (
     <Router>
+      <PageHeader />
       <Switch>
         <Route exact path="/" component={Dashboard} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     </Router>
   );

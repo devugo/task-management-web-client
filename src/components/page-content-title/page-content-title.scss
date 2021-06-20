@@ -1,0 +1,11 @@
+@import '../../scss/variable';
+
+.page-content-title {
+  background-color: var(--page-content-title-bg-color);
+  padding: 7px 10px 1px 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--page-content-title-border-color);
+  h2 {
+    color: var(--page-content-title-color);
+  }
+}

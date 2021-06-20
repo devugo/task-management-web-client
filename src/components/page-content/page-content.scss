@@ -1,0 +1,8 @@
+@import '../../scss/variable';
+
+.page-content {
+  width: calc(100% - 400px);
+  background-color: var(--page-content-bg-color);
+  margin: 0 auto;
+  padding-top: 80px;
+}

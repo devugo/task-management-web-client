@@ -1,0 +1,18 @@
+.task-content {
+  margin-left: 20px;
+
+  &__tags {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .task-groups {
+      &-one {
+        display: flex;
+      }
+      &-two {
+        display: flex;
+        margin-top: 5px;
+      }
+    }
+  }
+}

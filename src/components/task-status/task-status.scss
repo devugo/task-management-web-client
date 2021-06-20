@@ -1,0 +1,29 @@
+@import '../../scss/variable';
+
+.task-status {
+  color: var(--task-status-text-color);
+  font-size: 13px;
+  border-radius: 15px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 4px;
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  &.none {
+    background-color: var(--task-status-none-color);
+  }
+  &.in-progress {
+    background-color: var(--task-status-in-progress-color);
+  }
+  &.completed {
+    background-color: var(--task-status-in-progress-color);
+  }
+
+  span {
+    margin-left: 2px;
+    margin-top: -3px;
+  }
+}

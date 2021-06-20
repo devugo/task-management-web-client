@@ -1,6 +1,6 @@
-import './style.scss';
+import './page-wrapper.scss';
 
-const PageWrapper = (props: any) => {
+const PageWrapper = (props: { children: any }) => {
   return <div className="page-wrapper">{props.children}</div>;
 };
 

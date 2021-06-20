@@ -1,12 +1,12 @@
-import './task-projects.scss';
+import './task-labels.scss';
 
 import { Fragment, useState } from 'react';
 
-import { projectGroupItems } from '../../constants/projectGroupItems';
+import { labelGroupItems } from '../../constants/labelGroupItems';
 import SidebarTitle from '../sidebar-title';
 import SingleTaskMainGroup from '../single-task-main-group';
 
-const TaskProjects = () => {
+const TaskLabels = () => {
   const [open, setOpen] = useState(false);
 
   const changeOpen = (): void => {
@@ -14,10 +14,10 @@ const TaskProjects = () => {
   };
 
   return (
-    <div className="task-projects">
-      <SidebarTitle changeOpen={changeOpen} title="Projects" />
-      <div className={`task-projects__content${open ? ' open' : ''}`}>
-        {projectGroupItems.map((group, index) => (
+    <div className="task-labels">
+      <SidebarTitle changeOpen={changeOpen} title="Labels" />
+      <div className={`task-labels__content${open ? ' open' : ''}`}>
+        {labelGroupItems.map((group, index) => (
           <Fragment key={index}>
             <SingleTaskMainGroup bg={false} {...group} />
           </Fragment>
@@ -27,4 +27,4 @@ const TaskProjects = () => {
   );
 };
 
-export default TaskProjects;
+export default TaskLabels;

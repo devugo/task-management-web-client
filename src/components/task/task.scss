@@ -1,0 +1,13 @@
+@import '../../scss/variable';
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  border: 1px solid var(--task-border-color);
+  background-color: var(--task-bg-color);
+  border-radius: 20px;
+  position: relative;
+  margin-bottom: 10px;
+}
