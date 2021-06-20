@@ -10,25 +10,29 @@ import RenderIcon from '../../components/icons/RenderIcon';
 import Input from '../../components/input';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 
-const initialFormValues: { email: string; password: string } = {
+const initialFormValues: { email: string; password: string; confirmPassword: string } = {
   email: EMPTY_STRING,
   password: EMPTY_STRING,
+  confirmPassword: EMPTY_STRING,
 };
 
 const validationSchema = Yup.object({
   email: Yup.string().required('Email is required').email('Please, provide a valid email address'),
   password: Yup.string().required('Password is required'),
+  confirmPassword: Yup.string()
+    .required('Please confirm password')
+    .oneOf([Yup.ref('password')], 'Confirm password must match password'),
 });
 
-const Login = () => {
+const Register = () => {
   // const [loading, setLoading] = useState(false);
-  const signInWithEmailAndPasswordHandler = (email: string, password: string) => {};
+  const signUpWithEmailAndPasswordHandler = (email: string, password: string) => {};
   return (
     <div className="auth">
       <div className="devugo-card">
         {/* <div className="logo"><img src={LogoText} alt="logo-text" /></div> */}
         <p className="center">
-          <strong>Sign in to continue!</strong>
+          <strong>Sign up to continue!</strong>
         </p>
 
         <Formik
@@ -42,7 +46,7 @@ const Login = () => {
             // })
 
             // processLogin(values);
-            signInWithEmailAndPasswordHandler(values.email, values.password);
+            signUpWithEmailAndPasswordHandler(values.email, values.password);
           }}
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
@@ -77,26 +81,27 @@ const Login = () => {
                   {errors.password && touched.password && errors.password}
                 </small>
               </div>
-              <Button type="submit">Login</Button>
-              {/* <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                        disabled={loading.google || loading.form}
-                    >
-                        Sign in
-                        {
-                            loading.form ? <CircularProgress size={20} style={{color: 'white'}} /> : ''
-                        }
-                    </Button> */}
-
-              {/* <div className="text-center mt-3">
-                <p>OR</p>
-              </div> */}
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-lock" /> Confirm Password
+                </label>
+                <Input
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Enter your password again"
+                  value={values.confirmPassword}
+                />
+                <small className="danger">
+                  {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                </small>
+              </div>
+              <Button type="submit">Register</Button>
 
               <div className="center mt-2">
                 <p>
-                  Dont have an account? <Link to="/register">Sign up here</Link>
+                  Already have an account? <Link to="/login">Sign in here</Link>
                 </p>
                 <p>
                   <Link to="/password-reset">Forgot password?</Link>
@@ -110,4 +115,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

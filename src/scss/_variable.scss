@@ -79,6 +79,12 @@ html {
 
   // INPUT
   --input-border-color-focus: var(--tertiary-color);
+  --input-bg-color: rgb(248, 248, 255);
+  --input-disabled-bg-color: #ebeaea;
+
+  // BUTTON
+  --button-bg: var(--primary-color);
+  --button-border-color: var(--primary-color);
 }
 
 //  DARK THEME
@@ -150,4 +156,24 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
 
 .center {
   text-align: center;
+}
+
+.danger {
+  color: #ff4444;
+}
+
+.warning {
+  color: #ffbb33;
+}
+
+.success {
+  color: #00c851;
+}
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+.mt-2 {
+  margin-top: 20px;
 }
