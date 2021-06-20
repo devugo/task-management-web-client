@@ -1,10 +1,11 @@
 import axios from 'axios';
 
+import { retrieveFromStorage } from '../../helpers/functions/localStorage';
 import { ActionType } from '../../types.d';
 
 const axiosClient: any = axios.create({
   baseURL: 'http://localhost:4000/',
-  // headers: { Authorization: `Bearer ${'token'}` },
+  headers: { Authorization: `Bearer ${retrieveFromStorage('token')}` },
 });
 
 type ActionObject = {

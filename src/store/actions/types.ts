@@ -11,5 +11,6 @@ const compose = (action: string): ActionType => {
 };
 
 const SIGNUP_USER = compose(ACTION_NAME.SIGNUP_USER);
+const SIGNIN_USER = compose(ACTION_NAME.SIGNIN_USER);
 
-export { SIGNUP_USER };
+export { SIGNIN_USER, SIGNUP_USER };

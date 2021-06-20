@@ -11,6 +11,11 @@ export type SignupType = {
   confirmPassword: string;
 };
 
+export type SigninType = {
+  email: string;
+  password: string;
+};
+
 export type LoaderType = { type: string; response: any };
 
 export type RootStateType = {

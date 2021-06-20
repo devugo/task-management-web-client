@@ -1,16 +1,24 @@
 import './auth.scss';
 
+import { LoadingOutlined } from '@ant-design/icons';
+import { Alert } from 'antd';
 import { Formik } from 'formik';
-// import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from '../../components/button';
 import RenderIcon from '../../components/icons/RenderIcon';
 import Input from '../../components/input';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { renderServerError } from '../../helpers/functions/renderServerError';
+import { showMessage } from '../../helpers/functions/showMessage';
+import { signin } from '../../store/actions/auth';
+import { SIGNIN_USER } from '../../store/actions/types';
+import { LoaderType, RootStateType, SigninType } from '../../types.d';
 
-const initialFormValues: { email: string; password: string } = {
+const initialFormValues: SigninType = {
   email: EMPTY_STRING,
   password: EMPTY_STRING,
 };
@@ -21,8 +29,26 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
-  // const [loading, setLoading] = useState(false);
-  const signInWithEmailAndPasswordHandler = (email: string, password: string) => {};
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const loaders = useSelector((state: RootStateType) => state.loader);
+  const progressData = loaders.find((x) => x.type === SIGNIN_USER.IN_PROGRESS) as LoaderType;
+  const loading = progressData ? true : false;
+  const errorData = loaders.find((x) => x.type === SIGNIN_USER.FAILURE) as LoaderType;
+  const successData = loaders.find((x) => x.type === SIGNIN_USER.SUCCESS) as LoaderType;
+
+  const signInWithEmailAndPasswordHandler = (values: SigninType) => {
+    dispatch(signin(values));
+  };
+
+  useEffect(() => {
+    if (successData?.response?.status == 201) {
+      showMessage('success', 'Login was successfully', 4);
+      history.replace('/');
+    }
+  }, [successData]);
+
   return (
     <div className="auth">
       <div className="devugo-card">
@@ -34,19 +60,22 @@ const Login = () => {
         <Formik
           initialValues={initialFormValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
-            // setLoading({
-            //     ...loading,
-            //     form: true
-            // })
-
-            // processLogin(values);
-            signInWithEmailAndPasswordHandler(values.email, values.password);
+          onSubmit={(values) => {
+            signInWithEmailAndPasswordHandler(values);
           }}
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
+              {renderServerError(errorData).length > 0 && (
+                <div className="server-message mb-2 mt-2">
+                  <Alert
+                    message="Error"
+                    description={renderServerError(errorData)}
+                    type="error"
+                    showIcon
+                  />
+                </div>
+              )}
               <div className="input-container">
                 <label>
                   <RenderIcon title="mdi mdi-email" /> Email
@@ -77,7 +106,9 @@ const Login = () => {
                   {errors.password && touched.password && errors.password}
                 </small>
               </div>
-              <Button type="submit">Login</Button>
+              <Button disabled={loading} type="submit">
+                Login {loading && <LoadingOutlined spin />}
+              </Button>
               {/* <Button
                         color="primary"
                         variant="contained"

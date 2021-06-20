@@ -12,20 +12,11 @@ import Button from '../../components/button';
 import RenderIcon from '../../components/icons/RenderIcon';
 import Input from '../../components/input';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
 import { signup } from '../../store/actions/auth';
 import { SIGNUP_USER } from '../../store/actions/types';
 import { LoaderType, RootStateType, SignupType } from '../../types.d';
-
-const renderServerMessage = (messageObj: LoaderType): string => {
-  const message = messageObj?.response?.data?.message as string | string[];
-  if (typeof message === 'string') {
-    return message;
-  } else if (typeof message === 'object') {
-    return message[0];
-  }
-  return '';
-};
 
 const initialFormValues: SignupType = {
   email: EMPTY_STRING,
@@ -47,7 +38,8 @@ const Register = () => {
   const history = useHistory();
 
   const loaders = useSelector((state: RootStateType) => state.loader);
-  const loading = loaders.find((x) => x.type === SIGNUP_USER.IN_PROGRESS) as LoaderType;
+  const progressData = loaders.find((x) => x.type === SIGNUP_USER.IN_PROGRESS) as LoaderType;
+  const loading = progressData ? true : false;
   const errorData = loaders.find((x) => x.type === SIGNUP_USER.FAILURE) as LoaderType;
   const successData = loaders.find((x) => x.type === SIGNUP_USER.SUCCESS) as LoaderType;
 
@@ -79,11 +71,11 @@ const Register = () => {
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-              {renderServerMessage(errorData).length > 0 && (
+              {renderServerError(errorData).length > 0 && (
                 <div className="server-message mb-2 mt-2">
                   <Alert
                     message="Error"
-                    description={renderServerMessage(errorData)}
+                    description={renderServerError(errorData)}
                     type="error"
                     showIcon
                   />
@@ -150,7 +142,7 @@ const Register = () => {
                   {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                 </small>
               </div>
-              <Button type="submit">
+              <Button type="submit" disabled={loading}>
                 Register
                 {loading && <LoadingOutlined spin />}
               </Button>

@@ -1,13 +1,11 @@
 import { ACTION_STATUS } from '../../constants/ACTION_STATUS';
 import { bindActionDetail } from '../../helpers/functions/bindActionDetail';
 import { getActionDetail } from '../../helpers/functions/getActionDetail';
-// import { removeFromArray } from '../../helpers/functions/removeFromArray';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.loaders;
 
 const loaderReducer = (state = initialState, action: { type: string; response: any }) => {
-  // console.log('actions', action);
   const { type, response } = action;
   const actionStatus = getActionDetail(type).status;
   const actionName = getActionDetail(type).name;
