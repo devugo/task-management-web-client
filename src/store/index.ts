@@ -2,8 +2,8 @@ import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { middleware } from './middleware';
-import testReducer from './reducers/test';
+import { reducer } from './reducers';
 
-const store = createStore(testReducer, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware)));
 
 export default store;
