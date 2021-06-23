@@ -12,5 +12,7 @@ const compose = (action: string): ActionType => {
 
 const SIGNUP_USER = compose(ACTION_NAME.SIGNUP_USER);
 const SIGNIN_USER = compose(ACTION_NAME.SIGNIN_USER);
+const KEEP_AUTH_USER = compose(ACTION_NAME.KEEP_AUTH_USER);
+const READ_PROJECTS = compose(ACTION_NAME.READ_PROJECTS);
 
-export { SIGNIN_USER, SIGNUP_USER };
+export { KEEP_AUTH_USER, READ_PROJECTS, SIGNIN_USER, SIGNUP_USER };

@@ -1,6 +1,7 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import PageHeader from './components/page-header';
+import Auth from './interceptors/Auth';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Dashboard from './pages/dashboard';
@@ -10,9 +11,9 @@ const App = () => {
     <Router>
       <PageHeader />
       <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
+        <Auth isAuth exact path="/" component={Dashboard} />
+        <Auth isAuth={false} exact path="/login" component={Login} />
+        <Auth isAuth={false} exact path="/register" component={Register} />
       </Switch>
     </Router>
   );

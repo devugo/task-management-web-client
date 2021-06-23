@@ -4,5 +4,6 @@ export const DEFAULT_STATE = {
     accessToken: null,
     username: '',
     email: '',
+    loggedIn: false,
   },
 };

@@ -1,5 +1,6 @@
+import { GET_TOKEN } from '../../constants/GET_TOKEN';
 import { saveToStorage } from '../../helpers/functions/localStorage';
-import { SIGNIN_USER } from '../actions/types';
+import { KEEP_AUTH_USER, SIGNIN_USER } from '../actions/types';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.auth;
@@ -11,7 +12,12 @@ const authReducer = (state = initialState, action: { type: string; response: any
     case SIGNIN_USER.SUCCESS: {
       const responseData = response.data;
       saveToStorage('token', responseData.accessToken);
-      return responseData;
+      return { ...state, loggedIn: true, ...responseData };
+    }
+
+    case KEEP_AUTH_USER.SUCCESS: {
+      const responseData = response.data;
+      return { ...state, loggedIn: true, ...responseData, accessToken: GET_TOKEN };
     }
     default: {
       return state;

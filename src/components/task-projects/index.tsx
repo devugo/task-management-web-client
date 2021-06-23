@@ -1,17 +1,24 @@
 import './task-projects.scss';
 
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { projectGroupItems } from '../../constants/projectGroupItems';
+import { getProjects } from '../../store/actions/project';
 import SidebarTitle from '../sidebar-title';
 import SingleTaskMainGroup from '../single-task-main-group';
 
 const TaskProjects = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const changeOpen = (): void => {
     setOpen((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    dispatch(getProjects());
+  }, []);
 
   return (
     <div className="task-projects">

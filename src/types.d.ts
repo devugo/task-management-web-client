@@ -17,7 +17,9 @@ export type SigninType = {
 };
 
 export type LoaderType = { type: string; response: any };
+export type AuthType = { accessToken: string; username: string; email: string; loggedIn: boolean };
 
 export type RootStateType = {
   loader: LoaderType[];
+  auth: AuthType;
 };
