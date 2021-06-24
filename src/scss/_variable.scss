@@ -71,6 +71,10 @@ html {
   --group-active-bg-color: var(--gray);
   --group-active-border-color: var(--secondary-color);
   --sidebar-title-border-color: var(--secondary-color);
+
+  // SIDEBAR ADD NEW
+  --sidebar-add-new-color: var(--green);
+
   // MAIN GROUP
   --task-main-group-border-color: var(--secondary-color);
   --task-main-group-bg-color: var(--white);
@@ -172,6 +176,13 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
 
 .input-container {
   margin-bottom: 20px;
+}
+
+.devugo-form {
+  button {
+    width: 100%;
+    height: 50px;
+  }
 }
 
 .mt-2 {

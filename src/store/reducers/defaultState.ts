@@ -6,4 +6,8 @@ export const DEFAULT_STATE = {
     email: '',
     loggedIn: false,
   },
+  projects: {
+    data: [],
+    count: 0,
+  },
 };

@@ -1,6 +1,6 @@
-import { LoaderType } from '../../types.d';
+import { ApiResponseType } from '../../types.d';
 
-export const renderServerError = (messageObj: LoaderType): string => {
+export const renderServerError = (messageObj: ApiResponseType): string => {
   const message = messageObj?.response?.data?.message as string | string[];
   if (typeof message === 'string') {
     return message;

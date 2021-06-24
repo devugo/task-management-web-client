@@ -1,9 +1,9 @@
-import { ActionType, LoaderType } from '../../types.d';
+import { ActionType, ApiResponseType } from '../../types.d';
 
-export const getLoader = (loader: LoaderType[], api: ActionType) => {
-  const successData = loader.find((x) => x.type === api.SUCCESS) as LoaderType;
-  const errorData = loader.find((x) => x.type === api.FAILURE) as LoaderType;
-  const progressData = loader.find((x) => x.type === api.IN_PROGRESS) as LoaderType;
+export const getLoader = (loader: ApiResponseType[], api: ActionType) => {
+  const successData = loader.find((x) => x.type === api.SUCCESS) as ApiResponseType;
+  const errorData = loader.find((x) => x.type === api.FAILURE) as ApiResponseType;
+  const progressData = loader.find((x) => x.type === api.IN_PROGRESS) as ApiResponseType;
 
   return { successData, errorData, progressData };
 };

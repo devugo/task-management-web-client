@@ -16,7 +16,7 @@ import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
 import { signup } from '../../store/actions/auth';
 import { SIGNUP_USER } from '../../store/actions/types';
-import { LoaderType, RootStateType, SignupType } from '../../types.d';
+import { ApiResponseType, RootStateType, SignupType } from '../../types.d';
 
 const initialFormValues: SignupType = {
   email: EMPTY_STRING,
@@ -38,10 +38,10 @@ const Register = () => {
   const history = useHistory();
 
   const loaders = useSelector((state: RootStateType) => state.loader);
-  const progressData = loaders.find((x) => x.type === SIGNUP_USER.IN_PROGRESS) as LoaderType;
+  const progressData = loaders.find((x) => x.type === SIGNUP_USER.IN_PROGRESS) as ApiResponseType;
   const loading = progressData ? true : false;
-  const errorData = loaders.find((x) => x.type === SIGNUP_USER.FAILURE) as LoaderType;
-  const successData = loaders.find((x) => x.type === SIGNUP_USER.SUCCESS) as LoaderType;
+  const errorData = loaders.find((x) => x.type === SIGNUP_USER.FAILURE) as ApiResponseType;
+  const successData = loaders.find((x) => x.type === SIGNUP_USER.SUCCESS) as ApiResponseType;
 
   const signUpWithEmailAndPasswordHandler = (values: SignupType) => {
     const { email, password, username } = values;
@@ -70,7 +70,7 @@ const Register = () => {
           }}
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="devugo-form">
               {renderServerError(errorData).length > 0 && (
                 <div className="server-message mb-2 mt-2">
                   <Alert

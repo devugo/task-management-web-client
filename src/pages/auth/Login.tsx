@@ -12,11 +12,12 @@ import Button from '../../components/button';
 import RenderIcon from '../../components/icons/RenderIcon';
 import Input from '../../components/input';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
 import { signin } from '../../store/actions/auth';
 import { SIGNIN_USER } from '../../store/actions/types';
-import { LoaderType, RootStateType, SigninType } from '../../types.d';
+import { RootStateType, SigninType } from '../../types.d';
 
 const initialFormValues: SigninType = {
   email: EMPTY_STRING,
@@ -32,11 +33,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const loaders = useSelector((state: RootStateType) => state.loader);
-  const progressData = loaders.find((x) => x.type === SIGNIN_USER.IN_PROGRESS) as LoaderType;
+  const loader = useSelector((state: RootStateType) => state.loader);
+
+  const { progressData, successData, errorData } = getLoader(loader, SIGNIN_USER);
   const loading = progressData ? true : false;
-  const errorData = loaders.find((x) => x.type === SIGNIN_USER.FAILURE) as LoaderType;
-  const successData = loaders.find((x) => x.type === SIGNIN_USER.SUCCESS) as LoaderType;
 
   const signInWithEmailAndPasswordHandler = (values: SigninType) => {
     dispatch(signin(values));
@@ -65,7 +65,7 @@ const Login = () => {
           }}
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="devugo-form">
               {renderServerError(errorData).length > 0 && (
                 <div className="server-message mb-2 mt-2">
                   <Alert

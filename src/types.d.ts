@@ -16,10 +16,16 @@ export type SigninType = {
   password: string;
 };
 
-export type LoaderType = { type: string; response: any };
+export type ApiResponseType = { type: string; response: any };
 export type AuthType = { accessToken: string; username: string; email: string; loggedIn: boolean };
 
 export type RootStateType = {
-  loader: LoaderType[];
+  loader: ApiResponseType[];
   auth: AuthType;
+};
+
+export type ProjectType = {
+  title: string;
+  description: string;
+  color: string;
 };
