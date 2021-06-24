@@ -1,14 +1,16 @@
 import './task-projects.scss';
 
+import { LoadingOutlined } from '@ant-design/icons';
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { projectGroupItems } from '../../constants/projectGroupItems';
+import { ICONS } from '../../constants/ICONS';
+// import { projectGroupItems } from '../../constants/projectGroupItems';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { successCreation } from '../../helpers/functions/responseChecker';
 import { showMessage } from '../../helpers/functions/showMessage';
 import { getProjects } from '../../store/actions/project';
-import { CREATE_PROJECT } from '../../store/actions/types';
+import { CREATE_PROJECT, READ_PROJECTS } from '../../store/actions/types';
 import { RootStateType } from '../../types.d';
 import ProjectForm from '../project-form';
 import SidebarAddNew from '../sidebar-add-new';
@@ -20,8 +22,14 @@ const TaskProjects = () => {
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { loader } = useSelector((state: RootStateType) => state);
+  const { loader, projects } = useSelector((state: RootStateType) => state);
+  const projectData = projects.data;
 
+  // READING
+  const readProjectLoaders = getLoader(loader, READ_PROJECTS);
+  const { progressData } = readProjectLoaders;
+  const fetching = progressData ? true : false;
+  // CREATING
   const { successData } = getLoader(loader, CREATE_PROJECT);
   const isCreated = successCreation(successData);
 
@@ -52,11 +60,20 @@ const TaskProjects = () => {
     <div className="task-projects">
       <SidebarTitle changeOpen={changeOpen} title="Projects" />
       <div className={`task-projects__content${open ? ' open' : ''}`}>
-        {projectGroupItems.map((group, index) => (
-          <Fragment key={index}>
-            <SingleTaskMainGroup bg={false} {...group} />
-          </Fragment>
-        ))}
+        {fetching ? (
+          <div className="center">
+            <LoadingOutlined spin />
+          </div>
+        ) : (
+          projectData.map((group, index) => {
+            return (
+              <Fragment key={index}>
+                <SingleTaskMainGroup icon={ICONS.project} bg={false} {...group} />
+              </Fragment>
+            );
+          })
+        )}
+
         <SidebarAddNew title="Add New" toggleModal={showModal} />
       </div>
       <ProjectForm title="Add Project" modalVisible={modalVisible} handleCancel={handleCancel} />

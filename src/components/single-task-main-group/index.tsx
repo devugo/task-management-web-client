@@ -8,7 +8,11 @@ const SingleTaskMainGroup = (props: {
   bg: boolean;
   color?: string;
 }) => {
-  const { title, icon, bg, color } = props;
+  let { title, icon, bg, color } = props;
+
+  if (color === '#ffffff') {
+    color = '';
+  }
   return (
     <Link to="/" className={`single-task-main-group${title === 'Home' ? ' active' : ''}`}>
       <div className="single-task-main-group__content">

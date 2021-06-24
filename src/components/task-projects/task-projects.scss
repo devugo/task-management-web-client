@@ -4,7 +4,7 @@
   margin-top: 40px;
   &__content {
     max-height: 0;
-    overflow: hidden;
+    overflow: auto;
     @include transition-ease;
 
     &.open {

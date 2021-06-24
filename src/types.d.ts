@@ -19,13 +19,14 @@ export type SigninType = {
 export type ApiResponseType = { type: string; response: any };
 export type AuthType = { accessToken: string; username: string; email: string; loggedIn: boolean };
 
-export type RootStateType = {
-  loader: ApiResponseType[];
-  auth: AuthType;
-};
-
 export type ProjectType = {
   title: string;
   description: string;
   color: string;
+};
+
+export type RootStateType = {
+  loader: ApiResponseType[];
+  auth: AuthType;
+  projects: { data: ProjectType[]; count: number };
 };
