@@ -25,8 +25,14 @@ export type ProjectType = {
   color: string;
 };
 
+export type LabelType = {
+  title: string;
+  color: string;
+};
+
 export type RootStateType = {
   loader: ApiResponseType[];
   auth: AuthType;
   projects: { data: ProjectType[]; count: number };
+  labels: { data: LabelType[]; count: number };
 };

@@ -8,27 +8,24 @@ import * as Yup from 'yup';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
-import { createProject } from '../../store/actions/project';
-import { CREATE_PROJECT } from '../../store/actions/types';
-import { ProjectType, RootStateType } from '../../types.d';
+import { createLabel } from '../../store/actions/label';
+import { CREATE_LABEL } from '../../store/actions/types';
+import { LabelType, RootStateType } from '../../types.d';
 import Button from '../button';
 import RenderIcon from '../icons/RenderIcon';
 import Input from '../input';
-import TextareaInput from '../textarea-input';
 
-const initialFormValues: ProjectType = {
+const initialFormValues: LabelType = {
   title: EMPTY_STRING,
-  description: EMPTY_STRING,
   color: '#ffffff',
 };
 
 const validationSchema = Yup.object({
   title: Yup.string().required('Please, provide a title'),
   color: Yup.string().required('Please, provide a color'),
-  description: Yup.string().nullable(),
 });
 
-const ProjectForm = ({
+const LabelForm = ({
   title,
   modalVisible,
   handleCancel,
@@ -41,11 +38,11 @@ const ProjectForm = ({
 
   const { loader } = useSelector((state: RootStateType) => state);
 
-  const { errorData, progressData } = getLoader(loader, CREATE_PROJECT);
+  const { errorData, progressData } = getLoader(loader, CREATE_LABEL);
   const loading = progressData ? true : false;
 
-  const addProject = (values: ProjectType) => {
-    dispatch(createProject(values));
+  const addLabel = (values: LabelType) => {
+    dispatch(createLabel(values));
   };
 
   return (
@@ -54,7 +51,7 @@ const ProjectForm = ({
         initialValues={initialFormValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          addProject(values);
+          addLabel(values);
           resetForm();
         }}
       >
@@ -76,28 +73,12 @@ const ProjectForm = ({
               </label>
               <Input
                 name="title"
-                placeholder="Enter project title"
+                placeholder="Enter label title"
                 onChange={handleChange}
                 id="title"
                 value={values.title}
               />
               <small className="danger">{errors.title && touched.title && errors.title}</small>
-            </div>
-
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Description
-              </label>
-              <TextareaInput
-                name="description"
-                placeholder="Enter description title"
-                onChange={handleChange}
-                id="description"
-                value={values.description}
-              />
-              <small className="danger">
-                {errors.description && touched.description && errors.description}
-              </small>
             </div>
 
             <div className="input-container">
@@ -125,4 +106,4 @@ const ProjectForm = ({
   );
 };
 
-export default ProjectForm;
+export default LabelForm;

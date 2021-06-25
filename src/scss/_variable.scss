@@ -8,8 +8,11 @@ html {
   --primary-color: #006fd6;
   --secondary-color: red;
   --tertiary-color: #191970;
+  --light-blue: #dadaff;
+  --very-light-blue: rgb(248, 248, 255);
 
   --gray: #b4b4b4;
+  --gray-2: #ebeaea;
   --light-gray: #f6f6f6;
   --light-gray-2: #f3f3f3;
   --white: #ffffff;
@@ -68,7 +71,7 @@ html {
   --task-status-completed-color: var(--green);
 
   // LEFT SIDEBAR
-  --group-active-bg-color: var(--gray);
+  --group-active-bg-color: var(--light-blue);
   --group-active-border-color: var(--secondary-color);
   --sidebar-title-border-color: var(--secondary-color);
 
@@ -83,8 +86,8 @@ html {
 
   // INPUT
   --input-border-color-focus: var(--tertiary-color);
-  --input-bg-color: rgb(248, 248, 255);
-  --input-disabled-bg-color: #ebeaea;
+  --input-bg-color: var(--very-light-blue);
+  --input-disabled-bg-color: var(----gray-2);
 
   // BUTTON
   --button-bg: var(--primary-color);

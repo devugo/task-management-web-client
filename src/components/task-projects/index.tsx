@@ -5,7 +5,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ICONS } from '../../constants/ICONS';
-// import { projectGroupItems } from '../../constants/projectGroupItems';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { successCreation } from '../../helpers/functions/responseChecker';
 import { showMessage } from '../../helpers/functions/showMessage';

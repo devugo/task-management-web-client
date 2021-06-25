@@ -10,4 +10,8 @@ export const DEFAULT_STATE = {
     data: [],
     count: 0,
   },
+  labels: {
+    data: [],
+    count: 0,
+  },
 };

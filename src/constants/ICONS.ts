@@ -1,5 +1,5 @@
 export const ICONS = {
-  project: 'mdi mdi-ufo-outline',
-  label: 'mdi mdi-debug-step-over',
+  project: 'mdi mdi-animation-outline',
+  label: 'mdi mdi-label-multiple-outline',
   priority: 'mdi mdi-flag-outline',
 };
