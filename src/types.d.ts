@@ -30,6 +30,18 @@ export type LabelType = {
   color: string;
 };
 
+export type LevelType = {
+  title: string;
+};
+
+export type TaskType = {
+  title: string;
+  description: string;
+  labels: string[] | LabelType[];
+  project: string | ProjectType;
+  level: string | LevelType;
+};
+
 export type RootStateType = {
   loader: ApiResponseType[];
   auth: AuthType;

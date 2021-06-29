@@ -14,4 +14,8 @@ export const DEFAULT_STATE = {
     data: [],
     count: 0,
   },
+  tasks: {
+    data: [],
+    count: 0,
+  },
 };

@@ -10,6 +10,7 @@ html {
   --tertiary-color: #191970;
   --light-blue: #dadaff;
   --very-light-blue: rgb(248, 248, 255);
+  // --very-light-: rgb(221, 221, 230);
 
   --gray: #b4b4b4;
   --gray-2: #ebeaea;
@@ -78,6 +79,10 @@ html {
   // SIDEBAR ADD NEW
   --sidebar-add-new-color: var(--green);
 
+  // SIDEBAR ADD TASK
+  --add-task-section-border-color: var(--gray);
+  --add-task-section-bg-color: var(--very-light-blue);
+
   // MAIN GROUP
   --task-main-group-border-color: var(--secondary-color);
   --task-main-group-bg-color: var(--white);
@@ -87,7 +92,8 @@ html {
   // INPUT
   --input-border-color-focus: var(--tertiary-color);
   --input-bg-color: var(--very-light-blue);
-  --input-disabled-bg-color: var(----gray-2);
+  --input-select-bg-color: var(--gray-2);
+  --input-disabled-bg-color: var(--gray-2);
 
   // BUTTON
   --button-bg: var(--primary-color);
@@ -158,6 +164,24 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
 @include media-md {
   .devugo-card {
     padding: 40px;
+  }
+}
+
+.devugo-input {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: 0px;
+  outline: none;
+  background-color: var(--input-bg-color);
+  padding: 0 10px;
+  @include transition-ease;
+
+  &:focus {
+    border: 1px solid var(--input-border-color-focus);
+  }
+  &:disabled {
+    background-color: var(--input-disabled-bg-color);
   }
 }
 
