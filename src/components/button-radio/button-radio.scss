@@ -5,15 +5,17 @@
   // background-color: orange;
   justify-content: space-between;
 
-  &__left,
-  &__center,
-  &__right {
+  &__radio {
     width: 100px;
-    color: white;
     font-size: 10px;
     padding: 5px 15px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+
+    i {
+      margin-right: 10px;
+    }
   }
 }

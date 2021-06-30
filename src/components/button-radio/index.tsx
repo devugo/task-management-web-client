@@ -1,19 +1,40 @@
 import './button-radio.scss';
 
+import { useSelector } from 'react-redux';
+
+import { RootStateType } from '../../types.d';
 import RenderIcon from '../icons/RenderIcon';
 
-const ButtonRadio = () => {
+const ButtonRadio = ({
+  value,
+  changeSelect,
+}: {
+  value: string;
+  changeSelect: (value: any, type: string) => void;
+}) => {
+  const { priorities } = useSelector((state: RootStateType) => state);
+  const priorityData = priorities.data;
+
   return (
     <div className="button-radio">
-      <div className="button-radio__left">
-        <RenderIcon title="mdi mdi-flag-outline" /> Priority 1
-      </div>
-      <div className="button-radio__center">
-        <RenderIcon title="mdi mdi-flag-outline" /> Priority 2
-      </div>
-      <div className="button-radio__right" style={{ border: '1px solid red' }}>
-        <RenderIcon title="mdi mdi-flag-outline" /> Priority 3
-      </div>
+      {priorityData.map((priority, index) => {
+        const isSelected = priority.id === value;
+        const textColor = isSelected ? 'white' : priority.color;
+        const backgroundColor = isSelected ? priority.color : 'white';
+        const borderColor = priority.color;
+
+        return (
+          <div
+            key={index}
+            className="button-radio__radio"
+            onClick={() => changeSelect(priority.id, 'level')}
+            style={{ backgroundColor, border: '1px solid', borderColor }}
+          >
+            <RenderIcon styles={{ color: textColor }} title="mdi mdi-flag-outline" />{' '}
+            <span style={{ color: textColor }}>{priority.title}</span>
+          </div>
+        );
+      })}
     </div>
   );
 };

@@ -3,13 +3,13 @@ import { Alert, Select } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
-// import { createTask } from '../../store/actions/task';
+import { createTask } from '../../store/actions/task';
 import { CREATE_TASK } from '../../store/actions/types';
 import { RootStateType, TaskType } from '../../types.d';
 import Button from '../button';
@@ -31,6 +31,12 @@ const validationSchema = Yup.object({
   description: Yup.string().nullable(),
 });
 
+const emptyFormData: { project: string; labels: string[]; level: string } = {
+  project: EMPTY_STRING,
+  labels: [],
+  level: EMPTY_STRING,
+};
+
 const TaskForm = ({
   title,
   modalVisible,
@@ -40,28 +46,26 @@ const TaskForm = ({
   modalVisible: boolean;
   handleCancel: () => void;
 }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { loader, projects, labels } = useSelector((state: RootStateType) => state);
 
-  const [selectedValues, setSelectedValues] = useState([] as string[]);
+  const [formData, setFormData] = useState(emptyFormData as any);
 
   const { errorData, progressData } = getLoader(loader, CREATE_TASK);
   const loading = progressData ? true : false;
 
   const { Option }: { Option: any } = Select;
 
-  function handleChangeSelect(values: string[]) {
-    setSelectedValues(values);
-  }
-
-  function handleChangeSingleSelect(value: any) {
-    console.log(`selected ${value}`);
-  }
-
   const addTask = (values: TaskType) => {
-    return console.log(values);
-    // dispatch(createTask(values));
+    dispatch(createTask(values));
+  };
+
+  const changeSelect = (value: any, key: string) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
   };
 
   return (
@@ -70,7 +74,7 @@ const TaskForm = ({
         initialValues={initialFormValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          addTask(values);
+          addTask({ ...values, ...formData });
           resetForm();
         }}
       >
@@ -123,8 +127,8 @@ const TaskForm = ({
               <Select
                 allowClear
                 placeholder="Please select"
-                defaultValue=""
-                onChange={handleChangeSingleSelect}
+                defaultValue={formData.project}
+                onChange={(value) => changeSelect(value, 'project')}
                 id="project"
                 showArrow={false}
               >
@@ -134,7 +138,6 @@ const TaskForm = ({
                   </Option>
                 ))}
               </Select>
-              {/* <small className="danger">{errors.color && touched.color && errors.color}</small> */}
             </div>
 
             <div className="input-container">
@@ -145,23 +148,23 @@ const TaskForm = ({
                 mode="tags"
                 allowClear
                 placeholder="Please select"
-                defaultValue={selectedValues}
-                onChange={handleChangeSelect}
+                defaultValue={formData.labels}
+                onChange={(value) => changeSelect(value, 'labels')}
                 id="labels"
               >
                 {labels.data.map((label, index) => (
-                  <Option key={index}>{label.title}</Option>
+                  <Option value={label.id} key={index}>
+                    {label.title}
+                  </Option>
                 ))}
               </Select>
-              {/* <small className="danger">{errors.color && touched.color && errors.color}</small> */}
             </div>
 
             <div className="input-container">
               <label>
                 <RenderIcon title="mdi mdi-title" /> Priority
               </label>
-              <ButtonRadio />
-              {/* <small className="danger">{errors.color && touched.color && errors.color}</small> */}
+              <ButtonRadio value={formData.level} changeSelect={changeSelect} />
             </div>
 
             <Button disabled={loading} type="submit">

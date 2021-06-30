@@ -54,8 +54,6 @@ const MultiSelectInput = () => {
     }
   };
 
-  console.log(selected);
-
   return (
     <div className="devugo-multi-select">
       <p className="placeholder">Select a value</p>
