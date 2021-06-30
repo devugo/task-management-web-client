@@ -20,21 +20,26 @@ export type ApiResponseType = { type: string; response: any };
 export type AuthType = { accessToken: string; username: string; email: string; loggedIn: boolean };
 
 export type ProjectType = {
+  id?: string;
   title: string;
   description: string;
   color: string;
 };
 
 export type LabelType = {
+  id?: string;
   title: string;
   color: string;
 };
 
 export type LevelType = {
+  id?: string;
   title: string;
+  color: string;
 };
 
 export type TaskType = {
+  id?: string;
   title: string;
   description: string;
   labels: string[] | LabelType[];
@@ -47,4 +52,5 @@ export type RootStateType = {
   auth: AuthType;
   projects: { data: ProjectType[]; count: number };
   labels: { data: LabelType[]; count: number };
+  priorities: { data: LevelType[]; count: number };
 };

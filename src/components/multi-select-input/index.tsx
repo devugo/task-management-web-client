@@ -47,9 +47,10 @@ const MultiSelectInput = () => {
     if (exist === -1) {
       setSelected((prevState) => [...prevState, id]);
     } else {
-      state.splice(exist, 1);
-      console.log('state', state);
-      setSelected(state);
+      setSelected((prevState) => [...prevState].filter((x) => x !== id));
+      // state.splice(exist, 1);
+      // console.log('state', state);
+      // setSelected(state);
     }
   };
 

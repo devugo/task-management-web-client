@@ -17,6 +17,7 @@
     overflow: auto;
     background-color: var(--input-select-bg-color);
     border: 1px solid black;
+    box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.05);
 
     &__value {
       height: 50px;

@@ -1,0 +1,19 @@
+@import '../../scss/variable';
+
+.button-radio {
+  display: flex;
+  // background-color: orange;
+  justify-content: space-between;
+
+  &__left,
+  &__center,
+  &__right {
+    width: 100px;
+    color: white;
+    font-size: 10px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

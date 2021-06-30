@@ -2,6 +2,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Alert, Select } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -12,10 +13,9 @@ import { renderServerError } from '../../helpers/functions/renderServerError';
 import { CREATE_TASK } from '../../store/actions/types';
 import { RootStateType, TaskType } from '../../types.d';
 import Button from '../button';
+import ButtonRadio from '../button-radio';
 import RenderIcon from '../icons/RenderIcon';
 import Input from '../input';
-import MultiSelectInput from '../multi-select-input';
-import SelectInput from '../select-input';
 import TextareaInput from '../textarea-input';
 
 const initialFormValues: TaskType = {
@@ -42,22 +42,22 @@ const TaskForm = ({
 }) => {
   // const dispatch = useDispatch();
 
-  const { loader } = useSelector((state: RootStateType) => state);
+  const { loader, projects, labels } = useSelector((state: RootStateType) => state);
+
+  const [selectedValues, setSelectedValues] = useState([] as string[]);
 
   const { errorData, progressData } = getLoader(loader, CREATE_TASK);
   const loading = progressData ? true : false;
 
   const { Option }: { Option: any } = Select;
 
-  const children: number[] = [];
-  for (let i = 10; i < 36; i++) {
-    children.push(i);
+  function handleChangeSelect(values: string[]) {
+    setSelectedValues(values);
   }
 
-  // function handleChangeSelect(value: any) {
-  //   console.log(value);
-  //   console.log(`selected ${value}`);
-  // }
+  function handleChangeSingleSelect(value: any) {
+    console.log(`selected ${value}`);
+  }
 
   const addTask = (values: TaskType) => {
     return console.log(values);
@@ -118,19 +118,20 @@ const TaskForm = ({
 
             <div className="input-container">
               <label>
-                <RenderIcon title="mdi mdi-title" /> Labels
+                <RenderIcon title="mdi mdi-title" /> Project
               </label>
               <Select
-                mode="multiple"
                 allowClear
-                style={{ width: '100%', height: '100px' }}
                 placeholder="Please select"
-                defaultValue={values.labels as string[]}
-                onChange={handleChange}
-                id="labels"
+                defaultValue=""
+                onChange={handleChangeSingleSelect}
+                id="project"
+                showArrow={false}
               >
-                {children.map((i) => (
-                  <Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>
+                {projects.data.map((project, index) => (
+                  <Option key={index} value={project.id}>
+                    {project.title}
+                  </Option>
                 ))}
               </Select>
               {/* <small className="danger">{errors.color && touched.color && errors.color}</small> */}
@@ -138,17 +139,28 @@ const TaskForm = ({
 
             <div className="input-container">
               <label>
-                <RenderIcon title="mdi mdi-title" /> Project
+                <RenderIcon title="mdi mdi-title" /> Labels
               </label>
-              <SelectInput />
+              <Select
+                mode="tags"
+                allowClear
+                placeholder="Please select"
+                defaultValue={selectedValues}
+                onChange={handleChangeSelect}
+                id="labels"
+              >
+                {labels.data.map((label, index) => (
+                  <Option key={index}>{label.title}</Option>
+                ))}
+              </Select>
               {/* <small className="danger">{errors.color && touched.color && errors.color}</small> */}
             </div>
 
             <div className="input-container">
               <label>
-                <RenderIcon title="mdi mdi-title" /> Multi
+                <RenderIcon title="mdi mdi-title" /> Priority
               </label>
-              <MultiSelectInput />
+              <ButtonRadio />
               {/* <small className="danger">{errors.color && touched.color && errors.color}</small> */}
             </div>
 

@@ -1,3 +1,8 @@
+const entityState = {
+  data: [],
+  count: 0,
+};
+
 export const DEFAULT_STATE = {
   loaders: [],
   auth: {
@@ -6,16 +11,8 @@ export const DEFAULT_STATE = {
     email: '',
     loggedIn: false,
   },
-  projects: {
-    data: [],
-    count: 0,
-  },
-  labels: {
-    data: [],
-    count: 0,
-  },
-  tasks: {
-    data: [],
-    count: 0,
-  },
+  projects: entityState,
+  labels: entityState,
+  tasks: entityState,
+  priorities: entityState,
 };
