@@ -64,7 +64,7 @@ const TaskForm = ({
   const changeSelect = (value: any, key: string) => {
     setFormData({
       ...formData,
-      [key]: value,
+      [key]: key === 'level' && value === formData[key] ? '' : value,
     });
   };
 
