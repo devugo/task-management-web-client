@@ -9,15 +9,15 @@ type StatusType = {
 
 const statuses: StatusType[] = [
   {
-    name: 'None',
-    color: 'none',
+    name: 'OPEN',
+    color: 'draft',
   },
   {
-    name: 'In Progress',
+    name: 'IN_PROGRESS',
     color: 'in-progress',
   },
   {
-    name: 'Completed',
+    name: 'DONE',
     color: 'completed',
   },
 ];

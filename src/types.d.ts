@@ -19,6 +19,8 @@ export type SigninType = {
 export type ApiResponseType = { type: string; response: any };
 export type AuthType = { accessToken: string; username: string; email: string; loggedIn: boolean };
 
+export type StatusType = 'OPEN' | 'IN_PROGRESS' | 'DOONE';
+
 export type ProjectType = {
   id?: string;
   title: string;
@@ -45,6 +47,21 @@ export type TaskType = {
   labels: string[] | LabelType[];
   project: string | ProjectType;
   level: string | LevelType;
+  status?: StatusType;
+  created_at?: Date;
+  updated_at?: Date;
+};
+
+export type ViewTaskType = {
+  id?: string;
+  title: string;
+  description?: string;
+  labels?: LabelType[];
+  project?: ProjectType;
+  level?: LevelType;
+  status: StatusType;
+  created_at?: Date;
+  updated_at?: Date;
 };
 
 export type RootStateType = {
@@ -53,4 +70,5 @@ export type RootStateType = {
   projects: { data: ProjectType[]; count: number };
   labels: { data: LabelType[]; count: number };
   priorities: { data: LevelType[]; count: number };
+  tasks: { data: ViewTaskType[]; count: number };
 };

@@ -1,47 +1,48 @@
 import './dashboard-content.scss';
 
+import { LoadingOutlined } from '@ant-design/icons';
+import { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getLoader } from '../../helpers/functions/getLoader';
+import { getTasks } from '../../store/actions/task';
+import { READ_TASKS } from '../../store/actions/types';
+import { RootStateType } from '../../types.d';
 import PageContent from '../page-content';
 import PageContentTitle from '../page-content-title';
 import Task from '../task';
 
 const DashboardContent = () => {
+  const dispatch = useDispatch();
+  const { loader, tasks } = useSelector((state: RootStateType) => state);
+  const tasksData = tasks.data;
+
+  // READING
+  const readTasksLoaders = getLoader(loader, READ_TASKS);
+  const { progressData } = readTasksLoaders;
+  const fetching = progressData ? true : false;
+
+  useEffect(() => {
+    dispatch(getTasks());
+  }, []);
+
   return (
     <PageContent>
       <div className="dashboard-content">
         <PageContentTitle title="Today Tasks" />
-        <Task
-          borderColor="red"
-          title="Task One"
-          description="This is definitely for task one. GOt it?!"
-        />
-        <Task
-          borderColor="orange"
-          title="Task One"
-          description="This is definitely for task one. GOt it?!"
-        />
-        <Task
-          borderColor="grey"
-          title="Task One"
-          description="This is definitely for task one. GOt it?!"
-        />
-
-        <PageContentTitle title="Overdue Tasks" />
-
-        <Task
-          borderColor="red"
-          title="Task One"
-          description="This is definitely for task one. GOt it?!"
-        />
-        <Task
-          borderColor="orange"
-          title="Task One"
-          description="This is definitely for task one. GOt it?!"
-        />
-        <Task
-          borderColor="grey"
-          title="Task One"
-          description="This is definitely for task one. GOt it?!"
-        />
+        {fetching ? (
+          <div className="center">
+            <LoadingOutlined spin />
+          </div>
+        ) : (
+          tasksData.map((task, index) => {
+            return (
+              <Fragment key={index}>
+                <Task {...task} />
+              </Fragment>
+            );
+          })
+        )}
       </div>
     </PageContent>
   );

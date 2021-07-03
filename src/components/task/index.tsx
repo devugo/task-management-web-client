@@ -1,20 +1,20 @@
 import './task.scss';
 
+import { ViewTaskType } from '../../types.d';
 import TaskCheckbox from '../task-checkbox';
 import TaskContent from '../task-content';
 import TaskOptionsToggler from '../task-options-toggler/indext';
 import TaskStatus from '../task-status';
 
-const Task = (props: { title: string; description: string; borderColor?: string }) => {
-  const { title, description, borderColor } = props;
-
+const Task = (props: ViewTaskType) => {
+  const { level, status } = props;
   return (
-    <div className="task" style={{ borderColor }}>
+    <div className="task" style={{ borderColor: level ? level.color : 'white' }}>
       <TaskCheckbox />
-      <TaskContent title={title} description={description} />
+      <TaskContent {...props} />
 
       <TaskOptionsToggler />
-      <TaskStatus title="In Progress" />
+      <TaskStatus title={status} />
     </div>
   );
 };

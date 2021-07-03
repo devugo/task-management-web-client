@@ -12,7 +12,7 @@
   position: absolute;
   right: 6px;
   bottom: 6px;
-  &.none {
+  &.draft {
     background-color: var(--task-status-none-color);
   }
   &.in-progress {
