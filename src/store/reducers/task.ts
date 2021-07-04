@@ -21,7 +21,8 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
       const responseData = response.data;
       const data: ViewTaskType[] = currentState.data;
       const updatedIndex = data.findIndex((data) => data.id === responseData.id);
-      if (updatedIndex) {
+      console.log(updatedIndex);
+      if (updatedIndex > -1) {
         data[updatedIndex] = responseData;
       }
       return { ...currentState, data };
