@@ -10,7 +10,7 @@ import TaskLabel from '../task-label';
 import TaskProject from '../task-project';
 
 const TaskContent = (props: ViewTaskType) => {
-  const { title, description, project, level, labels, created_at }: ViewTaskType = props;
+  const { title, description, project, level, labels, created_at } = props;
 
   return (
     <div className="task-content">

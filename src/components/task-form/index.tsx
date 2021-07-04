@@ -2,27 +2,33 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Alert, Select } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { MODE } from '../../constants/MODE';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
-import { createTask } from '../../store/actions/task';
-import { CREATE_TASK } from '../../store/actions/types';
-import { RootStateType, TaskType } from '../../types.d';
+import { successCreation, successUpdate } from '../../helpers/functions/responseChecker';
+import { showMessage } from '../../helpers/functions/showMessage';
+import { createTask, updateTask } from '../../store/actions/task';
+import { CREATE_TASK, UPDATE_TASK } from '../../store/actions/types';
+import { CreateTaskType, RootStateType, ViewTaskType } from '../../types.d';
 import Button from '../button';
 import ButtonRadio from '../button-radio';
 import RenderIcon from '../icons/RenderIcon';
 import Input from '../input';
 import TextareaInput from '../textarea-input';
 
-const initialFormValues: TaskType = {
+const initialFormValues: { title: string; description?: string } = {
   title: EMPTY_STRING,
   description: EMPTY_STRING,
-  labels: [],
+};
+
+const emptyFormData: { project: string; labels: string[]; level: string } = {
   project: EMPTY_STRING,
+  labels: [],
   level: EMPTY_STRING,
 };
 
@@ -31,34 +37,45 @@ const validationSchema = Yup.object({
   description: Yup.string().nullable(),
 });
 
-const emptyFormData: { project: string; labels: string[]; level: string } = {
-  project: EMPTY_STRING,
-  labels: [],
-  level: EMPTY_STRING,
-};
-
 const TaskForm = ({
   title,
   modalVisible,
   handleCancel,
+  data,
 }: {
   title: string;
   modalVisible: boolean;
   handleCancel: () => void;
+  data?: ViewTaskType;
 }) => {
   const dispatch = useDispatch();
 
   const { loader, projects, labels } = useSelector((state: RootStateType) => state);
 
   const [formData, setFormData] = useState(emptyFormData as any);
+  const [formikFormValues, setFormikFormValues] = useState(initialFormValues);
 
-  const { errorData, progressData } = getLoader(loader, CREATE_TASK);
+  //  Get task mode of form
+  const mode = data ? MODE.edit : MODE.new;
+
+  // In Progress loading
+  const { errorData, progressData, successData } =
+    mode === MODE.new ? getLoader(loader, CREATE_TASK) : getLoader(loader, UPDATE_TASK);
   const loading = progressData ? true : false;
+
+  // Check if task was created or updated successfully
+  const isSuccess = mode === MODE.new ? successCreation(successData) : successUpdate(successData);
 
   const { Option }: { Option: any } = Select;
 
-  const addTask = (values: TaskType) => {
+  const add = (values: CreateTaskType) => {
     dispatch(createTask(values));
+  };
+
+  const update = (values: ViewTaskType) => {
+    if (data) {
+      dispatch(updateTask(values, data.id));
+    }
   };
 
   const changeSelect = (value: any, key: string) => {
@@ -68,14 +85,41 @@ const TaskForm = ({
     });
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      showMessage(
+        'success',
+        `Task was ${mode === MODE.new ? 'created' : 'updated'} successfully`,
+        4
+      );
+      handleCancel();
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (data) {
+      const labels = data.labels?.map((label) => label.id) || [];
+      const level = data.level?.id || '';
+      const project = data.project?.id || '';
+      setFormikFormValues({ title: data.title, description: data.description });
+      setFormData({ project, level, labels });
+    }
+  }, [data]);
+
   return (
     <Modal footer={null} title={title} visible={modalVisible} onCancel={handleCancel}>
       <Formik
-        initialValues={initialFormValues}
+        enableReinitialize
+        initialValues={formikFormValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          addTask({ ...values, ...formData });
+          if (mode === MODE.new) {
+            add({ ...values, ...formData });
+          } else {
+            update({ ...values, ...formData });
+          }
           resetForm();
+          setFormData(emptyFormData);
         }}
       >
         {({ values, errors, touched, handleChange, handleSubmit }) => (
@@ -168,7 +212,7 @@ const TaskForm = ({
             </div>
 
             <Button disabled={loading} type="submit">
-              Add {loading && <LoadingOutlined spin />}
+              {mode === MODE.new ? 'Add' : 'Update'} {loading && <LoadingOutlined spin />}
             </Button>
           </form>
         )}

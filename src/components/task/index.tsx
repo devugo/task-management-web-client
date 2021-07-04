@@ -6,14 +6,29 @@ import TaskContent from '../task-content';
 import TaskOptionsToggler from '../task-options-toggler/indext';
 import TaskStatus from '../task-status';
 
-const Task = (props: ViewTaskType) => {
-  const { level, status } = props;
+const Task = ({
+  data,
+  showModal,
+  setModalTitle,
+  setModalData,
+}: {
+  data: ViewTaskType;
+  showModal: () => void;
+  setModalTitle: (title: string) => void;
+  setModalData: (data: any) => void;
+}) => {
+  const { level, status } = data;
   return (
     <div className="task" style={{ borderColor: level ? level.color : 'white' }}>
       <TaskCheckbox />
-      <TaskContent {...props} />
+      <TaskContent {...data} />
 
-      <TaskOptionsToggler />
+      <TaskOptionsToggler
+        data={data}
+        showModal={showModal}
+        setModalTitle={setModalTitle}
+        setModalData={setModalData}
+      />
       <TaskStatus title={status} />
     </div>
   );

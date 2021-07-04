@@ -40,25 +40,21 @@ export type LevelType = {
   color: string;
 };
 
-export type TaskType = {
-  id?: string;
+export type CreateTaskType = {
   title: string;
   description: string;
-  labels: string[] | LabelType[];
-  project: string | ProjectType;
-  level: string | LevelType;
-  status?: StatusType;
-  created_at?: Date;
-  updated_at?: Date;
+  labels: string[];
+  project: string;
+  level: string;
 };
 
 export type ViewTaskType = {
-  id?: string;
+  id: string;
   title: string;
   description?: string;
-  labels?: LabelType[];
-  project?: ProjectType;
-  level?: LevelType;
+  labels: LabelType[];
+  project: ProjectType;
+  level: LevelType;
   status: StatusType;
   created_at?: Date;
   updated_at?: Date;

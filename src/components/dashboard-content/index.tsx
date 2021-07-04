@@ -12,7 +12,15 @@ import PageContent from '../page-content';
 import PageContentTitle from '../page-content-title';
 import Task from '../task';
 
-const DashboardContent = () => {
+const DashboardContent = ({
+  showModal,
+  setModalTitle,
+  setModalData,
+}: {
+  showModal: () => void;
+  setModalTitle: (title: string) => void;
+  setModalData: (data: any) => void;
+}) => {
   const dispatch = useDispatch();
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
@@ -38,7 +46,12 @@ const DashboardContent = () => {
           tasksData.map((task, index) => {
             return (
               <Fragment key={index}>
-                <Task {...task} />
+                <Task
+                  showModal={showModal}
+                  setModalTitle={setModalTitle}
+                  setModalData={setModalData}
+                  data={task}
+                />
               </Fragment>
             );
           })

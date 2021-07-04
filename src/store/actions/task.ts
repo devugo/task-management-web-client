@@ -1,5 +1,5 @@
-import { TaskType } from '../../types.d';
-import { CREATE_TASK, READ_TASKS } from './types';
+import { CreateTaskType, ViewTaskType } from '../../types.d';
+import { CREATE_TASK, READ_TASKS, UPDATE_TASK } from './types';
 
 export const getTasks = () => {
   const url = 'tasks';
@@ -10,11 +10,20 @@ export const getTasks = () => {
   };
 };
 
-export const createTask = (formData: TaskType) => {
+export const createTask = (formData: CreateTaskType) => {
   const url = 'tasks';
   return {
     type: CREATE_TASK,
     url,
     api: (apiClient: any) => apiClient.post(url, formData),
+  };
+};
+
+export const updateTask = (formData: ViewTaskType, id: string) => {
+  const url = `tasks/${id}`;
+  return {
+    type: UPDATE_TASK,
+    url,
+    api: (apiClient: any) => apiClient.patch(url, formData),
   };
 };
