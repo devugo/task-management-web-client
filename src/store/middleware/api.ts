@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { STORAGE_VARIABLE } from '../../constants/STORAGE_VARIABLE';
 import { retrieveFromStorage } from '../../helpers/functions/localStorage';
 import { ActionType } from '../../types.d';
 
@@ -10,7 +11,7 @@ type ActionObject = {
 };
 
 const apiMiddleware = (store: any) => (next: any) => async (action: ActionObject) => {
-  const GET_TOKEN = retrieveFromStorage('token');
+  const GET_TOKEN = retrieveFromStorage(STORAGE_VARIABLE.token);
 
   const axiosClient: any = axios.create({
     baseURL: 'http://localhost:4000/',

@@ -2,28 +2,15 @@ import './task-options-toggler.scss';
 
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Dropdown, Menu, Modal } from 'antd';
+import { useDispatch } from 'react-redux';
 
+import { STORAGE_VARIABLE } from '../../constants/STORAGE_VARIABLE';
+import { saveToStorage } from '../../helpers/functions/localStorage';
+import { deleteTask } from '../../store/actions/task';
 import { ViewTaskType } from '../../types.d';
 import RenderIcon from '../icons/RenderIcon';
 
 const { confirm } = Modal;
-
-const showDeleteConfirm = () => {
-  confirm({
-    title: 'Are you sutre delete this  task?',
-    icon: <ExclamationCircleOutlined />,
-    content: 'Some descriptions',
-    okText: 'Yes',
-    okType: 'danger',
-    cancelText: 'No',
-    onOk() {
-      console.log('Ok');
-    },
-    onCancel() {
-      console.log('cancel');
-    },
-  });
-};
 
 const TaskOptionsToggler = ({
   data,
@@ -36,10 +23,33 @@ const TaskOptionsToggler = ({
   setModalTitle: (title: string) => void;
   setModalData: (data: any) => void;
 }) => {
+  const dispatch = useDispatch();
+
+  const removeTask = () => {
+    if (data) {
+      saveToStorage(STORAGE_VARIABLE.deleteID, data.id);
+      dispatch(deleteTask(data.id));
+    }
+  };
+
   const openModal = async () => {
     await setModalTitle('Udpdate Task');
     await setModalData(data);
     showModal();
+  };
+
+  const showDeleteConfirm = () => {
+    confirm({
+      title: 'Are you sutre delete this  task?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'This action is not reversible. Click Yes to continue',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        removeTask();
+      },
+    });
   };
 
   const menu = (
@@ -55,14 +65,7 @@ const TaskOptionsToggler = ({
         </a>
       </Menu.Item>
       <Menu.Item onClick={openModal}>
-        {/* <a
-          target="_blank"
-          style={{ color: 'dodgerBlue' }}
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        > */}
         <RenderIcon styles={{ color: 'dodgerBlue' }} title="mdi mdi-playlist-edit" /> Edit
-        {/* </a> */}
       </Menu.Item>
       <Menu.Item>
         <a
