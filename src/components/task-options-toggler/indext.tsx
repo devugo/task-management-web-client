@@ -40,7 +40,7 @@ const TaskOptionsToggler = ({
 
   const showDeleteConfirm = () => {
     confirm({
-      title: 'Are you sutre delete this  task?',
+      title: 'Are you sure you want delete this task?',
       icon: <ExclamationCircleOutlined />,
       content: 'This action is not reversible. Click Yes to continue',
       okText: 'Yes',
@@ -77,10 +77,8 @@ const TaskOptionsToggler = ({
           <RenderIcon title="mdi mdi-clock-outline" /> Re-schedule
         </a>
       </Menu.Item>
-      <Menu.Item>
-        <a rel="noopener noreferrer" style={{ color: 'red' }} href="#" onClick={showDeleteConfirm}>
-          <RenderIcon title="mdi mdi-delete-sweep-outline" /> Delete
-        </a>
+      <Menu.Item onClick={showDeleteConfirm}>
+        <RenderIcon styles={{ color: 'red' }} title="mdi mdi-delete-sweep-outline" /> Delete
       </Menu.Item>
     </Menu>
   );
