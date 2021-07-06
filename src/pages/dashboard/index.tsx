@@ -7,12 +7,16 @@ import LeftSideBar from '../../components/left-sidebar';
 import LoaderOverlay from '../../components/loader-overlay';
 import PageWrapper from '../../components/page-wrapper';
 import RightSideBar from '../../components/right-sidebar';
+import StatusForm from '../../components/status-form';
 import TaskForm from '../../components/task-form';
 
 const Dashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalData, setModalData] = useState();
+
+  // Status Modal
+  const [statusModalVisible, setStatusModalVisible] = useState(false);
 
   const [openOverlay, setOpenOverlay] = useState(false);
 
@@ -22,6 +26,14 @@ const Dashboard = () => {
 
   const handleCancel = () => {
     setModalVisible(false);
+  };
+
+  const showStatusModal = () => {
+    setStatusModalVisible(true);
+  };
+
+  const cancelStatusModal = () => {
+    setStatusModalVisible(false);
   };
 
   const toggleOverlay = (value: boolean) => {
@@ -36,6 +48,7 @@ const Dashboard = () => {
         setModalTitle={setModalTitle}
         setModalData={setModalData}
         toggleOverlay={toggleOverlay}
+        showStatusModal={showStatusModal}
       />
       <RightSideBar showModal={showModal} setModalTitle={setModalTitle} />
 
@@ -44,6 +57,11 @@ const Dashboard = () => {
         title={modalTitle}
         modalVisible={modalVisible}
         handleCancel={handleCancel}
+      />
+      <StatusForm
+        data={modalData}
+        handleCancel={cancelStatusModal}
+        modalVisible={statusModalVisible}
       />
       {openOverlay && <LoaderOverlay />}
     </PageWrapper>

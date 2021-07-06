@@ -19,7 +19,7 @@
     background-color: var(--task-status-in-progress-color);
   }
   &.completed {
-    background-color: var(--task-status-in-progress-color);
+    background-color: var(--task-status-completed-color);
   }
 
   span {

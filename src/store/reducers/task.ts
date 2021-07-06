@@ -1,6 +1,12 @@
 import { deleteHelper } from '../../helpers/functions/deleteHelper';
 import { ApiResponseType, ViewTaskType } from '../../types.d';
-import { CREATE_TASK, DELETE_TASK, READ_TASKS, UPDATE_TASK } from '../actions/types';
+import {
+  CREATE_TASK,
+  DELETE_TASK,
+  READ_TASKS,
+  UPDATE_TASK,
+  UPDATE_TASK_STATUS,
+} from '../actions/types';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.tasks;
@@ -33,6 +39,15 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
         return { ...currentState, data: filteredData, count: currentState.count - 1 };
       }
       return currentState;
+    }
+    case UPDATE_TASK_STATUS.SUCCESS: {
+      const responseData = response.data;
+      const data: ViewTaskType[] = currentState.data;
+      const updatedIndex = data.findIndex((data) => data.id === responseData.id);
+      if (updatedIndex > -1) {
+        data[updatedIndex] = responseData;
+      }
+      return { ...currentState, data };
     }
     default: {
       return state;

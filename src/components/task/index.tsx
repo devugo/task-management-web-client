@@ -11,11 +11,13 @@ const Task = ({
   showModal,
   setModalTitle,
   setModalData,
+  showStatusModal,
 }: {
   data: ViewTaskType;
   showModal: () => void;
   setModalTitle: (title: string) => void;
   setModalData: (data: any) => void;
+  showStatusModal: () => void;
 }) => {
   const { level, status } = data;
   return (
@@ -28,6 +30,7 @@ const Task = ({
         showModal={showModal}
         setModalTitle={setModalTitle}
         setModalData={setModalData}
+        showStatusModal={showStatusModal}
       />
       <TaskStatus title={status} />
     </div>

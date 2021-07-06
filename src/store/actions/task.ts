@@ -1,5 +1,5 @@
 import { CreateTaskType, ViewTaskType } from '../../types.d';
-import { CREATE_TASK, DELETE_TASK, READ_TASKS, UPDATE_TASK } from './types';
+import { CREATE_TASK, DELETE_TASK, READ_TASKS, UPDATE_TASK, UPDATE_TASK_STATUS } from './types';
 
 export const getTasks = () => {
   const url = 'tasks';
@@ -34,5 +34,14 @@ export const deleteTask = (id: string) => {
     type: DELETE_TASK,
     url,
     api: (apiClient: any) => apiClient.delete(url),
+  };
+};
+
+export const updateTaskStatus = (formData: { status: string }, id: string) => {
+  const url = `tasks/${id}/update-status`;
+  return {
+    type: UPDATE_TASK_STATUS,
+    url,
+    api: (apiClient: any) => apiClient.patch(url, formData),
   };
 };

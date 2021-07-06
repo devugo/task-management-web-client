@@ -17,11 +17,13 @@ const TaskOptionsToggler = ({
   showModal,
   setModalTitle,
   setModalData,
+  showStatusModal,
 }: {
   data: ViewTaskType;
   showModal: () => void;
   setModalTitle: (title: string) => void;
   setModalData: (data: any) => void;
+  showStatusModal: () => void;
 }) => {
   const dispatch = useDispatch();
 
@@ -36,6 +38,11 @@ const TaskOptionsToggler = ({
     await setModalTitle('Udpdate Task');
     await setModalData(data);
     showModal();
+  };
+
+  const openStatusModal = async () => {
+    await setModalData(data);
+    showStatusModal();
   };
 
   const showDeleteConfirm = () => {
@@ -54,15 +61,8 @@ const TaskOptionsToggler = ({
 
   const menu = (
     <Menu>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'grey' }}
-          href="https://www.antgroup.com"
-        >
-          <RenderIcon title="mdi mdi-file-tree" /> Status
-        </a>
+      <Menu.Item onClick={openStatusModal}>
+        <RenderIcon styles={{ color: 'grey' }} title="mdi mdi-file-tree" /> Status
       </Menu.Item>
       <Menu.Item onClick={openModal}>
         <RenderIcon styles={{ color: 'dodgerBlue' }} title="mdi mdi-playlist-edit" /> Edit
