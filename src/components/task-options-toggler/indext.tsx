@@ -18,12 +18,14 @@ const TaskOptionsToggler = ({
   setModalTitle,
   setModalData,
   showStatusModal,
+  showRescheduleModal,
 }: {
   data: ViewTaskType;
   showModal: () => void;
   setModalTitle: (title: string) => void;
   setModalData: (data: any) => void;
   showStatusModal: () => void;
+  showRescheduleModal: () => void;
 }) => {
   const dispatch = useDispatch();
 
@@ -43,6 +45,11 @@ const TaskOptionsToggler = ({
   const openStatusModal = async () => {
     await setModalData(data);
     showStatusModal();
+  };
+
+  const openRescheduleModal = async () => {
+    await setModalData(data);
+    showRescheduleModal();
   };
 
   const showDeleteConfirm = () => {
@@ -67,15 +74,8 @@ const TaskOptionsToggler = ({
       <Menu.Item onClick={openModal}>
         <RenderIcon styles={{ color: 'dodgerBlue' }} title="mdi mdi-playlist-edit" /> Edit
       </Menu.Item>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'orange' }}
-          href="https://www.aliyun.com"
-        >
-          <RenderIcon title="mdi mdi-clock-outline" /> Re-schedule
-        </a>
+      <Menu.Item onClick={openRescheduleModal}>
+        <RenderIcon styles={{ color: 'orange' }} title="mdi mdi-clock-outline" /> Re-schedule
       </Menu.Item>
       <Menu.Item onClick={showDeleteConfirm}>
         <RenderIcon styles={{ color: 'red' }} title="mdi mdi-delete-sweep-outline" /> Delete

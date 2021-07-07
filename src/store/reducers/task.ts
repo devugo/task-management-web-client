@@ -4,6 +4,7 @@ import {
   CREATE_TASK,
   DELETE_TASK,
   READ_TASKS,
+  RESCHEDULE_TASK,
   UPDATE_TASK,
   UPDATE_TASK_STATUS,
 } from '../actions/types';
@@ -41,6 +42,16 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
       return currentState;
     }
     case UPDATE_TASK_STATUS.SUCCESS: {
+      const responseData = response.data;
+      const data: ViewTaskType[] = currentState.data;
+      const updatedIndex = data.findIndex((data) => data.id === responseData.id);
+      if (updatedIndex > -1) {
+        data[updatedIndex] = responseData;
+      }
+      return { ...currentState, data };
+    }
+
+    case RESCHEDULE_TASK.SUCCESS: {
       const responseData = response.data;
       const data: ViewTaskType[] = currentState.data;
       const updatedIndex = data.findIndex((data) => data.id === responseData.id);

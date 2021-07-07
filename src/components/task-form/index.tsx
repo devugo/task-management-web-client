@@ -1,11 +1,13 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { Alert, Select } from 'antd';
+import { Alert, DatePicker, Select } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
+import { DATE_FORMAT } from '../../constants/DATE_FORMAT';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { MODE } from '../../constants/MODE';
 import { getLoader } from '../../helpers/functions/getLoader';
@@ -26,10 +28,13 @@ const initialFormValues: { title: string; description?: string } = {
   description: EMPTY_STRING,
 };
 
-const emptyFormData: { project: string; labels: string[]; level: string } = {
+// moment(date).format(DateFormats.main)
+
+const emptyFormData: { project: string; labels: string[]; level: string; date: moment.Moment } = {
   project: EMPTY_STRING,
   labels: [],
   level: EMPTY_STRING,
+  date: moment(new Date(), DATE_FORMAT.secondary),
 };
 
 const validationSchema = Yup.object({
@@ -85,6 +90,15 @@ const TaskForm = ({
     });
   };
 
+  const onChangeDate = (date: moment.Moment | null, dateString: string): void => {
+    setFormData((prevSate: any) => {
+      return {
+        ...prevSate,
+        date,
+      };
+    });
+  };
+
   useEffect(() => {
     if (isSuccess) {
       showMessage(
@@ -102,7 +116,7 @@ const TaskForm = ({
       const level = data.level?.id || '';
       const project = data.project?.id || '';
       setFormikFormValues({ title: data.title, description: data.description });
-      setFormData({ project, level, labels });
+      setFormData({ project, level, labels, date: moment(data.date, DATE_FORMAT.secondary) });
     }
   }, [data]);
 
@@ -146,6 +160,17 @@ const TaskForm = ({
                 value={values.title}
               />
               <small className="danger">{errors.title && touched.title && errors.title}</small>
+            </div>
+
+            <div className="input-container">
+              <label>
+                <RenderIcon title="mdi mdi-title" /> Date
+              </label>
+              <DatePicker
+                style={{ width: '100%', height: 50 }}
+                defaultValue={formData.date}
+                onChange={onChangeDate}
+              />
             </div>
 
             <div className="input-container">

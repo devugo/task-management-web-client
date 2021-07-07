@@ -12,12 +12,14 @@ const Task = ({
   setModalTitle,
   setModalData,
   showStatusModal,
+  showRescheduleModal,
 }: {
   data: ViewTaskType;
   showModal: () => void;
   setModalTitle: (title: string) => void;
   setModalData: (data: any) => void;
   showStatusModal: () => void;
+  showRescheduleModal: () => void;
 }) => {
   const { level, status } = data;
   return (
@@ -31,6 +33,7 @@ const Task = ({
         setModalTitle={setModalTitle}
         setModalData={setModalData}
         showStatusModal={showStatusModal}
+        showRescheduleModal={showRescheduleModal}
       />
       <TaskStatus title={status} />
     </div>

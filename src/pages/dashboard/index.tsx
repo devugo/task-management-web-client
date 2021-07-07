@@ -6,6 +6,7 @@ import DashboardContent from '../../components/dashboard-content';
 import LeftSideBar from '../../components/left-sidebar';
 import LoaderOverlay from '../../components/loader-overlay';
 import PageWrapper from '../../components/page-wrapper';
+import RescheduleTaskForm from '../../components/reschedule-task-form';
 import RightSideBar from '../../components/right-sidebar';
 import StatusForm from '../../components/status-form';
 import TaskForm from '../../components/task-form';
@@ -18,12 +19,14 @@ const Dashboard = () => {
   // Status Modal
   const [statusModalVisible, setStatusModalVisible] = useState(false);
 
+  // Reschedule Modal
+  const [rescheduleModalVisible, setRescheduleModalVisible] = useState(false);
+
   const [openOverlay, setOpenOverlay] = useState(false);
 
   const showModal = () => {
     setModalVisible(true);
   };
-
   const handleCancel = () => {
     setModalVisible(false);
   };
@@ -31,9 +34,15 @@ const Dashboard = () => {
   const showStatusModal = () => {
     setStatusModalVisible(true);
   };
-
   const cancelStatusModal = () => {
     setStatusModalVisible(false);
+  };
+
+  const showRescheduleModal = () => {
+    setRescheduleModalVisible(true);
+  };
+  const cancelRescheduleModal = () => {
+    setRescheduleModalVisible(false);
   };
 
   const toggleOverlay = (value: boolean) => {
@@ -49,6 +58,7 @@ const Dashboard = () => {
         setModalData={setModalData}
         toggleOverlay={toggleOverlay}
         showStatusModal={showStatusModal}
+        showRescheduleModal={showRescheduleModal}
       />
       <RightSideBar showModal={showModal} setModalTitle={setModalTitle} />
 
@@ -62,6 +72,11 @@ const Dashboard = () => {
         data={modalData}
         handleCancel={cancelStatusModal}
         modalVisible={statusModalVisible}
+      />
+      <RescheduleTaskForm
+        data={modalData}
+        handleCancel={cancelRescheduleModal}
+        modalVisible={rescheduleModalVisible}
       />
       {openOverlay && <LoaderOverlay />}
     </PageWrapper>

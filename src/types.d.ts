@@ -46,6 +46,7 @@ export type CreateTaskType = {
   labels: string[];
   project: string;
   level: string;
+  date: moment.Moment;
 };
 
 export type ViewTaskType = {
@@ -56,6 +57,7 @@ export type ViewTaskType = {
   project: ProjectType;
   level: LevelType;
   status: StatusType;
+  date: moment.Moment;
   created_at?: Date;
   updated_at?: Date;
 };

@@ -1,5 +1,12 @@
 import { CreateTaskType, ViewTaskType } from '../../types.d';
-import { CREATE_TASK, DELETE_TASK, READ_TASKS, UPDATE_TASK, UPDATE_TASK_STATUS } from './types';
+import {
+  CREATE_TASK,
+  DELETE_TASK,
+  READ_TASKS,
+  RESCHEDULE_TASK,
+  UPDATE_TASK,
+  UPDATE_TASK_STATUS,
+} from './types';
 
 export const getTasks = () => {
   const url = 'tasks';
@@ -38,9 +45,18 @@ export const deleteTask = (id: string) => {
 };
 
 export const updateTaskStatus = (formData: { status: string }, id: string) => {
-  const url = `tasks/${id}/update-status`;
+  const url = `tasks/${id}/status`;
   return {
     type: UPDATE_TASK_STATUS,
+    url,
+    api: (apiClient: any) => apiClient.patch(url, formData),
+  };
+};
+
+export const rescheduleTask = (formData: { date: moment.Moment }, id: string) => {
+  const url = `tasks/${id}/reschedule`;
+  return {
+    type: RESCHEDULE_TASK,
     url,
     api: (apiClient: any) => apiClient.patch(url, formData),
   };

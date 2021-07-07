@@ -20,12 +20,14 @@ const DashboardContent = ({
   setModalData,
   toggleOverlay,
   showStatusModal,
+  showRescheduleModal,
 }: {
   showModal: () => void;
   setModalTitle: (title: string) => void;
   setModalData: (data: any) => void;
   toggleOverlay: (value: boolean) => void;
   showStatusModal: () => void;
+  showRescheduleModal: () => void;
 }) => {
   const dispatch = useDispatch();
   const { loader, tasks } = useSelector((state: RootStateType) => state);
@@ -79,6 +81,7 @@ const DashboardContent = ({
                   setModalData={setModalData}
                   data={task}
                   showStatusModal={showStatusModal}
+                  showRescheduleModal={showRescheduleModal}
                 />
               </Fragment>
             );
