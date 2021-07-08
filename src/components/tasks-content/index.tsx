@@ -3,6 +3,7 @@ import './tasks-content.scss';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { getLoader } from '../../helpers/functions/getLoader';
 import { successDelete } from '../../helpers/functions/responseChecker';
@@ -33,6 +34,9 @@ const TasksContent = ({
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
 
+  // Params
+  const { type }: { type: string } = useParams();
+
   // READING
   const readTasksLoaders = getLoader(loader, READ_TASKS);
   const { progressData } = readTasksLoaders;
@@ -60,8 +64,8 @@ const TasksContent = ({
   }, [isDeleted]);
 
   useEffect(() => {
-    dispatch(getTasks());
-  }, []);
+    dispatch(getTasks(type));
+  }, [type]);
 
   return (
     <PageContent>

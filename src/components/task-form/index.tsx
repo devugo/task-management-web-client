@@ -116,7 +116,7 @@ const TaskForm = ({
       const level = data.level?.id || '';
       const project = data.project?.id || '';
       setFormikFormValues({ title: data.title, description: data.description });
-      setFormData({ project, level, labels, date: moment(data.date, DATE_FORMAT.secondary) });
+      setFormData({ project, level, labels, date: moment(data.date, DATE_FORMAT.primary) });
     }
   }, [data]);
 

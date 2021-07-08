@@ -5,7 +5,7 @@ import moment from 'moment';
 import { DATE_FORMAT } from '../../constants/DATE_FORMAT';
 import RenderIcon from '../icons/RenderIcon';
 
-const TaskDate = (props: { date: Date }) => {
+const TaskDate = (props: { date: moment.Moment }) => {
   const { date } = props;
   return (
     <div className="task-date">

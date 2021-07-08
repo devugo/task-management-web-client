@@ -10,7 +10,7 @@ import TaskLabel from '../task-label';
 import TaskProject from '../task-project';
 
 const TaskContent = (props: ViewTaskType) => {
-  const { title, description, project, level, labels, created_at } = props;
+  const { title, description, project, level, labels, date } = props;
 
   return (
     <div className="task-content">
@@ -21,7 +21,7 @@ const TaskContent = (props: ViewTaskType) => {
       <div className="task-content__tags">
         <div className="task-groups">
           <div className="task-groups-one">
-            <TaskDate date={created_at!} />
+            <TaskDate date={date!} />
             {project && <TaskProject item={project} />}
             {level && <RenderIcon styles={{ color: level.color }} title={ICONS.priority} />}
           </div>
