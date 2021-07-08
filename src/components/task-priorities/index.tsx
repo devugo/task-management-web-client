@@ -44,7 +44,12 @@ const TaskPriorities = () => {
           priorityData.map((priority, index) => {
             return (
               <Fragment key={index}>
-                <SingleTaskMainGroup link="/" icon={ICONS.project} bg={false} {...priority} />
+                <SingleTaskMainGroup
+                  link={`/tasks?level=${priority.id}`}
+                  icon={ICONS.project}
+                  bg={false}
+                  {...priority}
+                />
               </Fragment>
             );
           })

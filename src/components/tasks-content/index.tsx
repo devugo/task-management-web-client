@@ -3,7 +3,7 @@ import './tasks-content.scss';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { getLoader } from '../../helpers/functions/getLoader';
 import { successDelete } from '../../helpers/functions/responseChecker';
@@ -36,6 +36,7 @@ const TasksContent = ({
 
   // Params
   const { type }: { type: string } = useParams();
+  const { search }: { search: string } = useLocation();
 
   // READING
   const readTasksLoaders = getLoader(loader, READ_TASKS);
@@ -64,8 +65,8 @@ const TasksContent = ({
   }, [isDeleted]);
 
   useEffect(() => {
-    dispatch(getTasks(type));
-  }, [type]);
+    dispatch(getTasks(type, search));
+  }, [type, search]);
 
   return (
     <PageContent>

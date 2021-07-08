@@ -67,7 +67,12 @@ const TaskProjects = () => {
           projectData.map((group, index) => {
             return (
               <Fragment key={index}>
-                <SingleTaskMainGroup link="/" icon={ICONS.project} bg={false} {...group} />
+                <SingleTaskMainGroup
+                  link={`/tasks?project=${group.id}`}
+                  icon={ICONS.project}
+                  bg={false}
+                  {...group}
+                />
               </Fragment>
             );
           })

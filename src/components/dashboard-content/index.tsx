@@ -12,23 +12,8 @@ import { DELETE_TASK, READ_TASKS } from '../../store/actions/types';
 import { RootStateType } from '../../types.d';
 import PageContent from '../page-content';
 import PageContentTitle from '../page-content-title';
-import Task from '../task';
 
-const DashboardContent = ({
-  showModal,
-  setModalTitle,
-  setModalData,
-  toggleOverlay,
-  showStatusModal,
-  showRescheduleModal,
-}: {
-  showModal: () => void;
-  setModalTitle: (title: string) => void;
-  setModalData: (data: any) => void;
-  toggleOverlay: (value: boolean) => void;
-  showStatusModal: () => void;
-  showRescheduleModal: () => void;
-}) => {
+const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) => void }) => {
   const dispatch = useDispatch();
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
@@ -75,14 +60,7 @@ const DashboardContent = ({
           tasksData.map((task, index) => {
             return (
               <Fragment key={index}>
-                <Task
-                  showModal={showModal}
-                  setModalTitle={setModalTitle}
-                  setModalData={setModalData}
-                  data={task}
-                  showStatusModal={showStatusModal}
-                  showRescheduleModal={showRescheduleModal}
-                />
+                <div>Dashboard Content</div>
               </Fragment>
             );
           })
