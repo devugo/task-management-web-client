@@ -1,20 +1,29 @@
 import './single-task-main-group.scss';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const SingleTaskMainGroup = (props: {
   title: string;
   icon: string;
   bg: boolean;
   color?: string;
+  link: string;
 }) => {
-  let { title, icon, bg, color } = props;
+  const { type }: { type: string } = useParams();
+  let { title, icon, bg, color, link } = props;
 
   if (color === '#ffffff') {
     color = '';
   }
+
+  const isActive =
+    title === 'Home' && !type
+      ? ' active'
+      : title.toLowerCase() == type?.toLowerCase()
+      ? ' active'
+      : '';
   return (
-    <Link to="/" className={`single-task-main-group${title === 'Home' ? ' active' : ''}`}>
+    <Link to={link} className={`single-task-main-group${isActive}`}>
       <div className="single-task-main-group__content">
         <div className={`icon${!bg ? ' hide-bg' : ''}`}>
           <i className={icon} style={{ color: color || '' }}></i>

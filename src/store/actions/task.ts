@@ -8,8 +8,8 @@ import {
   UPDATE_TASK_STATUS,
 } from './types';
 
-export const getTasks = () => {
-  const url = 'tasks';
+export const getTasks = (params = '') => {
+  const url = `tasks/${params}`;
   return {
     type: READ_TASKS,
     url,
