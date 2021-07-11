@@ -1,3 +1,5 @@
+@import '../../scss/variable';
+
 .tasks-filters {
   form {
     margin-top: 30px;
@@ -6,16 +8,20 @@
       display: flex;
       flex-direction: row-reverse;
       .input-container {
-        width: 300px;
         position: relative;
         input {
-          width: 100%;
+          width: 300px;
           height: 40px;
-          padding-right: 100px;
+          padding-right: 70px;
+          @include transition-ease;
+
+          &:focus {
+            width: 350px;
+          }
         }
         button {
           position: absolute;
-          width: 100px;
+          width: 70px;
           right: 0;
           height: 40px;
           font-size: 12px;

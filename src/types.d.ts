@@ -19,7 +19,7 @@ export type SigninType = {
 export type ApiResponseType = { type: string; response: any };
 export type AuthType = { accessToken: string; username: string; email: string; loggedIn: boolean };
 
-export type StatusType = 'OPEN' | 'IN_PROGRESS' | 'DOONE';
+export type StatusType = 'OPEN' | 'IN_PROGRESS' | 'DONE';
 
 export type ProjectType = {
   id?: string;

@@ -1,7 +1,7 @@
 import './task.scss';
 
 import { ViewTaskType } from '../../types.d';
-import TaskCheckbox from '../task-checkbox';
+import TaskCompleteIcon from '../task-complete-icon';
 import TaskContent from '../task-content';
 import TaskOptionsToggler from '../task-options-toggler/indext';
 import TaskStatus from '../task-status';
@@ -24,7 +24,7 @@ const Task = ({
   const { level, status } = data;
   return (
     <div className="task" style={{ borderColor: level ? level.color : 'white' }}>
-      <TaskCheckbox />
+      <TaskCompleteIcon complete={status === 'DONE'} />
       <TaskContent {...data} />
 
       <TaskOptionsToggler
