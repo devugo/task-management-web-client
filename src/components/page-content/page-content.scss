@@ -1,8 +1,21 @@
 @import '../../scss/variable';
 
 .page-content {
-  width: calc(100% - 400px);
+  width: 100%;
   background-color: var(--page-content-bg-color);
   margin: 0 auto;
-  padding-top: 80px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - 100px);
+}
+@include media-md {
+  .page-content {
+    width: calc(100% - 300px);
+  }
+}
+
+@include media-lg {
+  .page-content {
+    width: calc(100% - 400px);
+  }
 }

@@ -2,7 +2,7 @@
 
 .add-task-section {
   margin-top: 20px;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,5 +22,11 @@
     i {
       transform: scale(1.3);
     }
+  }
+}
+
+@include media-lg {
+  .add-task-section {
+    height: 200px;
   }
 }

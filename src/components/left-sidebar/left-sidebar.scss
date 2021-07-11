@@ -1,9 +1,20 @@
 @import '../../scss/variable';
 
 .left-sidebar {
-  width: 200px;
-  position: fixed;
+  width: 150px;
   pointer-events: all;
-  top: 80px;
   background: var(--task-main-group-bg-color);
+  display: none;
+}
+
+@include media-md {
+  .left-sidebar {
+    display: block;
+  }
+}
+
+@include media-lg {
+  .left-sidebar {
+    width: 200px;
+  }
 }

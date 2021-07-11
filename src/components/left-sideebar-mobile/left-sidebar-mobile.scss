@@ -1,0 +1,50 @@
+@import '../../scss/variable';
+
+.left-sidebar-mobile {
+  &__toggler {
+    position: fixed;
+    top: 25px;
+    left: 20px;
+    z-index: 3;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.15);
+    @include transition-ease;
+  }
+  &-modal {
+    width: 0px;
+    background-color: red;
+    overflow: hidden;
+    position: fixed;
+    overflow: hidden;
+    left: 0;
+    z-index: 10;
+    @include transition-ease;
+    .left-sidebar {
+      display: block;
+      box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.15) !important;
+      // background-color: green;
+    }
+    &.open {
+      width: 500px;
+    }
+  }
+}
+
+@include media-md {
+  .left-sidebar-mobile {
+    // display: none;
+    &__toggler {
+      display: none;
+    }
+    &-modal {
+      .left-sidebar {
+      }
+    }
+  }
+}

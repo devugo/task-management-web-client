@@ -1,12 +1,10 @@
 @import '../../scss/variable';
 
-@import '../../scss/variable';
-
 .task {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px 20px;
+  padding: 10px 6px;
   // border: 1px solid var(--task-border-color);
   background-color: var(--task-bg-color);
   border-radius: 20px;
@@ -21,13 +19,7 @@
   transition-duration: 0.1s;
 
   &:hover {
-    transform: scale(1.07);
+    transform: scale(1.03);
     box-shadow: 0 0px 18px 0px rgba(0, 0, 0, 0.1);
-  }
-
-  p.left-toggle {
-    position: absolute;
-    left: 10px;
-    top: 5px;
   }
 }
