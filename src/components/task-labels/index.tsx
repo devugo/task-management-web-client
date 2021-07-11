@@ -66,7 +66,12 @@ const TaskLabels = () => {
           labelData.map((group, index) => {
             return (
               <Fragment key={index}>
-                <SingleTaskMainGroup link="/" icon={ICONS.label} bg={false} {...group} />
+                <SingleTaskMainGroup
+                  link={`/tasks?label=${group.id}`}
+                  icon={ICONS.label}
+                  bg={false}
+                  {...group}
+                />
               </Fragment>
             );
           })

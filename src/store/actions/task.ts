@@ -10,7 +10,6 @@ import {
 
 export const getTasks = (type = '', params = '') => {
   const url = `tasks/${type}${params}`;
-  console.log(url);
   return {
     type: READ_TASKS,
     url,
