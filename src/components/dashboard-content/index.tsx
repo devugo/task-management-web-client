@@ -10,6 +10,7 @@ import { showMessage } from '../../helpers/functions/showMessage';
 import { getTasks } from '../../store/actions/task';
 import { DELETE_TASK, READ_TASKS } from '../../store/actions/types';
 import { RootStateType } from '../../types.d';
+import DashboardSummaryCard from '../dashboard-summary-card';
 import PageContent from '../page-content';
 import PageContentTitle from '../page-content-title';
 
@@ -51,20 +52,36 @@ const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) =
   return (
     <PageContent>
       <div className="dashboard-content">
-        <PageContentTitle title="Today Tasks" />
-        {fetching ? (
-          <div className="center">
-            <LoadingOutlined style={{ color: 'red' }} spin />
-          </div>
-        ) : (
-          tasksData.map((task, index) => {
-            return (
-              <Fragment key={index}>
-                <div>Dashboard Content</div>
-              </Fragment>
-            );
-          })
-        )}
+        <PageContentTitle title="Home" />
+        <div className="dashboard-summary-cards">
+          <DashboardSummaryCard
+            title="Today Tasks"
+            count={200}
+            iconTitle="mdi mdi-calendar-today"
+          />
+          <DashboardSummaryCard title="Due Tasks" count={20} iconTitle="mdi mdi-debug-step-over" />
+          <DashboardSummaryCard title="Upcoming Tasks" count={20} iconTitle="mdi mdi-ufo-outline" />
+          <DashboardSummaryCard title="Open Tasks" count={100} iconTitle="mdi mdi-email" />
+          <DashboardSummaryCard title="In-Progress Tasks" count={20} iconTitle="mdi mdi-email" />
+          <DashboardSummaryCard title="Completed Tasks" count={120} iconTitle="mdi mdi-email" />
+          {fetching ? (
+            <div className="center">
+              <LoadingOutlined style={{ color: 'red' }} spin />
+            </div>
+          ) : (
+            tasksData.map((task, index) => {
+              return (
+                <Fragment key={index}>
+                  {/* <DashboardSummaryCard
+                    title="Completed Task"
+                    count={200}
+                    iconTitle="mdi mdi-email"
+                  /> */}
+                </Fragment>
+              );
+            })
+          )}
+        </div>
       </div>
     </PageContent>
   );
