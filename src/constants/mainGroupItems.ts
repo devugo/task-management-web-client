@@ -5,6 +5,11 @@ export const mainGroupItems: { icon: string; title: string; link: string }[] = [
     link: '/',
   },
   {
+    icon: 'mdi mdi-home-edit-outline',
+    title: 'All',
+    link: '/tasks/all',
+  },
+  {
     icon: 'mdi mdi-calendar-today',
     title: 'Today',
     link: '/tasks/today',
