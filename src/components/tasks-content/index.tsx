@@ -14,6 +14,7 @@ import { RootStateType } from '../../types.d';
 import PageContent from '../page-content';
 import PageContentTitle from '../page-content-title';
 import Task from '../task';
+import TasksFilters from '../tasks-filters';
 
 const TasksContent = ({
   showModal,
@@ -50,6 +51,14 @@ const TasksContent = ({
   // Check if task was deleted successfully
   const isDeleted = successDelete(deleteData.successData);
 
+  const searchFilter = (value: string): void => {
+    let urlQuery = `?search=${value}`;
+    if (search) {
+      urlQuery = `${search}&search=${value}`;
+    }
+    dispatch(getTasks(type || '', urlQuery));
+  };
+
   useEffect(() => {
     if (deleting) {
       toggleOverlay(true);
@@ -72,26 +81,29 @@ const TasksContent = ({
     <PageContent>
       <div className="tasks-content">
         <PageContentTitle title="Today Tasks" />
-        {fetching ? (
-          <div className="center">
-            <LoadingOutlined style={{ color: 'red' }} spin />
-          </div>
-        ) : (
-          tasksData.map((task, index) => {
-            return (
-              <Fragment key={index}>
-                <Task
-                  showModal={showModal}
-                  setModalTitle={setModalTitle}
-                  setModalData={setModalData}
-                  data={task}
-                  showStatusModal={showStatusModal}
-                  showRescheduleModal={showRescheduleModal}
-                />
-              </Fragment>
-            );
-          })
-        )}
+        <div className="tasks">
+          <TasksFilters searchFilter={searchFilter} />
+          {fetching ? (
+            <div className="center">
+              <LoadingOutlined style={{ color: 'red' }} spin />
+            </div>
+          ) : (
+            tasksData.map((task, index) => {
+              return (
+                <Fragment key={index}>
+                  <Task
+                    showModal={showModal}
+                    setModalTitle={setModalTitle}
+                    setModalData={setModalData}
+                    data={task}
+                    showStatusModal={showStatusModal}
+                    showRescheduleModal={showRescheduleModal}
+                  />
+                </Fragment>
+              );
+            })
+          )}
+        </div>
       </div>
     </PageContent>
   );

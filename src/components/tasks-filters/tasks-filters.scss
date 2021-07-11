@@ -1,0 +1,26 @@
+.tasks-filters {
+  form {
+    margin-top: 30px;
+
+    .inputs-group {
+      display: flex;
+      flex-direction: row-reverse;
+      .input-container {
+        width: 300px;
+        position: relative;
+        input {
+          width: 100%;
+          height: 40px;
+          padding-right: 100px;
+        }
+        button {
+          position: absolute;
+          width: 100px;
+          right: 0;
+          height: 40px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
