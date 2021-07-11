@@ -5,7 +5,7 @@ export const mainGroupItems: { icon: string; title: string; link: string }[] = [
     link: '/',
   },
   {
-    icon: 'mdi mdi-home-edit-outline',
+    icon: 'mdi mdi-calendar-check',
     title: 'All',
     link: '/tasks/all',
   },

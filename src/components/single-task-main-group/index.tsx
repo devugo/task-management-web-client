@@ -1,6 +1,10 @@
 import './single-task-main-group.scss';
 
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
+
+const splitSearch = (value: string) => {
+  return value.split('/tasks', -1);
+};
 
 const SingleTaskMainGroup = (props: {
   title: string;
@@ -10,6 +14,7 @@ const SingleTaskMainGroup = (props: {
   link: string;
 }) => {
   const { type }: { type: string } = useParams();
+  const { search }: { search: string } = useLocation();
   let { title, icon, bg, color, link } = props;
 
   if (color === '#ffffff') {
@@ -17,11 +22,14 @@ const SingleTaskMainGroup = (props: {
   }
 
   const isActive =
-    title === 'Home' && !type
+    type && title.toLowerCase() === type?.toLowerCase()
       ? ' active'
-      : title.toLowerCase() == type?.toLowerCase()
+      : search === splitSearch(link)[1]
+      ? ' active'
+      : !search && !type && title === 'Home'
       ? ' active'
       : '';
+
   return (
     <Link to={link} className={`single-task-main-group${isActive}`}>
       <div className="single-task-main-group__content">

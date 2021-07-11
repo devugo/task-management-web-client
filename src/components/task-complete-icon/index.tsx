@@ -5,9 +5,7 @@ import { Tooltip } from 'antd';
 import RenderIcon from '../icons/RenderIcon';
 
 const TaskCompleteIcon = ({ complete }: { complete: boolean }) => {
-  if (!complete) {
-    return null;
-  }
+  if (!complete) return null;
   return (
     <div className="task-checkbox">
       <Tooltip title="Complete Task" color="green">

@@ -46,7 +46,7 @@ const TaskPriorities = () => {
               <Fragment key={index}>
                 <SingleTaskMainGroup
                   link={`/tasks?level=${priority.id}`}
-                  icon={ICONS.project}
+                  icon={ICONS.priority}
                   bg={false}
                   {...priority}
                 />
