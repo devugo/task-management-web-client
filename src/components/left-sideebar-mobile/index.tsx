@@ -12,7 +12,6 @@ const LeftSidebarMobile = () => {
     setOpen((prevState) => !prevState);
   };
 
-  console.log(open);
   return (
     <div className="left-sidebar-mobile">
       <div onClick={toggle} className={`left-sidebar-mobile__toggler${open ? ' open' : ''}`}>

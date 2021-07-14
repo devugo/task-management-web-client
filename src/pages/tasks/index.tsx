@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
 
 import LeftSideBar from '../../components/left-sidebar';
 import LeftSidebarMobile from '../../components/left-sideebar-mobile';
@@ -10,10 +12,13 @@ import RightSidebarMobile from '../../components/right-sidebar-mobile';
 import StatusForm from '../../components/status-form';
 import TaskForm from '../../components/task-form';
 import TasksContent from '../../components/tasks-content';
+import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { getTasks } from '../../store/actions/task';
 
 const Tasks = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
+  const [modalTitle, setModalTitle] = useState(EMPTY_STRING);
   const [modalData, setModalData] = useState();
 
   // Status Modal
@@ -23,6 +28,10 @@ const Tasks = () => {
   const [rescheduleModalVisible, setRescheduleModalVisible] = useState(false);
 
   const [openOverlay, setOpenOverlay] = useState(false);
+
+  // Params
+  const { type }: { type: string } = useParams();
+  const { search }: { search: string } = useLocation();
 
   const showModal = () => {
     setModalVisible(true);
@@ -49,6 +58,19 @@ const Tasks = () => {
     setOpenOverlay(value);
   };
 
+  const searchFilter = (value: { search: string; status: string }): void => {
+    const statusQuery = value.status ? `&status=${value.status}` : EMPTY_STRING;
+    let urlQuery = `?search=${value.search}${statusQuery}`;
+    if (search) {
+      urlQuery = `${search}&search=${value.search}${statusQuery}`;
+    }
+    dispatch(getTasks(type || EMPTY_STRING, urlQuery));
+  };
+
+  useEffect(() => {
+    dispatch(getTasks(type, search));
+  }, [type, search]);
+
   return (
     <PageWrapper>
       <LeftSideBar />
@@ -61,8 +83,16 @@ const Tasks = () => {
         showStatusModal={showStatusModal}
         showRescheduleModal={showRescheduleModal}
       />
-      <RightSideBar showModal={showModal} setModalTitle={setModalTitle} />
-      <RightSidebarMobile showModal={showModal} setModalTitle={setModalTitle} />
+      <RightSideBar
+        searchFilter={searchFilter}
+        showModal={showModal}
+        setModalTitle={setModalTitle}
+      />
+      <RightSidebarMobile
+        searchFilter={searchFilter}
+        showModal={showModal}
+        setModalTitle={setModalTitle}
+      />
 
       <TaskForm
         data={modalData}

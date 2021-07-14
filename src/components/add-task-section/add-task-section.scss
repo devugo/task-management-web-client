@@ -2,7 +2,7 @@
 
 .add-task-section {
   margin-top: 20px;
-  height: 150px;
+  height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,6 +27,6 @@
 
 @include media-lg {
   .add-task-section {
-    height: 200px;
+    height: 180px;
   }
 }

@@ -8,9 +8,11 @@ import RightSideBar from '../right-sidebar';
 const RightSidebarMobile = ({
   showModal,
   setModalTitle,
+  searchFilter,
 }: {
   showModal: () => void;
   setModalTitle: (x: string) => void;
+  searchFilter?: (value: { search: string; status: string }) => void;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -20,7 +22,11 @@ const RightSidebarMobile = ({
   return (
     <div className="right-sidebar-mobile">
       <div className={`right-sidebar-mobile-modal${open ? ' open' : ''}`}>
-        <RightSideBar showModal={showModal} setModalTitle={setModalTitle} />
+        <RightSideBar
+          searchFilter={searchFilter}
+          showModal={showModal}
+          setModalTitle={setModalTitle}
+        />
       </div>
       <div onClick={toggle} className={`right-sidebar-mobile__toggler${open ? ' open' : ''}`}>
         {open ? (
