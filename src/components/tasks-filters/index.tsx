@@ -71,7 +71,7 @@ const TasksFilters = ({
           <Select
             allowClear
             placeholder="Select a status"
-            defaultValue={formData.status}
+            value={formData.status}
             onChange={(value) => changeInput(value, 'status')}
             id="status"
             showArrow={false}

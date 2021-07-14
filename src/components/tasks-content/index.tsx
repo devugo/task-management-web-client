@@ -20,6 +20,7 @@ const TasksContent = ({
   toggleOverlay,
   showStatusModal,
   showRescheduleModal,
+  pageTitle,
 }: {
   showModal: () => void;
   setModalTitle: (title: string) => void;
@@ -27,6 +28,7 @@ const TasksContent = ({
   toggleOverlay: (value: boolean) => void;
   showStatusModal: () => void;
   showRescheduleModal: () => void;
+  pageTitle: string;
 }) => {
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
@@ -60,7 +62,7 @@ const TasksContent = ({
   return (
     <PageContent>
       <div className="tasks-content">
-        <PageContentTitle title="Today Tasks" />
+        <PageContentTitle title={pageTitle} />
         <div className="tasks">
           {fetching ? (
             <div className="center">

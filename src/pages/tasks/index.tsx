@@ -13,6 +13,7 @@ import StatusForm from '../../components/status-form';
 import TaskForm from '../../components/task-form';
 import TasksContent from '../../components/tasks-content';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { getPageContentTitle } from '../../helpers/functions/getPageContentTitle';
 import { getTasks } from '../../store/actions/task';
 
 const Tasks = () => {
@@ -20,6 +21,7 @@ const Tasks = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState(EMPTY_STRING);
   const [modalData, setModalData] = useState();
+  const [pageTitle, setPageTitle] = useState(EMPTY_STRING);
 
   // Status Modal
   const [statusModalVisible, setStatusModalVisible] = useState(false);
@@ -68,6 +70,11 @@ const Tasks = () => {
   };
 
   useEffect(() => {
+    const title = getPageContentTitle(type, search);
+    setPageTitle(title);
+  }, [type, search]);
+
+  useEffect(() => {
     dispatch(getTasks(type, search));
   }, [type, search]);
 
@@ -76,6 +83,7 @@ const Tasks = () => {
       <LeftSideBar />
       <LeftSidebarMobile />
       <TasksContent
+        pageTitle={pageTitle}
         showModal={showModal}
         setModalTitle={setModalTitle}
         setModalData={setModalData}
