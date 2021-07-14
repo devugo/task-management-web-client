@@ -19,12 +19,15 @@ const RightSidebarMobile = ({
   };
   return (
     <div className="right-sidebar-mobile">
-      <div onClick={toggle} className={`left-sidebar-mobile__toggler${open ? ' open' : ''}`}>
-        <RenderIcon styles={{ color: 'rgb(236, 236, 236)' }} title="mdi mdi-menu" />
-      </div>
-
       <div className={`right-sidebar-mobile-modal${open ? ' open' : ''}`}>
         <RightSideBar showModal={showModal} setModalTitle={setModalTitle} />
+      </div>
+      <div onClick={toggle} className={`right-sidebar-mobile__toggler${open ? ' open' : ''}`}>
+        {open ? (
+          <span style={{ color: '#fff' }}>X</span>
+        ) : (
+          <RenderIcon styles={{ color: 'rgb(236, 236, 236)' }} title="mdi mdi-plus" />
+        )}
       </div>
     </div>
   );
