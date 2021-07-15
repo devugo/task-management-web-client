@@ -5,11 +5,15 @@ import RenderIcon from '../icons/RenderIcon';
 const AddTaskSection = ({
   showModal,
   setModalTitle,
+  setModalData,
 }: {
   showModal: () => void;
   setModalTitle: (x: string) => void;
+  setModalData: (data?: any) => void;
 }) => {
   const openModal = async () => {
+    console.log('Got here');
+    setModalData();
     await setModalTitle('Add Task');
     showModal();
   };

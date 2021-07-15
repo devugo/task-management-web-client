@@ -8,16 +8,22 @@ const RightSideBar = ({
   showModal,
   setModalTitle,
   searchFilter,
+  setModalData,
 }: {
   showModal: () => void;
   setModalTitle: (x: string) => void;
   searchFilter?: (value: { search: string; status: string }) => void;
+  setModalData: (data: any) => void;
 }) => {
   return (
     <div className="right-sidebar">
       <TaskPriorities />
       {searchFilter && <TasksFilters searchFilter={searchFilter} />}
-      <AddTaskSection showModal={showModal} setModalTitle={setModalTitle} />
+      <AddTaskSection
+        showModal={showModal}
+        setModalData={setModalData}
+        setModalTitle={setModalTitle}
+      />
     </div>
   );
 };

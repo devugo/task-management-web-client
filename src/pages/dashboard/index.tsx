@@ -14,7 +14,7 @@ import TaskForm from '../../components/task-form';
 const Dashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
-  const [modalData] = useState();
+  const [modalData, setModalData] = useState();
 
   const [openOverlay, setOpenOverlay] = useState(false);
 
@@ -34,8 +34,16 @@ const Dashboard = () => {
       <LeftSideBar />
       <LeftSidebarMobile />
       <DashboardContent toggleOverlay={toggleOverlay} />
-      <RightSideBar showModal={showModal} setModalTitle={setModalTitle} />
-      <RightSidebarMobile showModal={showModal} setModalTitle={setModalTitle} />
+      <RightSideBar
+        setModalData={setModalData}
+        showModal={showModal}
+        setModalTitle={setModalTitle}
+      />
+      <RightSidebarMobile
+        setModalData={setModalData}
+        showModal={showModal}
+        setModalTitle={setModalTitle}
+      />
 
       <TaskForm
         data={modalData}

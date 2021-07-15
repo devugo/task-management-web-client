@@ -120,11 +120,13 @@ const Tasks = () => {
         searchFilter={searchFilter}
         showModal={showModal}
         setModalTitle={setModalTitle}
+        setModalData={setModalData}
       />
       <RightSidebarMobile
         searchFilter={searchFilter}
         showModal={showModal}
         setModalTitle={setModalTitle}
+        setModalData={setModalData}
       />
 
       <TaskForm

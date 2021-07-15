@@ -9,10 +9,12 @@ const RightSidebarMobile = ({
   showModal,
   setModalTitle,
   searchFilter,
+  setModalData,
 }: {
   showModal: () => void;
   setModalTitle: (x: string) => void;
   searchFilter?: (value: { search: string; status: string }) => void;
+  setModalData: (data: any) => void;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -26,6 +28,7 @@ const RightSidebarMobile = ({
           searchFilter={searchFilter}
           showModal={showModal}
           setModalTitle={setModalTitle}
+          setModalData={setModalData}
         />
       </div>
       <div onClick={toggle} className={`right-sidebar-mobile__toggler${open ? ' open' : ''}`}>
