@@ -1,7 +1,6 @@
 import './task-status.scss';
 
 import { STATUS } from '../../constants/STATUS';
-import RenderIcon from '../icons/RenderIcon';
 
 type StatusType = {
   name: string;
@@ -16,7 +15,6 @@ const TaskStatus = (props: { title: string }) => {
   const statusTitle = statusObj.title;
   return (
     <div className={`task-status ${color}`}>
-      <RenderIcon title="mdi mdi-flag-outline" />
       <span>{statusTitle}</span>
     </div>
   );

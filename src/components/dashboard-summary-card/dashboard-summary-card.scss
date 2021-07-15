@@ -1,9 +1,11 @@
+@import '../../scss/variable';
+
 .dashboard-summary-card {
   padding: 20px !important;
   border-radius: 20px;
   display: flex;
   align-items: center;
-  width: 220px;
+  width: 100%;
   justify-content: space-between;
   margin-top: 10px;
 
@@ -30,5 +32,17 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+  }
+}
+
+@include media-sm {
+  .dashboard-summary-card {
+    width: 200px;
+  }
+}
+
+@include media-lg {
+  .dashboard-summary-card {
+    width: 220px;
   }
 }
