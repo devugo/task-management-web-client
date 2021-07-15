@@ -10,7 +10,7 @@ const TaskCompleteIcon = ({ complete }: { complete: boolean }) => {
     <div className="task-checkbox">
       <Tooltip title="Complete Task" color="green">
         <div className="complete-task-icon">
-          <RenderIcon styles={{ color: 'green', fontSize: 20 }} title="mdi mdi-check-circle" />
+          <RenderIcon styles={{ color: '#1bc5bd', fontSize: 20 }} title="mdi mdi-check-circle" />
         </div>
       </Tooltip>
     </div>

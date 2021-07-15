@@ -13,6 +13,13 @@ html {
   --focus-color: #40a9ff;
   // --very-light-: rgb(221, 221, 230);
 
+  --success-bg-color: #c9f7f5;
+  --success-color: #1bc5bd;
+  --in-progress-bg-color: #fff4de;
+  --in-progress-color: #ffa800;
+  --open-bg-color: #e4e4e4;
+  --open-color: #353535;
+
   --gray: #b4b4b4;
   --gray-2: #ebeaea;
   --light-gray: #f6f6f6;
@@ -69,9 +76,12 @@ html {
 
   // TASK STATUS
   --task-status-text-color: var(--white);
-  --task-status-none-color: var(--gray);
-  --task-status-in-progress-color: var(--orange);
-  --task-status-completed-color: var(--green);
+  --task-status-open-color: var(--open-color);
+  --task-status-open-bg-color: var(--open-bg-color);
+  --task-status-in-progress-color: var(--in-progress-color);
+  --task-status-in-progress-bg-color: var(--in-progress-bg-color);
+  --task-status-completed-color: var(--success-color);
+  --task-status-completed-bg-color: var(--success-bg-color);
 
   // LEFT SIDEBAR
   --group-active-bg-color: var(--light-blue);

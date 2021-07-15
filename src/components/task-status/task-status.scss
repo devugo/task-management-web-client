@@ -13,13 +13,16 @@
   right: 6px;
   bottom: 10px;
   &.draft {
-    background-color: var(--task-status-none-color);
+    background-color: var(--task-status-open-bg-color);
+    color: var(--task-status-open-color);
   }
   &.in-progress {
-    background-color: var(--task-status-in-progress-color);
+    background-color: var(--task-status-in-progress-bg-color);
+    color: var(--task-status-in-progress-color);
   }
   &.completed {
-    background-color: var(--task-status-completed-color);
+    background-color: var(--task-status-completed-bg-color);
+    color: var(--task-status-completed-color);
   }
 
   span {
