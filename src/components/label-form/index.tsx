@@ -2,14 +2,18 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Alert } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { MODE } from '../../constants/MODE';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
-import { createLabel } from '../../store/actions/label';
-import { CREATE_LABEL } from '../../store/actions/types';
+import { successUpdate } from '../../helpers/functions/responseChecker';
+import { showMessage } from '../../helpers/functions/showMessage';
+import { createLabel, updateLabel } from '../../store/actions/label';
+import { CREATE_LABEL, UPDATE_LABEL } from '../../store/actions/types';
 import { LabelType, RootStateType } from '../../types.d';
 import Button from '../button';
 import RenderIcon from '../icons/RenderIcon';
@@ -29,29 +33,61 @@ const LabelForm = ({
   title,
   modalVisible,
   handleCancel,
+  data,
 }: {
   title: string;
   modalVisible: boolean;
   handleCancel: () => void;
+  data?: any;
 }) => {
   const dispatch = useDispatch();
 
   const { loader } = useSelector((state: RootStateType) => state);
 
-  const { errorData, progressData } = getLoader(loader, CREATE_LABEL);
+  //  Get Project Form Mode
+  const mode = data ? MODE.edit : MODE.new;
+
+  const { errorData, progressData, successData } =
+    mode === MODE.new ? getLoader(loader, CREATE_LABEL) : getLoader(loader, UPDATE_LABEL);
   const loading = progressData ? true : false;
 
-  const addLabel = (values: LabelType) => {
+  const isUpdated = successUpdate(successData);
+
+  const [formikFormValues, setFormikFormValues] = useState(initialFormValues);
+
+  const add = (values: LabelType) => {
     dispatch(createLabel(values));
   };
+
+  const update = (values: LabelType) => {
+    dispatch(updateLabel(values, data.id));
+  };
+
+  useEffect(() => {
+    if (isUpdated) {
+      showMessage('success', 'Label was updated successfully', 4);
+      handleCancel();
+    }
+  }, [isUpdated]);
+
+  useEffect(() => {
+    if (data) {
+      setFormikFormValues({ title: data.title, color: data.color });
+    }
+  }, [data]);
 
   return (
     <Modal footer={null} title={title} visible={modalVisible} onCancel={handleCancel}>
       <Formik
-        initialValues={initialFormValues}
+        enableReinitialize
+        initialValues={formikFormValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          addLabel(values);
+          if (mode === MODE.new) {
+            add(values);
+          } else {
+            update(values);
+          }
           resetForm();
         }}
       >
@@ -97,7 +133,7 @@ const LabelForm = ({
             </div>
 
             <Button disabled={loading} type="submit">
-              Add {loading && <LoadingOutlined spin />}
+              {mode === MODE.new ? 'Add' : 'Update'} {loading && <LoadingOutlined spin />}
             </Button>
           </form>
         )}

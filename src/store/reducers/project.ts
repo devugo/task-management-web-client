@@ -1,11 +1,12 @@
-import { ApiResponseType } from '../../types.d';
-import { CREATE_PROJECT, READ_PROJECTS } from '../actions/types';
+import { ApiResponseType, ProjectType } from '../../types.d';
+import { CREATE_PROJECT, READ_PROJECTS, UPDATE_PROJECT } from '../actions/types';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.projects;
 
 const projectReducer = (state = initialState, action: ApiResponseType) => {
   const { type, response } = action;
+  const currentState = { ...state };
 
   switch (type) {
     case READ_PROJECTS.SUCCESS: {
@@ -15,6 +16,15 @@ const projectReducer = (state = initialState, action: ApiResponseType) => {
     case CREATE_PROJECT.SUCCESS: {
       const responseData = response.data;
       return { ...state, data: [...state.data, responseData], count: state.count + 1 };
+    }
+    case UPDATE_PROJECT.SUCCESS: {
+      const responseData = response.data;
+      const data: ProjectType[] = currentState.data;
+      const updatedIndex = data.findIndex((data) => data.id === responseData.id);
+      if (updatedIndex > -1) {
+        data[updatedIndex] = responseData;
+      }
+      return { ...currentState, data };
     }
     default: {
       return state;

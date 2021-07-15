@@ -46,7 +46,7 @@ const TaskLabels = () => {
 
   useEffect(() => {
     if (isCreated) {
-      showMessage('success', 'Project was successfully', 4);
+      showMessage('success', 'Label was created successfully', 4);
       handleCancel();
     }
   }, [isCreated]);

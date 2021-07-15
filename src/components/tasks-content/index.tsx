@@ -20,7 +20,10 @@ const TasksContent = ({
   toggleOverlay,
   showStatusModal,
   showRescheduleModal,
+  showProjectModal,
+  showLabelModal,
   pageTitle,
+  search,
 }: {
   showModal: () => void;
   setModalTitle: (title: string) => void;
@@ -28,7 +31,10 @@ const TasksContent = ({
   toggleOverlay: (value: boolean) => void;
   showStatusModal: () => void;
   showRescheduleModal: () => void;
+  showProjectModal: () => void;
+  showLabelModal: () => void;
   pageTitle: string;
+  search: string;
 }) => {
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
@@ -62,7 +68,14 @@ const TasksContent = ({
   return (
     <PageContent>
       <div className="tasks-content">
-        <PageContentTitle title={pageTitle} />
+        <PageContentTitle
+          setModalTitle={setModalTitle}
+          showProjectModal={showProjectModal}
+          showLabelModal={showLabelModal}
+          title={pageTitle}
+          search={search}
+          setModalData={setModalData}
+        />
         <div className="tasks">
           {fetching ? (
             <div className="center">

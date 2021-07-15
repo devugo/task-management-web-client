@@ -46,7 +46,7 @@ const TaskProjects = () => {
 
   useEffect(() => {
     if (isCreated) {
-      showMessage('success', 'Project was successfully', 4);
+      showMessage('success', 'Project was created successfully', 4);
       handleCancel();
     }
   }, [isCreated]);

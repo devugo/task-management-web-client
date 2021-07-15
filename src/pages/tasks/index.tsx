@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 
+import LabelForm from '../../components/label-form';
 import LeftSideBar from '../../components/left-sidebar';
 import LeftSidebarMobile from '../../components/left-sideebar-mobile';
 import LoaderOverlay from '../../components/loader-overlay';
 import PageWrapper from '../../components/page-wrapper';
+import ProjectForm from '../../components/project-form';
 import RescheduleTaskForm from '../../components/reschedule-task-form';
 import RightSideBar from '../../components/right-sidebar';
 import RightSidebarMobile from '../../components/right-sidebar-mobile';
@@ -28,6 +30,12 @@ const Tasks = () => {
 
   // Reschedule Modal
   const [rescheduleModalVisible, setRescheduleModalVisible] = useState(false);
+
+  // Project Modal
+  const [projectModalVisible, setProjectModalVisible] = useState(false);
+
+  // Label Modal
+  const [labelModalVisible, setLabelModalVisible] = useState(false);
 
   const [openOverlay, setOpenOverlay] = useState(false);
 
@@ -54,6 +62,20 @@ const Tasks = () => {
   };
   const cancelRescheduleModal = () => {
     setRescheduleModalVisible(false);
+  };
+
+  const showProjectModal = () => {
+    setProjectModalVisible(true);
+  };
+  const cancelProjectModal = () => {
+    setProjectModalVisible(false);
+  };
+
+  const showLabelModal = () => {
+    setLabelModalVisible(true);
+  };
+  const cancelLabelModal = () => {
+    setLabelModalVisible(false);
   };
 
   const toggleOverlay = (value: boolean) => {
@@ -90,6 +112,9 @@ const Tasks = () => {
         toggleOverlay={toggleOverlay}
         showStatusModal={showStatusModal}
         showRescheduleModal={showRescheduleModal}
+        showProjectModal={showProjectModal}
+        showLabelModal={showLabelModal}
+        search={search}
       />
       <RightSideBar
         searchFilter={searchFilter}
@@ -117,6 +142,18 @@ const Tasks = () => {
         data={modalData}
         handleCancel={cancelRescheduleModal}
         modalVisible={rescheduleModalVisible}
+      />
+      <ProjectForm
+        title={modalTitle}
+        modalVisible={projectModalVisible}
+        handleCancel={cancelProjectModal}
+        data={modalData}
+      />
+      <LabelForm
+        title={modalTitle}
+        modalVisible={labelModalVisible}
+        handleCancel={cancelLabelModal}
+        data={modalData}
       />
       {openOverlay && <LoaderOverlay />}
     </PageWrapper>

@@ -2,14 +2,18 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Alert } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
+import { MODE } from '../../constants/MODE';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
-import { createProject } from '../../store/actions/project';
-import { CREATE_PROJECT } from '../../store/actions/types';
+import { successUpdate } from '../../helpers/functions/responseChecker';
+import { showMessage } from '../../helpers/functions/showMessage';
+import { createProject, updateProject } from '../../store/actions/project';
+import { CREATE_PROJECT, UPDATE_PROJECT } from '../../store/actions/types';
 import { ProjectType, RootStateType } from '../../types.d';
 import Button from '../button';
 import RenderIcon from '../icons/RenderIcon';
@@ -32,29 +36,61 @@ const ProjectForm = ({
   title,
   modalVisible,
   handleCancel,
+  data,
 }: {
   title: string;
   modalVisible: boolean;
   handleCancel: () => void;
+  data?: any;
 }) => {
   const dispatch = useDispatch();
 
   const { loader } = useSelector((state: RootStateType) => state);
 
-  const { errorData, progressData } = getLoader(loader, CREATE_PROJECT);
+  //  Get Project Form Mode
+  const mode = data ? MODE.edit : MODE.new;
+
+  const { errorData, progressData, successData } =
+    mode === MODE.new ? getLoader(loader, CREATE_PROJECT) : getLoader(loader, UPDATE_PROJECT);
   const loading = progressData ? true : false;
 
-  const addProject = (values: ProjectType) => {
+  const isUpdated = successUpdate(successData);
+
+  const [formikFormValues, setFormikFormValues] = useState(initialFormValues);
+
+  const add = (values: ProjectType) => {
     dispatch(createProject(values));
   };
+
+  const update = (values: ProjectType) => {
+    dispatch(updateProject(values, data.id));
+  };
+
+  useEffect(() => {
+    if (isUpdated) {
+      showMessage('success', 'Project was updated successfully', 4);
+      handleCancel();
+    }
+  }, [isUpdated]);
+
+  useEffect(() => {
+    if (data) {
+      setFormikFormValues({ title: data.title, description: data.description, color: data.color });
+    }
+  }, [data]);
 
   return (
     <Modal footer={null} title={title} visible={modalVisible} onCancel={handleCancel}>
       <Formik
-        initialValues={initialFormValues}
+        enableReinitialize
+        initialValues={formikFormValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          addProject(values);
+          if (mode === MODE.new) {
+            add(values);
+          } else {
+            update(values);
+          }
           resetForm();
         }}
       >
@@ -116,7 +152,7 @@ const ProjectForm = ({
             </div>
 
             <Button disabled={loading} type="submit">
-              Add {loading && <LoadingOutlined spin />}
+              {mode === MODE.new ? 'Add' : 'Update'} {loading && <LoadingOutlined spin />}
             </Button>
           </form>
         )}
