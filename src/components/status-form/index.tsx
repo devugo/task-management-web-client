@@ -9,7 +9,6 @@ import { STATUS } from '../../constants/STATUS';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { successUpdate } from '../../helpers/functions/responseChecker';
-import { showMessage } from '../../helpers/functions/showMessage';
 import { updateTaskStatus } from '../../store/actions/task';
 import { UPDATE_TASK_STATUS } from '../../store/actions/types';
 import { RootStateType, ViewTaskType } from '../../types.d';
@@ -67,7 +66,6 @@ const StatusForm = ({
 
   useEffect(() => {
     if (isSuccess) {
-      showMessage('success', 'Task status was updated successfully', 4);
       handleCancel();
     }
   }, [isSuccess]);

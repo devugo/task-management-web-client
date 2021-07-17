@@ -5,8 +5,6 @@ import { Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getLoader } from '../../helpers/functions/getLoader';
-import { successDelete } from '../../helpers/functions/responseChecker';
-import { showMessage } from '../../helpers/functions/showMessage';
 import { DELETE_TASK, READ_TASKS } from '../../store/actions/types';
 import { RootStateType } from '../../types.d';
 import PageContent from '../page-content';
@@ -48,9 +46,6 @@ const TasksContent = ({
   const deleteData = getLoader(loader, DELETE_TASK);
   const deleting = deleteData.progressData ? true : false;
 
-  // Check if task was deleted successfully
-  const isDeleted = successDelete(deleteData.successData);
-
   useEffect(() => {
     if (deleting) {
       toggleOverlay(true);
@@ -58,12 +53,6 @@ const TasksContent = ({
       toggleOverlay(false);
     }
   }, [deleting]);
-
-  useEffect(() => {
-    if (isDeleted) {
-      showMessage('success', 'Task was deleted successfully', 4);
-    }
-  }, [isDeleted]);
 
   return (
     <PageContent>

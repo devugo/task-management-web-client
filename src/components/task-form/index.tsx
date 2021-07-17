@@ -13,7 +13,6 @@ import { MODE } from '../../constants/MODE';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { successCreation, successUpdate } from '../../helpers/functions/responseChecker';
-import { showMessage } from '../../helpers/functions/showMessage';
 import { createTask, updateTask } from '../../store/actions/task';
 import { CREATE_TASK, UPDATE_TASK } from '../../store/actions/types';
 import { CreateTaskType, RootStateType, ViewTaskType } from '../../types.d';
@@ -27,8 +26,6 @@ const initialFormValues: { title: string; description?: string } = {
   title: EMPTY_STRING,
   description: EMPTY_STRING,
 };
-
-// moment(date).format(DateFormats.main)
 
 const emptyFormData: { project: string; labels: string[]; level: string; date: moment.Moment } = {
   project: EMPTY_STRING,
@@ -101,11 +98,6 @@ const TaskForm = ({
 
   useEffect(() => {
     if (isSuccess) {
-      showMessage(
-        'success',
-        `Task was ${mode === MODE.new ? 'created' : 'updated'} successfully`,
-        4
-      );
       handleCancel();
     }
   }, [isSuccess]);

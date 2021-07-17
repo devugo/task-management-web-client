@@ -11,10 +11,15 @@ import { showMessage } from '../helpers/functions/showMessage';
 import {
   CREATE_LABEL,
   CREATE_PROJECT,
+  CREATE_TASK,
   DELETE_LABEL,
   DELETE_PROJECT,
+  DELETE_TASK,
+  RESCHEDULE_TASK,
   UPDATE_LABEL,
   UPDATE_PROJECT,
+  UPDATE_TASK,
+  UPDATE_TASK_STATUS,
 } from '../store/actions/types';
 import { RootStateType } from '../types.d';
 
@@ -41,6 +46,22 @@ const SuccessMessages = () => {
   const { successData: createLabelSuccessData } = getLoader(loader, CREATE_LABEL);
   const isLabelCreated = successCreation(createLabelSuccessData);
 
+  // DELETE TASK Loader
+  const { successData: deleteTaskSuccessData } = getLoader(loader, DELETE_TASK);
+  const isTaskDeleted = successDelete(deleteTaskSuccessData);
+  // UPDATE TASK Loader
+  const { successData: updateTaskSuccessData } = getLoader(loader, UPDATE_TASK);
+  const isTaskUpdated = successUpdate(updateTaskSuccessData);
+  // CREATE TASK Loader
+  const { successData: createTaskSuccessData } = getLoader(loader, CREATE_TASK);
+  const isTaskCreated = successCreation(createTaskSuccessData);
+  // RESCHEDULE TASK Loader
+  const { successData: rescheduleTaskSuccessData } = getLoader(loader, RESCHEDULE_TASK);
+  const isTaskRescheduled = successUpdate(rescheduleTaskSuccessData);
+  // UPDATE TASK STATUS Loader
+  const { successData: uodateTaskStatusSuccessData } = getLoader(loader, UPDATE_TASK_STATUS);
+  const isTaskStatusUpdated = successUpdate(uodateTaskStatusSuccessData);
+
   useEffect(() => {
     if (isProjectDeleted) {
       showMessage('success', 'Project was deleted successfully', 4);
@@ -61,6 +82,22 @@ const SuccessMessages = () => {
     if (isLabelCreated) {
       showMessage('success', 'Label was created successfully', 4);
     }
+
+    if (isTaskDeleted) {
+      showMessage('success', 'Task was deleted successfully', 4);
+    }
+    if (isTaskUpdated) {
+      showMessage('success', 'Task was updated successfully', 4);
+    }
+    if (isTaskCreated) {
+      showMessage('success', 'Task was created successfully', 4);
+    }
+    if (isTaskRescheduled) {
+      showMessage('success', 'Task was rescheduled created successfully', 4);
+    }
+    if (isTaskStatusUpdated) {
+      showMessage('success', 'Task status was created successfully', 4);
+    }
   }, [
     isProjectDeleted,
     isProjectUpdated,
@@ -68,6 +105,11 @@ const SuccessMessages = () => {
     isLabelDeleted,
     isLabelUpdated,
     isLabelCreated,
+    isTaskDeleted,
+    isTaskUpdated,
+    isTaskCreated,
+    isTaskRescheduled,
+    isTaskStatusUpdated,
   ]);
 
   return <div></div>;

@@ -10,7 +10,6 @@ import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { successUpdate } from '../../helpers/functions/responseChecker';
-import { showMessage } from '../../helpers/functions/showMessage';
 import { rescheduleTask } from '../../store/actions/task';
 import { RESCHEDULE_TASK } from '../../store/actions/types';
 import { RootStateType, ViewTaskType } from '../../types.d';
@@ -68,7 +67,6 @@ const RescheduleTaskForm = ({
 
   useEffect(() => {
     if (isSuccess) {
-      showMessage('success', 'Task was rescheuled successfully', 4);
       handleCancel();
     }
   }, [isSuccess]);
