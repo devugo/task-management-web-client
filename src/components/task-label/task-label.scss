@@ -3,7 +3,7 @@
 .task-label {
   padding: 0 3px;
   margin-right: 5px;
-  height: 20px;
+  min-height: 15px;
   color: var(--task-label-color);
   border: 1px solid var(--task-label-border-color);
   background-color: var(--task-label-bg-color);

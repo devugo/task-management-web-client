@@ -3,7 +3,7 @@
 .task-project {
   padding: 0 3px;
   margin-left: 5px;
-  height: 20px;
+  min-height: 15px;
   color: var(--task-project-color);
   border: 1px solid var(--task-project-border-color);
   background-color: var(--task-project-bg-color);
