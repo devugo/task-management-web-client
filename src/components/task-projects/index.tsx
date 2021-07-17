@@ -15,9 +15,14 @@ import SidebarAddNew from '../sidebar-add-new';
 import SidebarTitle from '../sidebar-title';
 import SingleTaskMainGroup from '../single-task-main-group';
 
-const TaskProjects = () => {
+const TaskProjects = ({
+  changeOpenSide,
+  openSide,
+}: {
+  changeOpenSide: (current: string) => void;
+  openSide: string;
+}) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   const { loader, projects } = useSelector((state: RootStateType) => state);
@@ -32,7 +37,7 @@ const TaskProjects = () => {
   const isCreated = successCreation(successData);
 
   const changeOpen = (): void => {
-    setOpen((prevState) => !prevState);
+    changeOpenSide('projects');
   };
 
   const showModal = () => {
@@ -56,7 +61,7 @@ const TaskProjects = () => {
   return (
     <div className="task-projects">
       <SidebarTitle changeOpen={changeOpen} title="Projects" />
-      <div className={`task-projects__content${open ? ' open' : ''}`}>
+      <div className={`task-projects__content${openSide === 'projects' ? ' open' : ''}`}>
         {fetching ? (
           <div className="center">
             <LoadingOutlined spin />
