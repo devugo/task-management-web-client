@@ -104,7 +104,7 @@ const RescheduleTaskForm = ({
           </label>
           <DatePicker
             style={{ width: '100%', height: 50 }}
-            defaultValue={formData.date}
+            value={formData.date}
             onChange={onChangeDate}
           />
         </div>
