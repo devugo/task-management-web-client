@@ -163,7 +163,7 @@ const TaskForm = ({
               </label>
               <DatePicker
                 style={{ width: '100%', height: 50 }}
-                defaultValue={formData.date}
+                value={formData.date}
                 onChange={onChangeDate}
               />
             </div>
@@ -191,7 +191,7 @@ const TaskForm = ({
               <Select
                 allowClear
                 placeholder="Please select"
-                defaultValue={formData.project}
+                value={formData.project}
                 onChange={(value) => changeSelect(value, 'project')}
                 id="project"
                 showArrow={false}
@@ -212,7 +212,7 @@ const TaskForm = ({
                 mode="tags"
                 allowClear
                 placeholder="Please select"
-                defaultValue={formData.labels}
+                value={formData.labels}
                 onChange={(value) => changeSelect(value, 'labels')}
                 id="labels"
               >
