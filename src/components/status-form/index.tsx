@@ -104,7 +104,7 @@ const StatusForm = ({
           <Select
             allowClear
             placeholder="Please select"
-            defaultValue={formData.status}
+            value={formData.status}
             onChange={(value) => changeSelect(value, 'status')}
             id="status"
             showArrow={false}
