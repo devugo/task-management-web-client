@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 
 import LabelForm from '../../components/label-form';
@@ -17,9 +17,12 @@ import TasksContent from '../../components/tasks-content';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { getPageContentTitle } from '../../helpers/functions/getPageContentTitle';
 import { getTasks } from '../../store/actions/task';
+import { RootStateType } from '../../types.d';
 
 const Tasks = () => {
   const dispatch = useDispatch();
+
+  const { projects, labels, priorities } = useSelector((state: RootStateType) => state);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState(EMPTY_STRING);
   const [modalData, setModalData] = useState();
@@ -92,9 +95,9 @@ const Tasks = () => {
   };
 
   useEffect(() => {
-    const title = getPageContentTitle(type, search);
+    const title = getPageContentTitle(projects.data, labels.data, priorities.data, type, search);
     setPageTitle(title);
-  }, [type, search]);
+  }, [type, search, projects, labels, priorities]);
 
   useEffect(() => {
     dispatch(getTasks(type, search));

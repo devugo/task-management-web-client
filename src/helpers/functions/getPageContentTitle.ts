@@ -1,8 +1,12 @@
-import store from '../../store';
-import { ProjectType } from '../../types.d';
+import { LabelType, LevelType, ProjectType } from '../../types.d';
 
-export const getPageContentTitle = (type: string, search: string): string => {
-  const state = store.getState();
+export const getPageContentTitle = (
+  projects: ProjectType[],
+  labels: LabelType[],
+  priorities: LevelType[],
+  type: string,
+  search: string
+): string => {
   let title = 'Tasks';
   if (type) {
     switch (type) {
@@ -27,7 +31,6 @@ export const getPageContentTitle = (type: string, search: string): string => {
       const searchType = searchTypeArr[0];
       const id = searchTypeArr[1];
       if (searchType.includes('project')) {
-        const projects = state.projects.data;
         const project = projects.find((x: ProjectType) => x.id === id);
         if (project) {
           title = `${project.title} Project Tasks`;
@@ -35,16 +38,14 @@ export const getPageContentTitle = (type: string, search: string): string => {
           title = 'Project Tasks';
         }
       } else if (searchType.includes('level')) {
-        const priorities = state.priorities.data;
-        const priority = priorities.find((x: any) => x.id === id);
+        const priority = priorities.find((x: LevelType) => x.id === id);
         if (priority) {
           title = `${priority.title} Tasks`;
         } else {
           title = 'Priority Tasks';
         }
       } else if (searchType.includes('label')) {
-        const labels = state.labels.data;
-        const label = labels.find((x: any) => x.id === id);
+        const label = labels.find((x: LabelType) => x.id === id);
         if (label) {
           title = `${label.title} Label Tasks`;
         } else {
