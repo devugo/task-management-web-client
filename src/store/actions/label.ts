@@ -1,5 +1,5 @@
 import { LabelType } from '../../types.d';
-import { CREATE_LABEL, READ_LABELS, UPDATE_LABEL } from './types';
+import { CREATE_LABEL, DELETE_LABEL, READ_LABELS, UPDATE_LABEL } from './types';
 
 export const getLabels = () => {
   const url = 'labels';
@@ -25,5 +25,14 @@ export const updateLabel = (formData: LabelType, id: string) => {
     type: UPDATE_LABEL,
     url,
     api: (apiClient: any) => apiClient.patch(url, formData),
+  };
+};
+
+export const deleteLabel = (id: string) => {
+  const url = `labels/${id}`;
+  return {
+    type: DELETE_LABEL,
+    url,
+    api: (apiClient: any) => apiClient.delete(url),
   };
 };

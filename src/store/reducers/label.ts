@@ -1,5 +1,6 @@
+import { deleteHelper } from '../../helpers/functions/deleteHelper';
 import { ApiResponseType, LabelType } from '../../types.d';
-import { CREATE_LABEL, READ_LABELS, UPDATE_LABEL } from '../actions/types';
+import { CREATE_LABEL, DELETE_LABEL, READ_LABELS, UPDATE_LABEL } from '../actions/types';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.labels;
@@ -25,6 +26,13 @@ const labelReducer = (state = initialState, action: ApiResponseType) => {
         data[updatedIndex] = responseData;
       }
       return { ...currentState, data };
+    }
+    case DELETE_LABEL.SUCCESS: {
+      const filteredData = deleteHelper(currentState.data);
+      if (filteredData) {
+        return { ...currentState, data: filteredData, count: currentState.count - 1 };
+      }
+      return currentState;
     }
     default: {
       return state;

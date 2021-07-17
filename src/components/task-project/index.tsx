@@ -10,7 +10,7 @@ const TaskProject = (props: { item: ProjectType }) => {
     <div
       className="task-project"
       style={{
-        backgroundColor: item.color ? item.color : 'inherit',
+        backgroundColor: item.color ? item.color : 'red',
         borderColor: item.color ? item.color : '',
       }}
     >

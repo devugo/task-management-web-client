@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ICONS } from '../../constants/ICONS';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { successCreation } from '../../helpers/functions/responseChecker';
-import { showMessage } from '../../helpers/functions/showMessage';
 import { getProjects } from '../../store/actions/project';
 import { CREATE_PROJECT, READ_PROJECTS } from '../../store/actions/types';
 import { RootStateType } from '../../types.d';
@@ -46,7 +45,6 @@ const TaskProjects = () => {
 
   useEffect(() => {
     if (isCreated) {
-      showMessage('success', 'Project was created successfully', 4);
       handleCancel();
     }
   }, [isCreated]);

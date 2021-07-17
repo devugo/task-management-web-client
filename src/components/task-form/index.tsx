@@ -86,7 +86,7 @@ const TaskForm = ({
   const changeSelect = (value: any, key: string) => {
     setFormData({
       ...formData,
-      [key]: key === 'level' && value === formData[key] ? '' : value,
+      [key]: key === 'level' && value === formData[key] ? EMPTY_STRING : value,
     });
   };
 
@@ -113,8 +113,8 @@ const TaskForm = ({
   useEffect(() => {
     if (data) {
       const labels = data.labels?.map((label) => label.id) || [];
-      const level = data.level?.id || '';
-      const project = data.project?.id || '';
+      const level = data.level?.id || EMPTY_STRING;
+      const project = data.project?.id || EMPTY_STRING;
       setFormikFormValues({ title: data.title, description: data.description });
       setFormData({ project, level, labels, date: moment(data.date, DATE_FORMAT.primary) });
     } else {

@@ -1,5 +1,5 @@
 import { ProjectType } from '../../types.d';
-import { CREATE_PROJECT, READ_PROJECTS, UPDATE_PROJECT } from './types';
+import { CREATE_PROJECT, DELETE_PROJECT, READ_PROJECTS, UPDATE_PROJECT } from './types';
 
 export const getProjects = () => {
   const url = 'projects';
@@ -25,5 +25,14 @@ export const updateProject = (formData: ProjectType, id: string) => {
     type: UPDATE_PROJECT,
     url,
     api: (apiClient: any) => apiClient.patch(url, formData),
+  };
+};
+
+export const deleteProject = (id: string) => {
+  const url = `projects/${id}`;
+  return {
+    type: DELETE_PROJECT,
+    url,
+    api: (apiClient: any) => apiClient.delete(url),
   };
 };

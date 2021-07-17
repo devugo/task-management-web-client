@@ -12,7 +12,6 @@ const AddTaskSection = ({
   setModalData: (data?: any) => void;
 }) => {
   const openModal = async () => {
-    console.log('Got here');
     setModalData();
     await setModalTitle('Add Task');
     showModal();

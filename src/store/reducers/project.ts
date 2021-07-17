@@ -1,5 +1,6 @@
+import { deleteHelper } from '../../helpers/functions/deleteHelper';
 import { ApiResponseType, ProjectType } from '../../types.d';
-import { CREATE_PROJECT, READ_PROJECTS, UPDATE_PROJECT } from '../actions/types';
+import { CREATE_PROJECT, DELETE_PROJECT, READ_PROJECTS, UPDATE_PROJECT } from '../actions/types';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.projects;
@@ -25,6 +26,13 @@ const projectReducer = (state = initialState, action: ApiResponseType) => {
         data[updatedIndex] = responseData;
       }
       return { ...currentState, data };
+    }
+    case DELETE_PROJECT.SUCCESS: {
+      const filteredData = deleteHelper(currentState.data);
+      if (filteredData) {
+        return { ...currentState, data: filteredData, count: currentState.count - 1 };
+      }
+      return currentState;
     }
     default: {
       return state;

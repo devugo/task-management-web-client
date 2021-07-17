@@ -9,7 +9,7 @@ import {
 } from './types';
 
 export const getTasks = (type = '', params = '') => {
-  const url = `tasks/${type}${params}`;
+  const url = params ? `tasks${params}&type=${type}` : `tasks?type=${type}`;
   return {
     type: READ_TASKS,
     url,
