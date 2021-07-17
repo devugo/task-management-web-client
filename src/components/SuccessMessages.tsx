@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { getLoader } from '../helpers/functions/getLoader';
 import {
@@ -25,6 +26,13 @@ import { RootStateType } from '../types.d';
 
 const SuccessMessages = () => {
   const { loader } = useSelector((state: RootStateType) => state);
+
+  // Check when token expires and log user out
+  let isNotAuth = false;
+  const singleLoader = loader[0];
+  if (singleLoader) {
+    isNotAuth = singleLoader?.response?.status === 401;
+  }
 
   // DELETE PROJECT Loader
   const { successData: deleteProjectSuccessData } = getLoader(loader, DELETE_PROJECT);
@@ -111,6 +119,10 @@ const SuccessMessages = () => {
     isTaskRescheduled,
     isTaskStatusUpdated,
   ]);
+
+  if (isNotAuth) {
+    return <Redirect to="/login" />;
+  }
 
   return <div></div>;
 };
