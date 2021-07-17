@@ -1,17 +1,21 @@
 import './task-label.scss';
 
+import { Link } from 'react-router-dom';
+
+import { ICONS } from '../../constants/ICONS';
 import RenderIcon from '../icons/RenderIcon';
 
-const TaskLabel = (props: { title: string; color: string }) => {
-  const { title, color } = props;
+const TaskLabel = (props: { title: string; color: string; id: string | undefined }) => {
+  const { title, color, id } = props;
   return (
-    <div
+    <Link
+      to={`/tasks?label=${id}`}
       className="task-label"
       style={{ color: color ? color : 'inherit', borderColor: color ? color : 'inherit' }}
     >
-      <RenderIcon title="mdi mdi-debug-step-over" />
+      <RenderIcon title={ICONS.label} />
       <span>{title}</span>
-    </div>
+    </Link>
   );
 };
 

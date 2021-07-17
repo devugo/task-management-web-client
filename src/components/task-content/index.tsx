@@ -29,7 +29,7 @@ const TaskContent = (props: ViewTaskType) => {
             <div className="task-groups-two">
               {labels.map((label, index) => (
                 <Fragment key={index}>
-                  <TaskLabel title={label.title} color={label.color} />
+                  <TaskLabel title={label.title} color={label.color} id={label.id} />
                 </Fragment>
               ))}
             </div>

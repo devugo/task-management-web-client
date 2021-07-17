@@ -12,6 +12,11 @@
   justify-content: center;
   align-items: center;
 
+  &:hover {
+    color: var(--task-label-color);
+    opacity: 0.9;
+  }
+
   span {
     font-size: 10px;
     margin-left: 3px;
