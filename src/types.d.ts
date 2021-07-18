@@ -68,5 +68,5 @@ export type RootStateType = {
   projects: { data: ProjectType[]; count: number };
   labels: { data: LabelType[]; count: number };
   priorities: { data: LevelType[]; count: number };
-  tasks: { data: ViewTaskType[]; count: number };
+  tasks: { data: ViewTaskType[]; summary: T; count: number };
 };

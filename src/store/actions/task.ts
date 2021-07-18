@@ -3,6 +3,7 @@ import {
   CREATE_TASK,
   DELETE_TASK,
   READ_TASKS,
+  READ_TASKS_SUMMARY,
   RESCHEDULE_TASK,
   UPDATE_TASK,
   UPDATE_TASK_STATUS,
@@ -59,5 +60,14 @@ export const rescheduleTask = (formData: { date: moment.Moment }, id: string) =>
     type: RESCHEDULE_TASK,
     url,
     api: (apiClient: any) => apiClient.patch(url, formData),
+  };
+};
+
+export const getTasksSummary = (params = '') => {
+  const url = `tasks/summary${params}`;
+  return {
+    type: READ_TASKS_SUMMARY,
+    url,
+    api: (apiClient: any) => apiClient.get(url),
   };
 };

@@ -4,6 +4,7 @@ import {
   CREATE_TASK,
   DELETE_TASK,
   READ_TASKS,
+  READ_TASKS_SUMMARY,
   RESCHEDULE_TASK,
   UPDATE_TASK,
   UPDATE_TASK_STATUS,
@@ -22,10 +23,12 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
       const responseCount = response.data.count;
       return { ...currentState, data: responseData, count: responseCount };
     }
+
     case CREATE_TASK.SUCCESS: {
       const responseData = response.data;
       return { ...currentState, data: [responseData, ...state.data], count: state.count + 1 };
     }
+
     case UPDATE_TASK.SUCCESS: {
       const responseData = response.data;
       const data: ViewTaskType[] = currentState.data;
@@ -35,6 +38,7 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
       }
       return { ...currentState, data };
     }
+
     case DELETE_TASK.SUCCESS: {
       const filteredData = deleteHelper(currentState.data);
       if (filteredData) {
@@ -42,6 +46,7 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
       }
       return currentState;
     }
+
     case UPDATE_TASK_STATUS.SUCCESS: {
       const responseData = response.data;
       const data: ViewTaskType[] = currentState.data;
@@ -61,6 +66,12 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
       }
       return { ...currentState, data };
     }
+
+    case READ_TASKS_SUMMARY.SUCCESS: {
+      const responseData = response.data;
+      return { ...currentState, summary: responseData };
+    }
+
     default: {
       return state;
     }

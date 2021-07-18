@@ -27,6 +27,7 @@ const initialFormValues: SignupType = {
 const validationSchema = Yup.object({
   email: Yup.string().required('Email is required').email('Please, provide a valid email address'),
   password: Yup.string().required('Password is required'),
+  username: Yup.string().required('Username is required'),
   confirmPassword: Yup.string()
     .required('Please confirm password')
     .oneOf([Yup.ref('password')], 'Confirm password must match password'),
@@ -152,9 +153,9 @@ const Register = () => {
                 <p>
                   Already have an account? <Link to="/login">Sign in here</Link>
                 </p>
-                <p>
+                {/* <p>
                   <Link to="/password-reset">Forgot password?</Link>
-                </p>
+                </p> */}
               </div>
             </form>
           )}

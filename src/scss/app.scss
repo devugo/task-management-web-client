@@ -6,9 +6,6 @@
 @import './pages/auth';
 
 // Components
-@import './components/page-wrapper';
-@import './components/page-loader';
-@import './components/add-task-section';
 @import './components/textarea-input';
 @import './components/tasks-filters';
 @import './components/tasks-content';
@@ -29,15 +26,19 @@
 @import './components/sidebar-add-new';
 @import './components/right-sidebar';
 @import './components/right-sidebar-mobile';
+@import './components/page-wrapper';
+@import './components/page-loader';
 @import './components/page-header';
 @import './components/page-content-title';
 @import './components/page-content';
+@import './components/logout';
 @import './components/loader-overlay';
 @import './components/left-sidebar-mobile';
 @import './components/left-sidebar';
 @import './components/input';
 @import './components/dashboard-summary-card';
 @import './components/dashboard-content';
+@import './components/dashboard-chart';
 @import './components/button-radio';
 @import './components/button';
-@import './components/logout';
+@import './components/add-task-section';

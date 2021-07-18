@@ -3,6 +3,7 @@ import { Pagination } from 'antd';
 import { Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { PAGINATION } from '../constants/PAGINATION';
 import { getLoader } from '../helpers/functions/getLoader';
 import { DELETE_LABEL, DELETE_PROJECT, DELETE_TASK, READ_TASKS } from '../store/actions/types';
 import { RootStateType } from '../types.d';
@@ -98,7 +99,7 @@ const TasksContent = ({
         {!fetching && tasksCount > 0 && (
           <div className="pagination">
             <Pagination
-              defaultPageSize={5}
+              defaultPageSize={PAGINATION.itemsPerPage}
               onChange={goToPage}
               current={currentPage}
               total={tasksCount}

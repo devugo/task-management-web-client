@@ -15,6 +15,6 @@ export const DEFAULT_STATE = {
   },
   projects: entityState,
   labels: entityState,
-  tasks: entityState,
+  tasks: { ...entityState, summary: null },
   priorities: entityState,
 };
