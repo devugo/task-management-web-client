@@ -1,0 +1,9 @@
+.page-loader {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  align-items: center;
+
+  .site-logo {
+    margin: 0 auto;
+  }
+}
