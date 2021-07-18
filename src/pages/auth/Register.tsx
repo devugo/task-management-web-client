@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import Logo from '../../components/Logo';
 import RenderIcon from '../../components/RenderIcon';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { renderServerError } from '../../helpers/functions/renderServerError';
@@ -55,7 +56,9 @@ const Register = () => {
   return (
     <div className="auth">
       <div className="devugo-card">
-        {/* <div className="logo"><img src={LogoText} alt="logo-text" /></div> */}
+        <div className="logo">
+          <Logo />
+        </div>
         <p className="center">
           <strong>Sign up to continue!</strong>
         </p>
