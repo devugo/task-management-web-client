@@ -1,0 +1,18 @@
+.task-options-toggler {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 6px;
+  top: 6px;
+  border-top-right-radius: 20px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background-color: var(--task-options-toggler-bg-color);
+  i {
+    font-size: 10px;
+    color: var(--task-options-toggler-icon-color);
+    margin-left: 6px;
+    margin-top: 3px;
+  }
+}
