@@ -6,10 +6,6 @@
   text-decoration: none;
   @include transition-ease;
 
-  &:active {
-    color: blue;
-  }
-
   &:visited {
     color: inherit;
   }
@@ -30,7 +26,7 @@
       margin-right: 10px;
       width: 30px;
       height: 30px;
-      background-color: var(--main-group-icon-bg-color);
+      background-image: var(--main-group-icon-bg-color);
       border-radius: 5px;
       @include flex-center-center;
 

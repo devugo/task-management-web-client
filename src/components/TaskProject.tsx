@@ -12,7 +12,7 @@ const TaskProject = (props: { item: ProjectType }) => {
       to={`/tasks?project=${item.id}`}
       className="task-project"
       style={{
-        backgroundColor: item.color ? item.color : 'red',
+        backgroundColor: item.color ? item.color : '#fd5c63',
         borderColor: item.color ? item.color : '',
       }}
     >

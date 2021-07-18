@@ -6,7 +6,7 @@ html {
   --green: green;
   --orange: orange;
   --primary-color: #006fd6;
-  --secondary-color: red;
+  --secondary-color: #fd5c63;
   --tertiary-color: #191970;
   --light-blue: #dadaff;
   --very-light-blue: rgb(248, 248, 255);
@@ -34,7 +34,7 @@ html {
 
   // GENERAL
   --body-bg-color: var(--light-gray);
-  --gradient: linear-gradient(to bottom right, #191970, #006fd6);
+  --gradient: linear-gradient(to bottom right, var(--tertiary-color), var(--primary-color));
   --text-shadow-color: var(--black);
 
   // ICONS
@@ -100,7 +100,7 @@ html {
   // MAIN GROUP
   --task-main-group-border-color: var(--secondary-color);
   --task-main-group-bg-color: var(--white);
-  --main-group-icon-bg-color: var(--icon-bg-color);
+  --main-group-icon-bg-color: var(--gradient);
   --main-group-icon-color: var(--icon-color);
 
   // INPUT
@@ -111,7 +111,7 @@ html {
   --select-input-placeholder-color: var(--dark-gray);
 
   // BUTTON
-  --button-bg: var(--primary-color);
+  --button-bg: var(--gradient);
   --button-border-color: var(--primary-color);
 
   // SCROLLBAR

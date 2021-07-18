@@ -76,7 +76,7 @@ const TaskOptionsToggler = ({
         <RenderIcon styles={{ color: 'orange' }} title="mdi mdi-clock-outline" /> Re-schedule
       </Menu.Item>
       <Menu.Item onClick={showDeleteConfirm}>
-        <RenderIcon styles={{ color: 'red' }} title="mdi mdi-delete-sweep-outline" /> Delete
+        <RenderIcon styles={{ color: '#f64e60' }} title="mdi mdi-delete-sweep-outline" /> Delete
       </Menu.Item>
     </Menu>
   );

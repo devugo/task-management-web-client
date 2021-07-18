@@ -66,7 +66,7 @@ const TasksContent = ({
         <div className="tasks">
           {fetching ? (
             <div className="center">
-              <LoadingOutlined style={{ color: 'red' }} spin />
+              <LoadingOutlined style={{ color: '#fd5c63' }} spin />
             </div>
           ) : (
             tasksData.map((task, index) => {

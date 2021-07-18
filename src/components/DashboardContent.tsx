@@ -53,7 +53,7 @@ const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) =
           <DashboardSummaryCard title="Completed Tasks" count={120} iconTitle="mdi mdi-email" />
           {fetching ? (
             <div className="center">
-              <LoadingOutlined style={{ color: 'red' }} spin />
+              <LoadingOutlined style={{ color: '#f64e60' }} spin />
             </div>
           ) : (
             tasksData.map((task, index) => {
