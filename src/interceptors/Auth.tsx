@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
-import PageLoader from '../components/page-loader';
+import PageLoader from '../components/PageLoader';
 import { getLoader } from '../helpers/functions/getLoader';
 import { keepUserLoggedIn } from '../store/actions/auth';
 import { KEEP_AUTH_USER } from '../store/actions/types';

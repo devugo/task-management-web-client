@@ -1,0 +1,18 @@
+.right-sidebar {
+  display: none;
+  width: 150px;
+  pointer-events: all;
+  background: var(--task-main-group-bg-color);
+}
+
+@include media-md {
+  .right-sidebar {
+    display: block;
+  }
+}
+
+@include media-lg {
+  .right-sidebar {
+    width: 200px;
+  }
+}

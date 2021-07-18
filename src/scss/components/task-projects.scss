@@ -1,0 +1,16 @@
+.task-projects {
+  margin-top: 40px;
+  &__content {
+    max-height: 0;
+    overflow: auto;
+    @include transition-ease;
+
+    &.open {
+      max-height: 200px;
+    }
+
+    .single-task-main-group {
+      height: 40px;
+    }
+  }
+}

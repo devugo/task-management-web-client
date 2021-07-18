@@ -1,0 +1,25 @@
+.tasks-filters {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid black;
+
+  h4 {
+    padding-left: 10px;
+  }
+  form {
+    input,
+    button {
+      height: 40px;
+    }
+
+    .ant-select {
+      &-selector {
+        height: 40px !important;
+      }
+    }
+
+    .input-container {
+      margin-bottom: 10px;
+    }
+  }
+}

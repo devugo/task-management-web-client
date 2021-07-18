@@ -1,0 +1,30 @@
+.add-task-section {
+  margin-top: 20px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed var(--add-task-section-border-color);
+  cursor: pointer;
+  background-color: var(--add-task-section-bg-color);
+  @include transition-ease;
+
+  i {
+    @include transition-ease;
+    color: var(--add-task-section-border-color);
+  }
+
+  &:hover {
+    opacity: 0.8;
+    i {
+      transform: scale(1.3);
+    }
+  }
+}
+
+@include media-lg {
+  .add-task-section {
+    height: 180px;
+  }
+}

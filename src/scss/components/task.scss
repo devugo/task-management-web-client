@@ -1,0 +1,21 @@
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 6px;
+  background-color: var(--task-bg-color);
+  border-radius: 20px;
+  border: 2px solid white;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.05);
+  z-index: 2;
+  overflow: hidden;
+  @include transition-ease;
+  transition-duration: 0.1s;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0px 18px 0px rgba(0, 0, 0, 0.1);
+  }
+}

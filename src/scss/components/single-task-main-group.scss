@@ -1,0 +1,57 @@
+.single-task-main-group {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  text-decoration: none;
+  @include transition-ease;
+
+  &:active {
+    color: blue;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active,
+  &:hover {
+    border-right: 3px solid var(--group-active-border-color);
+    background-color: var(--group-active-bg-color);
+  }
+
+  &__content {
+    height: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+      background-color: var(--main-group-icon-bg-color);
+      border-radius: 5px;
+      @include flex-center-center;
+
+      i {
+        font-size: 16px;
+        color: var(--main-group-icon-color);
+      }
+
+      &.hide-bg {
+        background: none;
+
+        i {
+          color: var(--primary-color);
+        }
+      }
+    }
+
+    .title {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}

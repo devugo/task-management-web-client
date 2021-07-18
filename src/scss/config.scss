@@ -1,0 +1,48 @@
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin border($color, $position) {
+  @if $position == top {
+    border-top: 2px solid $color;
+  } @else if $position == bottom {
+    border-bottom: 2px solid $color;
+  } @else if $position == left {
+    border-left: 2px solid $color;
+  } @else if $position == right {
+    border-right: 2px solid $color;
+  } @else {
+    border: 2px solid $color;
+  }
+}
+
+@mixin media-sm {
+  @media screen and (min-width: 500px) {
+    @content;
+  }
+}
+@mixin media-md {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+@mixin media-lg {
+  @media screen and (min-width: 1000px) {
+    @content;
+  }
+}
+@mixin media-xl {
+  @media screen and (min-width: 1600px) {
+    @content;
+  }
+}
+
+@mixin transition-ease {
+  transition: all 0.5s ease-in-out;
+}
+
+@mixin transition-ease-out {
+  transition: all 0.5s ease-out;
+}

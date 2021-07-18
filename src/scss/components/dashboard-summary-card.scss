@@ -1,0 +1,46 @@
+.dashboard-summary-card {
+  padding: 20px !important;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .title-count {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 16px;
+    }
+
+    .count {
+      font-weight: bold;
+      font-size: 25px;
+      color: rgb(9, 36, 119);
+    }
+  }
+
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(213, 85, 85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+}
+
+@include media-sm {
+  .dashboard-summary-card {
+    width: 200px;
+  }
+}
+
+@include media-lg {
+  .dashboard-summary-card {
+    width: 220px;
+  }
+}

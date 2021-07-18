@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import PageHeader from './components/page-header';
+import PageHeader from './components/PageHeader';
 import SuccessMessages from './components/SuccessMessages';
 import Auth from './interceptors/Auth';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
-import Dashboard from './pages/dashboard';
-import Tasks from './pages/tasks';
+import Dashboard from './pages/Dashboard';
+import Tasks from './pages/Tasks';
 
 const App = () => {
   return (

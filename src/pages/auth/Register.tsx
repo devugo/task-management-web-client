@@ -1,5 +1,3 @@
-import './auth.scss';
-
 import { LoadingOutlined } from '@ant-design/icons';
 import { Alert } from 'antd';
 import { Formik } from 'formik';
@@ -8,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import Button from '../../components/button';
-import RenderIcon from '../../components/icons/RenderIcon';
-import Input from '../../components/input';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import RenderIcon from '../../components/RenderIcon';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
