@@ -18,8 +18,9 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
 
   switch (type) {
     case READ_TASKS.SUCCESS: {
-      const responseData = response.data;
-      return { ...currentState, data: responseData, count: responseData.length };
+      const responseData = response.data.tasks;
+      const responseCount = response.data.count;
+      return { ...currentState, data: responseData, count: responseCount };
     }
     case CREATE_TASK.SUCCESS: {
       const responseData = response.data;

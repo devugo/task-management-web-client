@@ -1,4 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
+import { Pagination } from 'antd';
 import { Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -20,6 +21,8 @@ const TasksContent = ({
   showLabelModal,
   pageTitle,
   search,
+  goToPage,
+  currentPage,
 }: {
   showModal: () => void;
   setModalTitle: (title: string) => void;
@@ -31,9 +34,12 @@ const TasksContent = ({
   showLabelModal: () => void;
   pageTitle: string;
   search: string;
+  goToPage: (page: number) => void;
+  currentPage: number;
 }) => {
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
+  const tasksCount = tasks.count;
 
   // READING
   const readTasksLoaders = getLoader(loader, READ_TASKS);
@@ -89,6 +95,16 @@ const TasksContent = ({
             })
           )}
         </div>
+        {!fetching && tasksCount > 0 && (
+          <div className="pagination">
+            <Pagination
+              defaultPageSize={5}
+              onChange={goToPage}
+              current={currentPage}
+              total={tasksCount}
+            />
+          </div>
+        )}
       </div>
     </PageContent>
   );

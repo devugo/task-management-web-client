@@ -27,6 +27,8 @@ const Tasks = () => {
   const [modalTitle, setModalTitle] = useState(EMPTY_STRING);
   const [modalData, setModalData] = useState();
   const [pageTitle, setPageTitle] = useState(EMPTY_STRING);
+  const [queryParams, setQueryParams] = useState(EMPTY_STRING);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Status Modal
   const [statusModalVisible, setStatusModalVisible] = useState(false);
@@ -91,8 +93,25 @@ const Tasks = () => {
     if (search) {
       urlQuery = `${search}&search=${value.search}${statusQuery}`;
     }
+    setQueryParams(urlQuery);
     dispatch(getTasks(type || EMPTY_STRING, urlQuery));
   };
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      let params = queryParams;
+      if (params) {
+        params += `&page=${currentPage}`;
+      } else {
+        params += `?page=${currentPage}`;
+      }
+      dispatch(getTasks(type || EMPTY_STRING, params));
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     const title = getPageContentTitle(projects.data, labels.data, priorities.data, type, search);
@@ -108,6 +127,8 @@ const Tasks = () => {
       <LeftSideBar />
       <LeftSidebarMobile />
       <TasksContent
+        goToPage={goToPage}
+        currentPage={currentPage}
         pageTitle={pageTitle}
         showModal={showModal}
         setModalTitle={setModalTitle}

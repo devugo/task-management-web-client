@@ -137,4 +137,15 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
 
 // SCROlLBAR CUSTOM STYLES
 
+// ANT PAGINATION
+.ant-pagination-item-active,
+.ant-pagination-item:hover {
+  border-color: var(--primary-color);
+}
+.ant-pagination-item-active a,
+.ant-pagination-item a:hover {
+  color: var(--primary-color);
+}
+// END OF ANT PAGINATION
+
 // END ANT DESIGN
