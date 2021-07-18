@@ -1,7 +1,7 @@
 import { GET_TOKEN } from '../../constants/GET_TOKEN';
 import { STORAGE_VARIABLE } from '../../constants/STORAGE_VARIABLE';
-import { saveToStorage } from '../../helpers/functions/localStorage';
-import { KEEP_AUTH_USER, SIGNIN_USER } from '../actions/types';
+import { deleteFromStorage, saveToStorage } from '../../helpers/functions/localStorage';
+import { KEEP_AUTH_USER, SIGNIN_USER, SIGNOUT_USER } from '../actions/types';
 import { DEFAULT_STATE } from './defaultState';
 
 const initialState = DEFAULT_STATE.auth;
@@ -20,6 +20,13 @@ const authReducer = (state = initialState, action: { type: string; response: any
       const responseData = response.data;
       return { ...state, loggedIn: true, ...responseData, accessToken: GET_TOKEN };
     }
+
+    case SIGNOUT_USER.SUCCESS: {
+      deleteFromStorage(STORAGE_VARIABLE.token);
+      deleteFromStorage(STORAGE_VARIABLE.deleteID);
+      return initialState;
+    }
+
     default: {
       return state;
     }

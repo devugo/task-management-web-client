@@ -2,7 +2,8 @@
   height: 50px;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   text-decoration: none;
   @include transition-ease;
 
@@ -23,7 +24,7 @@
     align-items: center;
 
     .icon {
-      margin-right: 10px;
+      margin-right: 5px;
       width: 30px;
       height: 30px;
       background-image: var(--main-group-icon-bg-color);
@@ -45,8 +46,20 @@
     }
 
     .title {
-      p {
-        font-size: 16px;
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@include media-md {
+  .single-task-main-group {
+    padding-left: 20px;
+    padding-right: 20px;
+    &__content {
+      .icon {
+        margin-right: 10px;
       }
     }
   }

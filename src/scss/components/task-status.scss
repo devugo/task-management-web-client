@@ -1,6 +1,6 @@
 .task-status {
   color: var(--task-status-text-color);
-  font-size: 10px;
+  font-size: 8px;
   border-radius: 15px;
   width: 65px;
   display: flex;
@@ -32,6 +32,6 @@
 @include media-md {
   .task-status {
     width: 80px;
-    font-size: 13px;
+    font-size: 11px;
   }
 }

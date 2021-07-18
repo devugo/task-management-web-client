@@ -17,17 +17,21 @@ const apiMiddleware = (store: any) => (next: any) => async (action: ActionObject
     baseURL: 'http://localhost:4000/',
     headers: { Authorization: `Bearer ${GET_TOKEN}` },
   });
-  const { api, type } = action;
-  next({ type: type.IN_PROGRESS, response: null });
+  const { api, type, url } = action;
+  if (!url) {
+    next({ type: type.SUCCESS, response: null });
+  } else {
+    next({ type: type.IN_PROGRESS, response: null });
 
-  const promise = api(axiosClient) as any;
-  promise
-    .then((response: any) => {
-      next({ type: type.SUCCESS, response: response });
-    })
-    .catch((error: any) => {
-      next({ type: type.FAILURE, response: error.response });
-    });
+    const promise = api(axiosClient) as any;
+    promise
+      .then((response: any) => {
+        next({ type: type.SUCCESS, response: response });
+      })
+      .catch((error: any) => {
+        next({ type: type.FAILURE, response: error.response });
+      });
+  }
 };
 
 export default apiMiddleware;
