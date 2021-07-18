@@ -11,7 +11,6 @@ html {
   --light-blue: #dadaff;
   --very-light-blue: rgb(248, 248, 255);
   --focus-color: #40a9ff;
-  // --very-light-: rgb(221, 221, 230);
 
   --success-bg-color: #c9f7f5;
   --success-color: #1bc5bd;
@@ -36,6 +35,10 @@ html {
   --body-bg-color: var(--light-gray);
   --gradient: linear-gradient(to bottom right, var(--tertiary-color), var(--primary-color));
   --text-shadow-color: var(--black);
+
+  // LOGOUT BUTTON
+  --logout-bg-color: var(--fail-color);
+  --logout-text-color: var(--white);
 
   // ICONS
   --icon-bg-color: var(--primary-color);

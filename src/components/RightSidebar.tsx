@@ -1,4 +1,5 @@
 import AddTaskSection from './AddTaskSection';
+import Logout from './Logout';
 import TaskPriorities from './TaskPriorities';
 import TasksFilters from './TasksFilters';
 
@@ -22,6 +23,7 @@ const RightSideBar = ({
         setModalData={setModalData}
         setModalTitle={setModalTitle}
       />
+      <Logout />
     </div>
   );
 };

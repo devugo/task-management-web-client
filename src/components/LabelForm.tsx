@@ -100,7 +100,7 @@ const LabelForm = ({
     if (isUpdated || isDeleted) {
       handleCancel();
     }
-  }, [isUpdated]);
+  }, [isDeleted, isUpdated]);
 
   useEffect(() => {
     if (data) {
@@ -171,7 +171,13 @@ const LabelForm = ({
             </form>
             {mode !== MODE.new && (
               <Button
-                style={{ backgroundColor: '#F64E60', width: '100%', height: '50px', marginTop: 10 }}
+                style={{
+                  backgroundImage: 'inherit',
+                  backgroundColor: '#F64E60',
+                  width: '100%',
+                  height: '50px',
+                  marginTop: 10,
+                }}
                 disabled={isDeleting}
                 onClick={showDeleteConfirm}
               >

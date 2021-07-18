@@ -1,0 +1,17 @@
+.logout {
+  display: flex;
+  justify-content: center;
+  background-color: var(--logout-bg-color);
+  color: var(--logout-text-color);
+  cursor: pointer;
+  padding: 5px;
+  @include transition-ease;
+
+  span {
+    font-size: 13px;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
