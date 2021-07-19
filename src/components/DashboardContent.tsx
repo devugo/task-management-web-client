@@ -29,7 +29,7 @@ const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) =
   const chartData =
     summary &&
     Object.keys(summary as object).map((key: string) => {
-      return { name: makeStartUppercase(key), value: summary[key] };
+      return { name: makeStartUppercase(key), count: summary[key] };
     });
 
   useEffect(() => {

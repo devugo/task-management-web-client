@@ -1,3 +1,9 @@
 .dashboard-chart {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  .devugo-card {
+    padding-left: 0;
+  }
 }
