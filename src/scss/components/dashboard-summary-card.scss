@@ -25,11 +25,34 @@
   .icon-wrapper {
     width: 40px;
     height: 40px;
-    background-color: rgb(213, 85, 85);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+
+    &.today {
+      background-color: var(--todayBgColor);
+    }
+
+    &.due {
+      background-color: var(--dueBgColor);
+    }
+
+    &.upcoming {
+      background-color: var(--upcomingBgColor);
+    }
+
+    &.open {
+      background-color: var(--openBgColor);
+    }
+
+    &.progress {
+      background-color: var(--inProgressBgColor);
+    }
+
+    &.complete {
+      background-color: var(--completeBgColor);
+    }
   }
 }
 

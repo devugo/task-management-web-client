@@ -59,31 +59,37 @@ const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) =
                 title="Today Tasks"
                 count={summary.today}
                 iconTitle="mdi mdi-calendar-today"
+                iconClass="today"
               />
               <DashboardSummaryCard
                 title="Due Tasks"
                 count={summary.due}
                 iconTitle="mdi mdi-debug-step-over"
+                iconClass="due"
               />
               <DashboardSummaryCard
                 title="Upcoming Tasks"
                 count={summary.upcoming}
                 iconTitle="mdi mdi-ufo-outline"
+                iconClass="upcoming"
               />
               <DashboardSummaryCard
                 title="Open Tasks"
                 count={summary.open}
-                iconTitle="mdi mdi-email"
+                iconTitle="mdi mdi-open-in-new"
+                iconClass="open"
               />
               <DashboardSummaryCard
                 title="In-Progress Tasks"
                 count={summary.inProgress}
-                iconTitle="mdi mdi-email"
+                iconTitle="mdi mdi-progress-clock"
+                iconClass="progress"
               />
               <DashboardSummaryCard
                 title="Completed Tasks"
                 count={summary.completed}
-                iconTitle="mdi mdi-email"
+                iconTitle="mdi mdi-check-outline"
+                iconClass="complete"
               />
             </div>
             <DashboardChart data={chartData} />
