@@ -1,9 +1,9 @@
-import Logo from './Logo';
+import Logo from '../images/logo.png';
 
 const PageLoader = () => {
   return (
     <div className="page-loader">
-      <Logo />
+      <img src={Logo} />
     </div>
   );
 };
