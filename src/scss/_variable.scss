@@ -2,7 +2,7 @@
 html {
   --black: #000000;
   --black-2: #19191d;
-  --black-2: #0f1a4f;
+  --black-3: #0f1a4f;
   --green: green;
   --orange: orange;
   --primary-color: #006fd6;
@@ -31,6 +31,10 @@ html {
 
   --header-text-color: #2e2e2e;
   --paragraph-text-color: var(--dark-gray);
+
+  // WATERMARK
+  --watermark-bg-color: var(--tertiary-color);
+  --watermark-text-color: var(--white);
 
   // GENERAL
   --body-bg-color: var(--light-gray);
@@ -117,6 +121,11 @@ html {
 
   // BUTTON
   --button-bg: var(--gradient);
+  --home-button-bg: linear-gradient(
+    to bottom right,
+    var(--secondary-color),
+    var(--in-progress-color)
+  );
   --button-border-color: var(--primary-color);
 
   // SCROLLBAR

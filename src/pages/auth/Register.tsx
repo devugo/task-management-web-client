@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import PageHeader from '../../components/PageHeader';
 import RenderIcon from '../../components/RenderIcon';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { renderServerError } from '../../helpers/functions/renderServerError';
@@ -55,110 +56,113 @@ const Register = () => {
     }
   }, [successData]);
   return (
-    <div className="auth">
-      <div className="devugo-card">
-        <div className="logo">
-          <img src={Logo} />
-        </div>
-        <p className="center">
-          <strong>Sign up to continue!</strong>
-        </p>
+    <>
+      <PageHeader />
+      <div className="auth">
+        <div className="devugo-card">
+          <div className="logo">
+            <img src={Logo} />
+          </div>
+          <p className="center">
+            <strong>Sign up to continue!</strong>
+          </p>
 
-        <Formik
-          initialValues={initialFormValues}
-          validationSchema={validationSchema}
-          onSubmit={(values) => {
-            signUpWithEmailAndPasswordHandler(values);
-          }}
-        >
-          {({ values, errors, touched, handleChange, handleSubmit }) => (
-            <form onSubmit={handleSubmit} className="devugo-form">
-              {renderServerError(errorData).length > 0 && (
-                <div className="server-message mb-2 mt-2">
-                  <Alert
-                    message="Error"
-                    description={renderServerError(errorData)}
-                    type="error"
-                    showIcon
+          <Formik
+            initialValues={initialFormValues}
+            validationSchema={validationSchema}
+            onSubmit={(values) => {
+              signUpWithEmailAndPasswordHandler(values);
+            }}
+          >
+            {({ values, errors, touched, handleChange, handleSubmit }) => (
+              <form onSubmit={handleSubmit} className="devugo-form">
+                {renderServerError(errorData).length > 0 && (
+                  <div className="server-message mb-2 mt-2">
+                    <Alert
+                      message="Error"
+                      description={renderServerError(errorData)}
+                      type="error"
+                      showIcon
+                    />
+                  </div>
+                )}
+                <div className="input-container">
+                  <label>
+                    <RenderIcon title="mdi mdi-email" /> Email
+                  </label>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    onChange={handleChange}
+                    id="email"
+                    value={values.email}
                   />
+                  <small className="danger">{errors.email && touched.email && errors.email}</small>
                 </div>
-              )}
-              <div className="input-container">
-                <label>
-                  <RenderIcon title="mdi mdi-email" /> Email
-                </label>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  onChange={handleChange}
-                  id="email"
-                  value={values.email}
-                />
-                <small className="danger">{errors.email && touched.email && errors.email}</small>
-              </div>
-              <div className="input-container">
-                <label>
-                  <RenderIcon title="mdi mdi-user" /> Username
-                </label>
-                <Input
-                  name="username"
-                  placeholder="Enter your username"
-                  onChange={handleChange}
-                  id="username"
-                  value={values.username}
-                />
-                <small className="danger">
-                  {errors.username && touched.username && errors.username}
-                </small>
-              </div>
-              <div className="input-container">
-                <label>
-                  <RenderIcon title="mdi mdi-lock" /> Password
-                </label>
-                <Input
-                  name="password"
-                  onChange={handleChange}
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={values.password}
-                />
-                <small className="danger">
-                  {errors.password && touched.password && errors.password}
-                </small>
-              </div>
-              <div className="input-container">
-                <label>
-                  <RenderIcon title="mdi mdi-lock" /> Confirm Password
-                </label>
-                <Input
-                  name="confirmPassword"
-                  onChange={handleChange}
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Enter your password again"
-                  value={values.confirmPassword}
-                />
-                <small className="danger">
-                  {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
-                </small>
-              </div>
-              <Button type="submit" disabled={loading}>
-                Register
-                {loading && <LoadingOutlined spin />}
-              </Button>
+                <div className="input-container">
+                  <label>
+                    <RenderIcon title="mdi mdi-user" /> Username
+                  </label>
+                  <Input
+                    name="username"
+                    placeholder="Enter your username"
+                    onChange={handleChange}
+                    id="username"
+                    value={values.username}
+                  />
+                  <small className="danger">
+                    {errors.username && touched.username && errors.username}
+                  </small>
+                </div>
+                <div className="input-container">
+                  <label>
+                    <RenderIcon title="mdi mdi-lock" /> Password
+                  </label>
+                  <Input
+                    name="password"
+                    onChange={handleChange}
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={values.password}
+                  />
+                  <small className="danger">
+                    {errors.password && touched.password && errors.password}
+                  </small>
+                </div>
+                <div className="input-container">
+                  <label>
+                    <RenderIcon title="mdi mdi-lock" /> Confirm Password
+                  </label>
+                  <Input
+                    name="confirmPassword"
+                    onChange={handleChange}
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Enter your password again"
+                    value={values.confirmPassword}
+                  />
+                  <small className="danger">
+                    {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                  </small>
+                </div>
+                <Button type="submit" disabled={loading}>
+                  Register
+                  {loading && <LoadingOutlined spin />}
+                </Button>
 
-              <div className="center mt-2">
-                <p>
-                  Already have an account? <Link to="/login">Sign in here</Link>
-                </p>
-              </div>
-            </form>
-          )}
-        </Formik>
+                <div className="center mt-2">
+                  <p>
+                    Already have an account? <Link to="/login">Sign in here</Link>
+                  </p>
+                </div>
+              </form>
+            )}
+          </Formik>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

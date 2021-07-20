@@ -37,15 +37,7 @@ function Auth({ component: Component, isAuth, ...rest }: any) {
       <Route
         {...rest}
         render={(props) =>
-          mount ? (
-            auth.loggedIn ? (
-              <Component {...props} />
-            ) : (
-              <Redirect to="/login" />
-            )
-          ) : (
-            <PageLoader />
-          )
+          mount ? auth.loggedIn ? <Component {...props} /> : <Redirect to="/" /> : <PageLoader />
         }
       />
     );
@@ -54,7 +46,15 @@ function Auth({ component: Component, isAuth, ...rest }: any) {
     <Route
       {...rest}
       render={(props) =>
-        mount ? auth.loggedIn ? <Redirect to="/" /> : <Component {...props} /> : <PageLoader />
+        mount ? (
+          auth.loggedIn ? (
+            <Redirect to="/dashboard" />
+          ) : (
+            <Component {...props} />
+          )
+        ) : (
+          <PageLoader />
+        )
       }
     />
   );

@@ -1,6 +1,12 @@
-const LogoWhite = () => {
+const LogoWhite = ({ width, height }: { width: number; height: number }) => {
   return (
-    <svg width="23" height="26" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 23 26"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M22 0H0V6.5H6L11 16.25H6.25L6.5 26H15C15 26 13.5 14.5 15 6.5C16.5 -1.5 22 6.5 22 6.5V0Z"
         fill="url(#paint0_linear)"

@@ -1,11 +1,15 @@
 const Watermark = () => {
   return (
-    <p style={{ textAlign: 'center', marginTop: 5, marginBottom: 5 }}>
-      Developed by{' '}
-      <a target="_blank" href="https://github.com/devugo" rel="noreferrer">
-        Devugo
-      </a>
-    </p>
+    <a
+      target="_blank"
+      href="https://github.com/devugo"
+      rel="noreferrer"
+      className="devugo-watermark"
+    >
+      <span>
+        Developed by <b>devugo</b>
+      </span>
+    </a>
   );
 };
 export default Watermark;

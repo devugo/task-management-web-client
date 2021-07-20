@@ -4,8 +4,10 @@
 
 //  Pages
 @import './pages/auth';
+@import './pages/home';
 
 // Components
+@import './components/watermark';
 @import './components/textarea-input';
 @import './components/tasks-filters';
 @import './components/tasks-content';
@@ -41,4 +43,5 @@
 @import './components/dashboard-chart';
 @import './components/button-radio';
 @import './components/button';
+@import './components/banner-image';
 @import './components/add-task-section';

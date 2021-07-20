@@ -3,7 +3,7 @@ import LogoWhite from './LogoWhite';
 const PageHeader = () => {
   return (
     <div className="page-header">
-      <LogoWhite />
+      <LogoWhite width={26} height={26} />
       <h1> Management</h1>
     </div>
   );

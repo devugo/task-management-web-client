@@ -1,0 +1,67 @@
+@keyframes white-path {
+  from {
+    fill: white;
+  }
+  to {
+    fill: #fff4de;
+  }
+}
+
+@keyframes orange-path {
+  from {
+    fill: #ffa800;
+  }
+  to {
+    fill: white;
+  }
+}
+
+@keyframes green-path {
+  from {
+    fill: #1bc5bd;
+  }
+  to {
+    fill: white;
+  }
+}
+
+@keyframes rect-path {
+  from {
+    fill: var(--primary-color);
+  }
+  to {
+    fill: var(--tertiary-color);
+  }
+}
+
+svg.banner-image {
+  .orange-path,
+  .green-path,
+  .white-path,
+  .rect-path {
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  .orange-path {
+    animation-name: orange-path;
+    animation-duration: 5s;
+  }
+
+  .green-path {
+    animation-name: green-path;
+    animation-duration: 3s;
+  }
+
+  .white-path {
+    animation-name: white-path;
+    animation-duration: 4s;
+  }
+
+  .rect-path {
+    animation-name: rect-path;
+    animation-duration: 10s;
+  }
+}

@@ -6,6 +6,7 @@ import LabelForm from '../components/LabelForm';
 import LeftSideBar from '../components/LeftSidebar';
 import LeftSidebarMobile from '../components/LeftSidebarMobile';
 import LoaderOverlay from '../components/LoaderOverlay';
+import PageHeader from '../components/PageHeader';
 import ProjectForm from '../components/ProjectForm';
 import RescheduleTaskForm from '../components/RescheduleTaskForm';
 import RightSideBar from '../components/RightSidebar';
@@ -123,66 +124,69 @@ const Tasks = () => {
   }, [type, search]);
 
   return (
-    <PageWrapper>
-      <LeftSideBar />
-      <LeftSidebarMobile />
-      <TasksContent
-        goToPage={goToPage}
-        currentPage={currentPage}
-        pageTitle={pageTitle}
-        showModal={showModal}
-        setModalTitle={setModalTitle}
-        setModalData={setModalData}
-        toggleOverlay={toggleOverlay}
-        showStatusModal={showStatusModal}
-        showRescheduleModal={showRescheduleModal}
-        showProjectModal={showProjectModal}
-        showLabelModal={showLabelModal}
-        search={search}
-      />
-      <RightSideBar
-        searchFilter={searchFilter}
-        showModal={showModal}
-        setModalTitle={setModalTitle}
-        setModalData={setModalData}
-      />
-      <RightSidebarMobile
-        searchFilter={searchFilter}
-        showModal={showModal}
-        setModalTitle={setModalTitle}
-        setModalData={setModalData}
-      />
+    <>
+      <PageHeader />
+      <PageWrapper>
+        <LeftSideBar />
+        <LeftSidebarMobile />
+        <TasksContent
+          goToPage={goToPage}
+          currentPage={currentPage}
+          pageTitle={pageTitle}
+          showModal={showModal}
+          setModalTitle={setModalTitle}
+          setModalData={setModalData}
+          toggleOverlay={toggleOverlay}
+          showStatusModal={showStatusModal}
+          showRescheduleModal={showRescheduleModal}
+          showProjectModal={showProjectModal}
+          showLabelModal={showLabelModal}
+          search={search}
+        />
+        <RightSideBar
+          searchFilter={searchFilter}
+          showModal={showModal}
+          setModalTitle={setModalTitle}
+          setModalData={setModalData}
+        />
+        <RightSidebarMobile
+          searchFilter={searchFilter}
+          showModal={showModal}
+          setModalTitle={setModalTitle}
+          setModalData={setModalData}
+        />
 
-      <TaskForm
-        data={modalData}
-        title={modalTitle}
-        modalVisible={modalVisible}
-        handleCancel={handleCancel}
-      />
-      <StatusForm
-        data={modalData}
-        handleCancel={cancelStatusModal}
-        modalVisible={statusModalVisible}
-      />
-      <RescheduleTaskForm
-        data={modalData}
-        handleCancel={cancelRescheduleModal}
-        modalVisible={rescheduleModalVisible}
-      />
-      <ProjectForm
-        title={modalTitle}
-        modalVisible={projectModalVisible}
-        handleCancel={cancelProjectModal}
-        data={modalData}
-      />
-      <LabelForm
-        title={modalTitle}
-        modalVisible={labelModalVisible}
-        handleCancel={cancelLabelModal}
-        data={modalData}
-      />
-      {openOverlay && <LoaderOverlay />}
-    </PageWrapper>
+        <TaskForm
+          data={modalData}
+          title={modalTitle}
+          modalVisible={modalVisible}
+          handleCancel={handleCancel}
+        />
+        <StatusForm
+          data={modalData}
+          handleCancel={cancelStatusModal}
+          modalVisible={statusModalVisible}
+        />
+        <RescheduleTaskForm
+          data={modalData}
+          handleCancel={cancelRescheduleModal}
+          modalVisible={rescheduleModalVisible}
+        />
+        <ProjectForm
+          title={modalTitle}
+          modalVisible={projectModalVisible}
+          handleCancel={cancelProjectModal}
+          data={modalData}
+        />
+        <LabelForm
+          title={modalTitle}
+          modalVisible={labelModalVisible}
+          handleCancel={cancelLabelModal}
+          data={modalData}
+        />
+        {openOverlay && <LoaderOverlay />}
+      </PageWrapper>
+    </>
   );
 };
 
