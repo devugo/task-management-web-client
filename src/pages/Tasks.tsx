@@ -30,6 +30,7 @@ const Tasks = () => {
   const [pageTitle, setPageTitle] = useState(EMPTY_STRING);
   const [queryParams, setQueryParams] = useState(EMPTY_STRING);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loaded, setLoaded] = useState(false);
 
   // Status Modal
   const [statusModalVisible, setStatusModalVisible] = useState(false);
@@ -103,7 +104,7 @@ const Tasks = () => {
   };
 
   useEffect(() => {
-    if (currentPage > 1) {
+    if (loaded) {
       let params = queryParams;
       if (params) {
         params += `&page=${currentPage}`;
@@ -121,6 +122,7 @@ const Tasks = () => {
 
   useEffect(() => {
     dispatch(getTasks(type, search));
+    setLoaded(true);
   }, [type, search]);
 
   return (
