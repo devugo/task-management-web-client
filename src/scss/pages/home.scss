@@ -1,3 +1,25 @@
+@keyframes top-in-home {
+  from {
+    margin-top: -40px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes sk-from-right {
+  from {
+    margin-left: 100px;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0px;
+    opacity: 1;
+  }
+}
+
 .home {
   max-width: 1700px;
   margin: 0 auto;
@@ -25,14 +47,43 @@
         span.sk {
           color: var(--white);
         }
+
+        svg {
+          text-shadow: $text-shadow;
+          color: var(--white);
+          animation-name: zoom-in;
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
+          animation-fill-mode: backwards;
+          animation-delay: 3s;
+        }
+
+        span.sk {
+          animation-name: sk-from-right;
+          animation-duration: 2s;
+          animation-timing-function: ease;
+          animation-fill-mode: backwards;
+          animation-delay: 3.5s;
+        }
         h1 {
           text-shadow: $text-shadow;
           color: var(--white);
+          animation-name: top-in-home;
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
+          animation-fill-mode: backwards;
+          animation-delay: 2s;
+          // animation-delay: 1.4s !important;
         }
         p {
           max-width: 400px;
           margin-bottom: 40px;
           color: var(--light-gray-2);
+          animation-name: top-in-home;
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
+          animation-fill-mode: backwards;
+          animation-delay: 1s;
         }
         a {
           background-image: var(--home-button-bg);
@@ -45,6 +96,10 @@
           font-size: 13px;
           padding: 15px 35px;
           @include transition-ease;
+          animation-name: zoom-in;
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
+          animation-fill-mode: backwards;
 
           &:hover {
             opacity: 0.9;
@@ -62,6 +117,10 @@
         svg {
           width: 90%;
           height: 100%;
+          animation-name: zoom-in;
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
+          animation-fill-mode: backwards;
         }
       }
     }

@@ -5,11 +5,18 @@
   z-index: 3;
   @include flex-center-center;
 
+  svg {
+    margin-top: 9px;
+  }
+
+  a {
+    display: flex;
+  }
+
   h1 {
     font-size: 20px;
     color: var(--page-header-text-color);
     text-shadow: $text-shadow;
-    margin-top: 15px;
     margin-left: 10px;
   }
 }
