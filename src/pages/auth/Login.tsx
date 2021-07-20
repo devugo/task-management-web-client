@@ -8,12 +8,12 @@ import * as Yup from 'yup';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import Logo from '../../components/Logo';
 import RenderIcon from '../../components/RenderIcon';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
+import Logo from '../../images/logo.png';
 import { signin } from '../../store/actions/auth';
 import { SIGNIN_USER } from '../../store/actions/types';
 import { RootStateType, SigninType } from '../../types.d';
@@ -52,7 +52,7 @@ const Login = () => {
     <div className="auth">
       <div className="devugo-card">
         <div className="logo">
-          <Logo />
+          <img src={Logo} />
         </div>
         <p className="center">
           <strong>Sign in to continue!</strong>
@@ -110,28 +110,10 @@ const Login = () => {
               <Button disabled={loading} type="submit">
                 Login {loading && <LoadingOutlined spin />}
               </Button>
-              {/* <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                        disabled={loading.google || loading.form}
-                    >
-                        Sign in
-                        {
-                            loading.form ? <CircularProgress size={20} style={{color: 'white'}} /> : ''
-                        }
-                    </Button> */}
-
-              {/* <div className="text-center mt-3">
-                <p>OR</p>
-              </div> */}
 
               <div className="center mt-2">
                 <p>
                   Dont have an account? <Link to="/register">Sign up here</Link>
-                </p>
-                <p>
-                  <Link to="/password-reset">Forgot password?</Link>
                 </p>
               </div>
             </form>

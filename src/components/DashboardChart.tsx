@@ -1,6 +1,6 @@
 import { Alert } from 'antd';
 import { useSelector } from 'react-redux';
-import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { getLoader } from '../helpers/functions/getLoader';
 import { renderServerError } from '../helpers/functions/renderServerError';
@@ -36,13 +36,25 @@ const DashboardChart = ({ data }: { data: { name: string; count: number }[] }) =
             <span>Fetching Chart Data</span>
           </div>
         ) : (
-          <LineChart width={chartWidth} height={300} data={data} margin={chartMargin}>
-            <Line type="monotone" dataKey="count" stroke="#8884d8" />
-            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <AreaChart width={chartWidth} height={300} data={data} margin={chartMargin}>
+            <defs>
+              <linearGradient id="colorUv" x1="1" y1="1" x2="1" y2="0">
+                <stop offset="5%" stopColor="#006fd6" stopOpacity={0.5} />
+                <stop offset="95%" stopColor="#191970" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <Area
+              type="monotone"
+              dataKey="count"
+              stroke="#006fd6"
+              fillOpacity={1}
+              fill="url(#colorUv)"
+            />
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis label={{ value: 'Count', angle: -90 }} />
             <Tooltip />
-          </LineChart>
+          </AreaChart>
         )}
       </div>
     </div>

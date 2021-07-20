@@ -1,7 +1,10 @@
+import LogoWhite from './LogoWhite';
+
 const PageHeader = () => {
   return (
     <div className="page-header">
-      <h1>Task Management</h1>
+      <LogoWhite />
+      <h1> Management</h1>
     </div>
   );
 };

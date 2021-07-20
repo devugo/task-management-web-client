@@ -8,11 +8,11 @@ import * as Yup from 'yup';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import Logo from '../../components/Logo';
 import RenderIcon from '../../components/RenderIcon';
 import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
+import Logo from '../../images/logo.png';
 import { signup } from '../../store/actions/auth';
 import { SIGNUP_USER } from '../../store/actions/types';
 import { ApiResponseType, RootStateType, SignupType } from '../../types.d';
@@ -58,7 +58,7 @@ const Register = () => {
     <div className="auth">
       <div className="devugo-card">
         <div className="logo">
-          <Logo />
+          <img src={Logo} />
         </div>
         <p className="center">
           <strong>Sign up to continue!</strong>
@@ -153,9 +153,6 @@ const Register = () => {
                 <p>
                   Already have an account? <Link to="/login">Sign in here</Link>
                 </p>
-                {/* <p>
-                  <Link to="/password-reset">Forgot password?</Link>
-                </p> */}
               </div>
             </form>
           )}
