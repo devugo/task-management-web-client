@@ -92,6 +92,35 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
     }
   }
 }
+
+.ant-select-open {
+  box-shadow: 0 0 0 0.5px rgba(24, 144, 255, 0.2);
+  outline: 0;
+  border: 1px solid var(--input-border-color-focus);
+  box-shadow: 0 0 0 0.5px rgba(24, 144, 255, 0.2);
+}
+
+.ant-input {
+  background-color: var(--input-bg-color) !important;
+  border-color: var(--input-bg-color);
+  width: 100%;
+
+  &:hover {
+    border-color: var(--input-bg-color);
+  }
+
+  &:focus {
+    // border-color: #57a8e9;
+    // outline: 0;
+    // -webkit-box-shadow: 0 0 0 2px rgba(87, 168, 233, 0.2);
+    // box-shadow: 0 0 0 2px rgba(87, 168, 233, 0.2);
+
+    box-shadow: 0 0 0 0.5px rgba(24, 144, 255, 0.2);
+    outline: 0;
+    border: 1px solid var(--input-border-color-focus);
+  }
+}
+
 // CHECKBOX
 .ant-checkbox-checked .ant-checkbox-inner,
 .ant-checkbox-checked .ant-checkbox-inner:hover {
@@ -105,6 +134,33 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
   width: 8.71px;
   height: 15px;
 }
+
+.ant-picker {
+  background-color: var(--input-bg-color);
+  border-color: var(--input-bg-color);
+  &.ant-picker-focused {
+    box-shadow: 0 0 0 0.5px rgba(24, 144, 255, 0.2) !important;
+    border: 1px solid var(--input-border-color-focus) !important;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 0.5px rgba(95, 126, 155, 0.2) !important;
+    border: 1px solid var(--input-bg-color);
+  }
+}
+
+// ANT PAGINATION
+.ant-pagination-item-active,
+.ant-pagination-item:hover {
+  border-color: var(--primary-color);
+}
+.ant-pagination-item-active a,
+.ant-pagination-item a:hover {
+  color: var(--primary-color);
+}
+// END OF ANT PAGINATION
+
+// END ANT DESIGN
 
 // SCROlLBAR CUSTOM STYLES
 
@@ -136,16 +192,3 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
 }
 
 // SCROlLBAR CUSTOM STYLES
-
-// ANT PAGINATION
-.ant-pagination-item-active,
-.ant-pagination-item:hover {
-  border-color: var(--primary-color);
-}
-.ant-pagination-item-active a,
-.ant-pagination-item a:hover {
-  color: var(--primary-color);
-}
-// END OF ANT PAGINATION
-
-// END ANT DESIGN

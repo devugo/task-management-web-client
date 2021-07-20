@@ -104,7 +104,7 @@ const SuccessMessages = () => {
       showMessage('success', 'Task was rescheduled created successfully', 4);
     }
     if (isTaskStatusUpdated) {
-      showMessage('success', 'Task status was created successfully', 4);
+      showMessage('success', 'Task status was updated successfully', 4);
     }
   }, [
     isProjectDeleted,

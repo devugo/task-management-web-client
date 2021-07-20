@@ -11,6 +11,7 @@ html {
   --light-blue: #dadaff;
   --very-light-blue: rgb(248, 248, 255);
   --focus-color: #40a9ff;
+  --hover-color: #a8d8ff;
 
   --success-bg-color: #c9f7f5;
   --success-color: #1bc5bd;
@@ -108,6 +109,7 @@ html {
 
   // INPUT
   --input-border-color-focus: var(--focus-color);
+  --input-border-color-hover: var(--hover-color);
   --input-bg-color: var(--very-light-blue);
   --input-select-bg-color: var(--gray-2);
   --input-disabled-bg-color: var(--gray-2);

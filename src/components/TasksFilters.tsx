@@ -1,4 +1,4 @@
-import { Alert, Select } from 'antd';
+import { Alert, Input, Select } from 'antd';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -9,7 +9,6 @@ import { renderServerError } from '../helpers/functions/renderServerError';
 import { READ_TASKS } from '../store/actions/types';
 import { RootStateType } from '../types.d';
 import Button from './Button';
-import Input from './Input';
 
 const emptyFormData: { search: string; status: string } = {
   search: EMPTY_STRING,
