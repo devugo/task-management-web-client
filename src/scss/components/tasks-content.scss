@@ -1,3 +1,10 @@
 .tasks-content {
   padding: 20px;
+
+  .pagination {
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+  }
 }

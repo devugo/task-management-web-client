@@ -11,8 +11,12 @@
   box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.05);
   z-index: 2;
   overflow: hidden;
-  @include transition-ease;
   transition-duration: 0.1s;
+  @include transition-ease;
+  animation-name: zoom-in;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
 
   &:hover {
     transform: scale(1.03);

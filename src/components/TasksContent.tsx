@@ -63,6 +63,8 @@ const TasksContent = ({
     }
   }, [deleting, deletingProject, deletingLabel]);
 
+  const paginationAnimationDelay = { animationDelay: `${(tasksData.length - 1) * 0.2}s` };
+
   return (
     <PageContent>
       <div className="tasks-content">
@@ -81,6 +83,7 @@ const TasksContent = ({
             </div>
           ) : (
             tasksData.map((task, index) => {
+              const animationDelay = index * 0.2;
               return (
                 <Fragment key={index}>
                   <Task
@@ -90,6 +93,7 @@ const TasksContent = ({
                     data={task}
                     showStatusModal={showStatusModal}
                     showRescheduleModal={showRescheduleModal}
+                    animationDelay={animationDelay}
                   />
                 </Fragment>
               );
@@ -97,7 +101,7 @@ const TasksContent = ({
           )}
         </div>
         {!fetching && tasksCount > 0 && (
-          <div className="pagination">
+          <div className="pagination" style={paginationAnimationDelay}>
             <Pagination
               defaultPageSize={PAGINATION.itemsPerPage}
               onChange={goToPage}

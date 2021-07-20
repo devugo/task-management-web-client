@@ -51,7 +51,7 @@
 
 @keyframes top-in {
   from {
-    margin-top: -60px;
+    margin-top: -40px;
     opacity: 0;
   }
   to {
@@ -63,8 +63,19 @@
 @keyframes zoom-in {
   from {
     transform: scale(0);
+    opacity: 0;
   }
   to {
     transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

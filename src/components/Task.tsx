@@ -11,6 +11,7 @@ const Task = ({
   setModalData,
   showStatusModal,
   showRescheduleModal,
+  animationDelay,
 }: {
   data: ViewTaskType;
   showModal: () => void;
@@ -18,10 +19,14 @@ const Task = ({
   setModalData: (data: any) => void;
   showStatusModal: () => void;
   showRescheduleModal: () => void;
+  animationDelay: number;
 }) => {
   const { level, status } = data;
   return (
-    <div className="task" style={{ borderColor: level ? level.color : 'white' }}>
+    <div
+      className="task"
+      style={{ borderColor: level ? level.color : 'white', animationDelay: `${animationDelay}s` }}
+    >
       <TaskCompleteIcon complete={status === 'DONE'} />
       <TaskContent {...data} />
 
