@@ -10,7 +10,7 @@ Basically, this app is for managing of task. Let's you organize your chat in a p
 - [TypeScript](https://www.typescriptlang.org/)
 - [Redux](https://redux.js.org/)
 - [Ant Design](https://ant.design/)
-- [Backend-Server](https://task-management-server-devugo.herokuapp.com/)
+- [Backend-Server-URL](https://task-management-server-devugo.herokuapp.com/)
 - [Backend-Repository](https://github.com/devugo/task-management-server)
 
 ## Project Structure
