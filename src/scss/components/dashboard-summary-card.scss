@@ -6,6 +6,10 @@
   width: 100%;
   justify-content: space-between;
   margin-top: 10px;
+  animation-name: top-in;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
 
   .title-count {
     display: flex;
@@ -65,5 +69,11 @@
 @include media-lg {
   .dashboard-summary-card {
     width: 220px;
+  }
+}
+
+@for $i from 2 through 6 {
+  .dashboard-summary-card:nth-child(#{$i}) {
+    animation-delay: ($i * 0.2s) !important;
   }
 }

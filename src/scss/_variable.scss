@@ -122,10 +122,10 @@ html {
   --scrollBaHroverColor: #ffac1d;
 
   // TASK DASHBOARD
-  --todayBgColor: rgba(26, 26, 255, 0.837);
+  --todayBgColor: rgba(0, 0, 139, 0.837);
   --dueBgColor: rgb(213, 85, 85);
   --upcomingBgColor: #17a9a1;
-  --openBgColor: rgba(0, 0, 139, 0.837);
+  --openBgColor: rgba(26, 26, 255, 0.837);
   --inProgressBgColor: var(--in-progress-color);
   --completeBgColor: var(--success-color);
 }
