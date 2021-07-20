@@ -10,7 +10,6 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import PageHeader from '../../components/PageHeader';
 import RenderIcon from '../../components/RenderIcon';
-import { EMPTY_STRING } from '../../constants/EMPTY_STRING';
 import { getLoader } from '../../helpers/functions/getLoader';
 import { renderServerError } from '../../helpers/functions/renderServerError';
 import { showMessage } from '../../helpers/functions/showMessage';
@@ -20,8 +19,8 @@ import { SIGNIN_USER } from '../../store/actions/types';
 import { RootStateType, SigninType } from '../../types.d';
 
 const initialFormValues: SigninType = {
-  email: EMPTY_STRING,
-  password: EMPTY_STRING,
+  email: 'test@gmail.com',
+  password: 'Password1234',
 };
 
 const validationSchema = Yup.object({

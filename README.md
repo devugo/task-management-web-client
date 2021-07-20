@@ -10,6 +10,8 @@ Basically, this app is for managing of task. Let's you organize your chat in a p
 - [TypeScript](https://www.typescriptlang.org/)
 - [Redux](https://redux.js.org/)
 - [And Design](https://ant.design/)
+- [Backend-Server](https://task-management-server-devugo.herokuapp.com/)
+- [Backend-Repository](https://github.com/devugo/task-management-server)
 
 ## Project Structure
 
@@ -37,6 +39,17 @@ Below shows the project structure;
 ## Live Demo
 
 - [Demo](https://task-management-by-devugo.netlify.app/).
+
+```Test Credentials
+
+```
+
+```
+    {
+        "email": "test@gmail.com",
+        "password": "Password1234,
+    }
+```
 
 ### Site Preview Images
 
