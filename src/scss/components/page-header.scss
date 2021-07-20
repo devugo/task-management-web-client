@@ -5,10 +5,6 @@
   z-index: 3;
   @include flex-center-center;
 
-  svg {
-    margin-top: 9px;
-  }
-
   a {
     display: flex;
   }
@@ -25,6 +21,10 @@
   .page-header {
     h1 {
       font-size: 30px;
+    }
+
+    svg {
+      margin-top: 9px;
     }
   }
 }
