@@ -12,11 +12,11 @@
   z-index: 2;
   overflow: hidden;
   transition-duration: 0.1s;
-  @include transition-ease;
   animation-name: zoom-in;
   animation-duration: 0.7s;
   animation-timing-function: ease-out;
-  animation-fill-mode: both;
+  animation-fill-mode: backwards;
+  @include transition-ease;
 
   &:hover {
     transform: scale(1.03);
