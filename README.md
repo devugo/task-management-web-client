@@ -2,7 +2,7 @@
 
 ## Overview
 
-Basically, this app is for managing of task. Let's you organize your chat in a place. Easily checkout completed task, view overdue tasks, reschedule tasks and lots more.
+Basically, this app is for managing of tasks. Let's you organize your tasks in a place. Easily checkout completed task, view overdue tasks, reschedule tasks and lots more.
 
 ## Dependencies
 
