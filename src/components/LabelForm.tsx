@@ -1,17 +1,22 @@
 import { ExclamationCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Alert, Modal } from 'antd';
 import { Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
+import { COLORS } from '../constants/COLORS';
 import { EMPTY_STRING } from '../constants/EMPTY_STRING';
 import { MODE } from '../constants/MODE';
 import { STORAGE_VARIABLE } from '../constants/STORAGE_VARIABLE';
 import { getLoader } from '../helpers/functions/getLoader';
 import { saveToStorage } from '../helpers/functions/localStorage';
 import { renderServerError } from '../helpers/functions/renderServerError';
-import { successDelete, successUpdate } from '../helpers/functions/responseChecker';
+import {
+  successCreation,
+  successDelete,
+  successUpdate,
+} from '../helpers/functions/responseChecker';
 import { createLabel, deleteLabel, updateLabel } from '../store/actions/label';
 import { CREATE_LABEL, DELETE_LABEL, UPDATE_LABEL } from '../store/actions/types';
 import { LabelType, RootStateType } from '../types.d';
@@ -21,7 +26,7 @@ import RenderIcon from './RenderIcon';
 
 const initialFormValues: LabelType = {
   title: EMPTY_STRING,
-  color: '#353535',
+  color: COLORS.initial,
 };
 
 const validationSchema = Yup.object({
@@ -43,6 +48,7 @@ const LabelForm = ({
   data?: any;
 }) => {
   const dispatch = useDispatch();
+  const resetFormButtonRef = useRef<any>(null);
 
   const { loader } = useSelector((state: RootStateType) => state);
 
@@ -54,6 +60,7 @@ const LabelForm = ({
     mode === MODE.new ? getLoader(loader, CREATE_LABEL) : getLoader(loader, UPDATE_LABEL);
   const loading = progressData ? true : false;
   const isUpdated = successUpdate(successData);
+  const isCreated = successCreation(successData);
 
   // DELETE Loader
   const {
@@ -96,6 +103,17 @@ const LabelForm = ({
     }
   };
 
+  const resetFormikEntries = (resetForm: any) => {
+    resetForm();
+  };
+
+  useEffect(() => {
+    if (isCreated) {
+      // Clear formik form values
+      resetFormButtonRef.current?.click();
+    }
+  });
+
   useEffect(() => {
     if (isUpdated || isDeleted) {
       handleCancel();
@@ -105,8 +123,10 @@ const LabelForm = ({
   useEffect(() => {
     if (data) {
       setFormikFormValues({ title: data.title, color: data.color });
+    } else {
+      setFormikFormValues(initialFormValues);
     }
-  }, [data]);
+  }, [modalVisible]);
 
   return (
     <Modal footer={null} title={title} visible={modalVisible} onCancel={handleCancel}>
@@ -114,16 +134,15 @@ const LabelForm = ({
         enableReinitialize
         initialValues={formikFormValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values) => {
           if (mode === MODE.new) {
             add(values);
           } else {
             update(values);
           }
-          resetForm();
         }}
       >
-        {({ values, errors, touched, handleChange, handleSubmit }) => (
+        {({ values, errors, touched, handleChange, handleSubmit, resetForm }) => (
           <>
             <form onSubmit={handleSubmit} className="devugo-form">
               {renderServerError(errorData || deleteErrorData).length > 0 && (
@@ -184,6 +203,12 @@ const LabelForm = ({
                 Delete {isDeleting && <LoadingOutlined spin />}
               </Button>
             )}
+            <button
+              style={{ display: 'none' }}
+              ref={resetFormButtonRef}
+              onClick={() => resetFormikEntries(resetForm)}
+              type="button"
+            ></button>
           </>
         )}
       </Formik>

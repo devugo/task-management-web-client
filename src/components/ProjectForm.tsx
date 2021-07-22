@@ -1,17 +1,22 @@
 import { ExclamationCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Alert, Modal } from 'antd';
 import { Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
+import { COLORS } from '../constants/COLORS';
 import { EMPTY_STRING } from '../constants/EMPTY_STRING';
 import { MODE } from '../constants/MODE';
 import { STORAGE_VARIABLE } from '../constants/STORAGE_VARIABLE';
 import { getLoader } from '../helpers/functions/getLoader';
 import { saveToStorage } from '../helpers/functions/localStorage';
 import { renderServerError } from '../helpers/functions/renderServerError';
-import { successDelete, successUpdate } from '../helpers/functions/responseChecker';
+import {
+  successCreation,
+  successDelete,
+  successUpdate,
+} from '../helpers/functions/responseChecker';
 import { createProject, deleteProject, updateProject } from '../store/actions/project';
 import { CREATE_PROJECT, DELETE_PROJECT, UPDATE_PROJECT } from '../store/actions/types';
 import { ProjectType, RootStateType } from '../types.d';
@@ -23,7 +28,7 @@ import TextareaInput from './TextAreaInput';
 const initialFormValues: ProjectType = {
   title: EMPTY_STRING,
   description: EMPTY_STRING,
-  color: '#353535',
+  color: COLORS.initial,
 };
 
 const validationSchema = Yup.object({
@@ -46,6 +51,7 @@ const ProjectForm = ({
   data?: any;
 }) => {
   const dispatch = useDispatch();
+  const resetFormButtonRef = useRef<any>(null);
 
   const { loader } = useSelector((state: RootStateType) => state);
 
@@ -57,6 +63,7 @@ const ProjectForm = ({
     mode === MODE.new ? getLoader(loader, CREATE_PROJECT) : getLoader(loader, UPDATE_PROJECT);
   const loading = progressData ? true : false;
   const isUpdated = successUpdate(successData);
+  const isCreated = successCreation(successData);
 
   // DELETE Loader
   const {
@@ -99,6 +106,17 @@ const ProjectForm = ({
     }
   };
 
+  const resetFormikEntries = (resetForm: any) => {
+    resetForm();
+  };
+
+  useEffect(() => {
+    if (isCreated) {
+      // Clear formik form values
+      resetFormButtonRef.current?.click();
+    }
+  });
+
   useEffect(() => {
     if (isDeleted || isUpdated) {
       handleCancel();
@@ -108,8 +126,10 @@ const ProjectForm = ({
   useEffect(() => {
     if (data) {
       setFormikFormValues({ title: data.title, description: data.description, color: data.color });
+    } else {
+      setFormikFormValues(initialFormValues);
     }
-  }, [data]);
+  }, [modalVisible]);
 
   return (
     <Modal footer={null} title={title} visible={modalVisible} onCancel={handleCancel}>
@@ -117,16 +137,15 @@ const ProjectForm = ({
         enableReinitialize
         initialValues={formikFormValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values) => {
           if (mode === MODE.new) {
             add(values);
           } else {
             update(values);
           }
-          resetForm();
         }}
       >
-        {({ values, errors, touched, handleChange, handleSubmit }) => (
+        {({ values, errors, touched, handleChange, handleSubmit, resetForm }) => (
           <>
             <form onSubmit={handleSubmit} className="devugo-form">
               {renderServerError(errorData || deleteErrorData).length > 0 && (
@@ -203,6 +222,12 @@ const ProjectForm = ({
                 Delete {isDeleting && <LoadingOutlined spin />}
               </Button>
             )}
+            <button
+              style={{ display: 'none' }}
+              ref={resetFormButtonRef}
+              onClick={() => resetFormikEntries(resetForm)}
+              type="button"
+            ></button>
           </>
         )}
       </Formik>

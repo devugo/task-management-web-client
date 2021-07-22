@@ -3,7 +3,7 @@ import { Alert, DatePicker, Select } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -51,6 +51,7 @@ const TaskForm = ({
   data?: ViewTaskType;
 }) => {
   const dispatch = useDispatch();
+  const resetFormButtonRef = useRef<any>(null);
 
   const { loader, projects, labels } = useSelector((state: RootStateType) => state);
 
@@ -96,9 +97,15 @@ const TaskForm = ({
     });
   };
 
+  const resetFormikEntries = (resetForm: any) => {
+    resetForm();
+  };
+
   useEffect(() => {
     if (isSuccess) {
       handleCancel();
+      // Clear formik form values
+      resetFormButtonRef.current?.click();
     }
   }, [isSuccess]);
 
@@ -113,7 +120,7 @@ const TaskForm = ({
       setFormData(emptyFormData);
       setFormikFormValues(initialFormValues);
     }
-  }, [data]);
+  }, [modalVisible]);
 
   return (
     <Modal footer={null} title={title} visible={modalVisible} onCancel={handleCancel}>
@@ -121,121 +128,127 @@ const TaskForm = ({
         enableReinitialize
         initialValues={formikFormValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values) => {
           if (mode === MODE.new) {
             add({ ...values, ...formData });
           } else {
             update({ ...values, ...formData });
           }
-          resetForm();
-          setFormData(emptyFormData);
         }}
       >
-        {({ values, errors, touched, handleChange, handleSubmit }) => (
-          <form onSubmit={handleSubmit} className="devugo-form">
-            {renderServerError(errorData).length > 0 && (
-              <div className="server-message mb-2 mt-2">
-                <Alert
-                  message="Error"
-                  description={renderServerError(errorData)}
-                  type="error"
-                  showIcon
+        {({ values, errors, touched, handleChange, handleSubmit, resetForm }) => {
+          return (
+            <form onSubmit={handleSubmit} className="devugo-form">
+              {renderServerError(errorData).length > 0 && (
+                <div className="server-message mb-2 mt-2">
+                  <Alert
+                    message="Error"
+                    description={renderServerError(errorData)}
+                    type="error"
+                    showIcon
+                  />
+                </div>
+              )}
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-title" /> Title
+                </label>
+                <Input
+                  name="title"
+                  placeholder="Enter project title"
+                  onChange={handleChange}
+                  id="title"
+                  value={values.title}
+                />
+                <small className="danger">{errors.title && touched.title && errors.title}</small>
+              </div>
+
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-title" /> Date
+                </label>
+                <DatePicker
+                  style={{ width: '100%', height: 50 }}
+                  value={formData.date}
+                  onChange={onChangeDate}
                 />
               </div>
-            )}
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Title
-              </label>
-              <Input
-                name="title"
-                placeholder="Enter project title"
-                onChange={handleChange}
-                id="title"
-                value={values.title}
-              />
-              <small className="danger">{errors.title && touched.title && errors.title}</small>
-            </div>
 
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Date
-              </label>
-              <DatePicker
-                style={{ width: '100%', height: 50 }}
-                value={formData.date}
-                onChange={onChangeDate}
-              />
-            </div>
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-title" /> Description
+                </label>
+                <TextareaInput
+                  name="description"
+                  placeholder="Enter description title"
+                  onChange={handleChange}
+                  id="description"
+                  value={values.description}
+                />
+                <small className="danger">
+                  {errors.description && touched.description && errors.description}
+                </small>
+              </div>
 
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Description
-              </label>
-              <TextareaInput
-                name="description"
-                placeholder="Enter description title"
-                onChange={handleChange}
-                id="description"
-                value={values.description}
-              />
-              <small className="danger">
-                {errors.description && touched.description && errors.description}
-              </small>
-            </div>
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-title" /> Project
+                </label>
+                <Select
+                  allowClear
+                  placeholder="Please select"
+                  value={formData.project}
+                  onChange={(value) => changeSelect(value, 'project')}
+                  id="project"
+                  showArrow={false}
+                >
+                  {projects.data.map((project, index) => (
+                    <Option key={index} value={project.id}>
+                      {project.title}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
 
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Project
-              </label>
-              <Select
-                allowClear
-                placeholder="Please select"
-                value={formData.project}
-                onChange={(value) => changeSelect(value, 'project')}
-                id="project"
-                showArrow={false}
-              >
-                {projects.data.map((project, index) => (
-                  <Option key={index} value={project.id}>
-                    {project.title}
-                  </Option>
-                ))}
-              </Select>
-            </div>
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-title" /> Labels
+                </label>
+                <Select
+                  mode="tags"
+                  allowClear
+                  placeholder="Please select"
+                  value={formData.labels}
+                  onChange={(value) => changeSelect(value, 'labels')}
+                  id="labels"
+                >
+                  {labels.data.map((label, index) => (
+                    <Option value={label.id} key={index}>
+                      {label.title}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
 
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Labels
-              </label>
-              <Select
-                mode="tags"
-                allowClear
-                placeholder="Please select"
-                value={formData.labels}
-                onChange={(value) => changeSelect(value, 'labels')}
-                id="labels"
-              >
-                {labels.data.map((label, index) => (
-                  <Option value={label.id} key={index}>
-                    {label.title}
-                  </Option>
-                ))}
-              </Select>
-            </div>
+              <div className="input-container">
+                <label>
+                  <RenderIcon title="mdi mdi-title" /> Priority
+                </label>
+                <ButtonRadio value={formData.level} changeSelect={changeSelect} />
+              </div>
 
-            <div className="input-container">
-              <label>
-                <RenderIcon title="mdi mdi-title" /> Priority
-              </label>
-              <ButtonRadio value={formData.level} changeSelect={changeSelect} />
-            </div>
-
-            <Button disabled={loading} type="submit">
-              {mode === MODE.new ? 'Add' : 'Update'} {loading && <LoadingOutlined spin />}
-            </Button>
-          </form>
-        )}
+              <Button disabled={loading} type="submit">
+                {mode === MODE.new ? 'Add' : 'Update'} {loading && <LoadingOutlined spin />}
+              </Button>
+              <button
+                style={{ display: 'none' }}
+                ref={resetFormButtonRef}
+                onClick={() => resetFormikEntries(resetForm)}
+                type="button"
+              ></button>
+            </form>
+          );
+        }}
       </Formik>
     </Modal>
   );

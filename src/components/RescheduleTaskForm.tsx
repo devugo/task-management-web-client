@@ -76,7 +76,7 @@ const RescheduleTaskForm = ({
       const title = data?.title || EMPTY_STRING;
       setFormData({ title, date: moment(data.date, DATE_FORMAT.secondary) });
     }
-  }, [data]);
+  }, [modalVisible]);
 
   return (
     <Modal footer={null} title="Reschedule Task" visible={modalVisible} onCancel={handleCancel}>
