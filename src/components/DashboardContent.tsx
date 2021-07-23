@@ -96,7 +96,7 @@ const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) =
           </>
         ) : (
           <div className="center">
-            <LoadingOutlined style={{ color: '#f64e60' }} spin />
+            <LoadingOutlined style={{ color: '#f64e60', fontSize: 50 }} spin />
           </div>
         )}
       </div>

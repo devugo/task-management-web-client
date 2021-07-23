@@ -41,6 +41,7 @@ const TasksContent = ({
   const { loader, tasks } = useSelector((state: RootStateType) => state);
   const tasksData = tasks.data;
   const tasksCount = tasks.count;
+  const tasksLoaded = tasks.loaded;
 
   // READING
   const readTasksLoaders = getLoader(loader, READ_TASKS);
@@ -77,9 +78,13 @@ const TasksContent = ({
           setModalData={setModalData}
         />
         <div className="tasks">
-          {fetching ? (
+          {fetching || !tasksLoaded ? (
             <div className="center">
-              <LoadingOutlined style={{ color: '#fd5c63' }} spin />
+              <LoadingOutlined style={{ color: '#fd5c63', fontSize: 50 }} spin />
+            </div>
+          ) : tasksData.length === 0 ? (
+            <div className="center">
+              <span>No task found! Please, add a task.</span>
             </div>
           ) : (
             tasksData.map((task, index) => {
