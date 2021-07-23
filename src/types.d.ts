@@ -65,8 +65,8 @@ export type ViewTaskType = {
 export type RootStateType = {
   loader: ApiResponseType[];
   auth: AuthType;
-  projects: { data: ProjectType[]; count: number };
-  labels: { data: LabelType[]; count: number };
-  priorities: { data: LevelType[]; count: number };
-  tasks: { data: ViewTaskType[]; summary: T; count: number };
+  projects: { data: ProjectType[]; count: number; loaded: boolean };
+  labels: { data: LabelType[]; count: number; loaded: boolean };
+  priorities: { data: LevelType[]; count: number; loaded: boolean };
+  tasks: { data: ViewTaskType[]; summary: T; count: number; loaded: boolean };
 };

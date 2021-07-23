@@ -1,11 +1,10 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ICONS } from '../constants/ICONS';
 import { getLoader } from '../helpers/functions/getLoader';
 import { successCreation } from '../helpers/functions/responseChecker';
-import { getLabels } from '../store/actions/label';
 import { CREATE_LABEL, READ_LABELS } from '../store/actions/types';
 import { RootStateType } from '../types.d';
 import LabelForm from './LabelForm';
@@ -20,7 +19,6 @@ const TaskLabels = ({
   changeOpenSide: (current: string) => void;
   openSide: string;
 }) => {
-  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
 
   const { loader, labels } = useSelector((state: RootStateType) => state);
@@ -52,9 +50,6 @@ const TaskLabels = ({
     }
   }, [isCreated]);
 
-  useEffect(() => {
-    dispatch(getLabels());
-  }, []);
   return (
     <div className="task-labels">
       <SidebarTitle changeOpen={changeOpen} title="Labels" />

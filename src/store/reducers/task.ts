@@ -21,7 +21,7 @@ const taskReducer = (state = initialState, action: ApiResponseType) => {
     case READ_TASKS.SUCCESS: {
       const responseData = response.data.tasks;
       const responseCount = response.data.count;
-      return { ...currentState, data: responseData, count: responseCount };
+      return { ...currentState, data: responseData, count: responseCount, loaded: true };
     }
 
     case CREATE_TASK.SUCCESS: {

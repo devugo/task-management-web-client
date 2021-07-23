@@ -17,6 +17,8 @@ import TasksContent from '../components/TasksContent';
 import { EMPTY_STRING } from '../constants/EMPTY_STRING';
 import { getPageContentTitle } from '../helpers/functions/getPageContentTitle';
 import PageWrapper from '../PageWrapper';
+import { getLabels } from '../store/actions/label';
+import { getProjects } from '../store/actions/project';
 import { getTasks } from '../store/actions/task';
 import { RootStateType } from '../types.d';
 
@@ -124,6 +126,11 @@ const Tasks = () => {
     dispatch(getTasks(type, search));
     setLoaded(true);
   }, [type, search]);
+
+  useEffect(() => {
+    dispatch(getProjects());
+    dispatch(getLabels());
+  }, []);
 
   return (
     <>

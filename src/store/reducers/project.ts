@@ -12,7 +12,7 @@ const projectReducer = (state = initialState, action: ApiResponseType) => {
   switch (type) {
     case READ_PROJECTS.SUCCESS: {
       const responseData = response.data;
-      return { ...state, data: responseData, count: responseData.length };
+      return { ...state, data: responseData, count: responseData.length, loaded: true };
     }
     case CREATE_PROJECT.SUCCESS: {
       const responseData = response.data;

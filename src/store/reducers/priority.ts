@@ -10,7 +10,7 @@ const priorityReducer = (state = initialState, action: ApiResponseType) => {
   switch (type) {
     case READ_PRIORITIES.SUCCESS: {
       const responseData = response.data;
-      return { ...state, data: responseData, count: responseData.length };
+      return { ...state, data: responseData, count: responseData.length, loaded: true };
     }
     default: {
       return state;

@@ -1,11 +1,10 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ICONS } from '../constants/ICONS';
 import { getLoader } from '../helpers/functions/getLoader';
 import { successCreation } from '../helpers/functions/responseChecker';
-import { getProjects } from '../store/actions/project';
 import { CREATE_PROJECT, READ_PROJECTS } from '../store/actions/types';
 import { RootStateType } from '../types.d';
 import ProjectForm from './ProjectForm';
@@ -20,7 +19,6 @@ const TaskProjects = ({
   changeOpenSide: (current: string) => void;
   openSide: string;
 }) => {
-  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
 
   const { loader, projects } = useSelector((state: RootStateType) => state);
@@ -51,10 +49,6 @@ const TaskProjects = ({
       handleCancel();
     }
   }, [isCreated]);
-
-  useEffect(() => {
-    dispatch(getProjects());
-  }, []);
 
   return (
     <div className="task-projects">

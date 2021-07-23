@@ -6,9 +6,10 @@ import RenderIcon from './RenderIcon';
 import TaskDate from './TaskDate';
 import TaskLabel from './TaskLabel';
 import TaskProject from './TaskProject';
+import TaskStatus from './TaskStatus';
 
 const TaskContent = (props: ViewTaskType) => {
-  const { title, description, project, level, labels, date } = props;
+  const { title, description, project, level, labels, date, status } = props;
 
   return (
     <div className="task-content">
@@ -33,6 +34,7 @@ const TaskContent = (props: ViewTaskType) => {
             </div>
           )}
         </div>
+        <TaskStatus title={status} />
       </div>
     </div>
   );
