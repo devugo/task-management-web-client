@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import DashboardContent from '../components/DashboardContent';
 import LeftSideBar from '../components/LeftSidebar';
@@ -10,12 +9,8 @@ import RightSideBar from '../components/RightSidebar';
 import RightSidebarMobile from '../components/RightSidebarMobile';
 import TaskForm from '../components/TaskForm';
 import PageWrapper from '../PageWrapper';
-import { getLabels } from '../store/actions/label';
-import { getProjects } from '../store/actions/project';
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalData, setModalData] = useState();
@@ -32,11 +27,6 @@ const Dashboard = () => {
   const toggleOverlay = (value: boolean) => {
     setOpenOverlay(value);
   };
-
-  useEffect(() => {
-    dispatch(getProjects());
-    dispatch(getLabels());
-  }, []);
 
   return (
     <>

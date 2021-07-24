@@ -2,7 +2,6 @@ import { ViewTaskType } from '../types.d';
 import TaskCompleteIcon from './TaskCompleteIcon';
 import TaskContent from './TaskContent';
 import TaskOptionsToggler from './TaskOptionsToggler';
-// import TaskStatus from './TaskStatus';
 
 const Task = ({
   data,
@@ -38,7 +37,6 @@ const Task = ({
         showStatusModal={showStatusModal}
         showRescheduleModal={showRescheduleModal}
       />
-      {/* <TaskStatus title={status} /> */}
     </div>
   );
 };
