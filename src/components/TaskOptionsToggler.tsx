@@ -83,7 +83,7 @@ const TaskOptionsToggler = ({
 
   return (
     <>
-      <Dropdown overlay={menu} placement="bottomCenter">
+      <Dropdown overlay={menu} placement="bottomCenter" trigger={['click', 'hover']}>
         <div className="task-options-toggler">
           <RenderIcon title="mdi mdi-video-input-component" />
         </div>
