@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
 import PageLoader from '../components/PageLoader';
+import { STORAGE_VARIABLE } from '../constants/STORAGE_VARIABLE';
 import { getLoader } from '../helpers/functions/getLoader';
+import { retrieveFromStorage } from '../helpers/functions/localStorage';
 import { keepUserLoggedIn } from '../store/actions/auth';
 import { KEEP_AUTH_USER } from '../store/actions/types';
 import { RootStateType } from '../types.d';
@@ -14,10 +16,15 @@ function Auth({ component: Component, isAuth, ...rest }: any) {
   const { auth, loader } = useSelector((state: RootStateType) => state);
 
   const { successData, errorData } = getLoader(loader, KEEP_AUTH_USER);
+  const token = retrieveFromStorage(STORAGE_VARIABLE.token);
 
   useEffect(() => {
     if (!auth.loggedIn) {
-      dispatch(keepUserLoggedIn());
+      if (token) {
+        dispatch(keepUserLoggedIn());
+      } else {
+        setMount(true);
+      }
     } else {
       setMount(true);
     }
