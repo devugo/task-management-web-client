@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Tasks from './pages/Tasks';
 import { getLabels } from './store/actions/label';
+import { getPriorities } from './store/actions/priority';
 import { getProjects } from './store/actions/project';
 import { RootStateType } from './types.d';
 
@@ -21,6 +22,7 @@ const App = () => {
     if (auth.loggedIn) {
       dispatch(getProjects());
       dispatch(getLabels());
+      dispatch(getPriorities());
     }
   };
 

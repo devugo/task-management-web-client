@@ -7,6 +7,7 @@ import LeftSideBar from '../components/LeftSidebar';
 import LeftSidebarMobile from '../components/LeftSidebarMobile';
 import LoaderOverlay from '../components/LoaderOverlay';
 import PageHeader from '../components/PageHeader';
+import PageWrapper from '../components/PageWrapper';
 import ProjectForm from '../components/ProjectForm';
 import RescheduleTaskForm from '../components/RescheduleTaskForm';
 import RightSideBar from '../components/RightSidebar';
@@ -16,7 +17,6 @@ import TaskForm from '../components/TaskForm';
 import TasksContent from '../components/TasksContent';
 import { EMPTY_STRING } from '../constants/EMPTY_STRING';
 import { getPageContentTitle } from '../helpers/functions/getPageContentTitle';
-import PageWrapper from '../PageWrapper';
 import { getTasks } from '../store/actions/task';
 import { RootStateType } from '../types.d';
 

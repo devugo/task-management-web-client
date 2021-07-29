@@ -5,10 +5,10 @@ import LeftSideBar from '../components/LeftSidebar';
 import LeftSidebarMobile from '../components/LeftSidebarMobile';
 import LoaderOverlay from '../components/LoaderOverlay';
 import PageHeader from '../components/PageHeader';
+import PageWrapper from '../components/PageWrapper';
 import RightSideBar from '../components/RightSidebar';
 import RightSidebarMobile from '../components/RightSidebarMobile';
 import TaskForm from '../components/TaskForm';
-import PageWrapper from '../PageWrapper';
 
 const Dashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);

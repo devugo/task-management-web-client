@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getLoader } from '../helpers/functions/getLoader';
-import { getTasks, getTasksSummary } from '../store/actions/task';
+import { getTasksSummary } from '../store/actions/task';
 import { DELETE_TASK } from '../store/actions/types';
 import { RootStateType } from '../types.d';
 import DashboardChart from './DashboardChart';
@@ -45,7 +45,7 @@ const DashboardContent = ({ toggleOverlay }: { toggleOverlay: (value: boolean) =
   }, [deleting]);
 
   useEffect(() => {
-    dispatch(getTasks());
+    // dispatch(getTasks());
   }, []);
 
   return (

@@ -1,17 +1,15 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { ICONS } from '../constants/ICONS';
 import { getLoader } from '../helpers/functions/getLoader';
-import { getPriorities } from '../store/actions/priority';
 import { READ_PRIORITIES } from '../store/actions/types';
 import { RootStateType } from '../types.d';
 import SidebarTitle from './SidebarTitle';
 import SingleTaskMainGroup from './SingleTaskMainGrup';
 
 const TaskPriorities = () => {
-  const dispatch = useDispatch();
   const { loader, priorities } = useSelector((state: RootStateType) => state);
   const priorityData = priorities.data;
 
@@ -25,10 +23,6 @@ const TaskPriorities = () => {
   const changeOpen = (): void => {
     setOpen((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    dispatch(getPriorities());
-  }, []);
 
   return (
     <div className="task-priorities">
