@@ -14,8 +14,8 @@ const apiMiddleware = (store: any) => (next: any) => async (action: ActionObject
   const GET_TOKEN = retrieveFromStorage(STORAGE_VARIABLE.token);
 
   const axiosClient: any = axios.create({
-    // baseURL: 'https://task-management-server-devugo.herokuapp.com/',
-    baseURL: 'http://localhost:4000/',
+    baseURL: 'https://task-management-server-devugo.herokuapp.com/',
+    // baseURL: 'http://localhost:4000/',
     headers: { Authorization: `Bearer ${GET_TOKEN}` },
   });
   const { api, type, url } = action;
