@@ -16,19 +16,22 @@ import { RootStateType } from './types.d';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { auth } = useSelector((state: RootStateType) => state);
+  const {
+    auth,
+    tasks: { summary },
+  } = useSelector((state: RootStateType) => state);
 
   const loadResources = () => {
-    if (auth.loggedIn) {
+    if (auth.loggedIn && summary) {
+      dispatch(getPriorities());
       dispatch(getProjects());
       dispatch(getLabels());
-      dispatch(getPriorities());
     }
   };
 
   useEffect(() => {
     loadResources();
-  }, [auth]);
+  }, [auth, summary]);
 
   return (
     <Router>

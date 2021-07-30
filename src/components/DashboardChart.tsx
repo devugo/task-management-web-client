@@ -36,7 +36,12 @@ const DashboardChart = ({ data }: { data: { name: string; count: number }[] }) =
             <span>Fetching Chart Data</span>
           </div>
         ) : (
-          <AreaChart width={chartWidth} height={300} data={data} margin={chartMargin}>
+          <AreaChart
+            width={chartWidth}
+            height={300}
+            data={data.map((d) => ({ ...d, count: +d.count }))}
+            margin={chartMargin}
+          >
             <defs>
               <linearGradient id="colorUv" x1="1" y1="1" x2="1" y2="0">
                 <stop offset="5%" stopColor="#006fd6" stopOpacity={0.5} />
