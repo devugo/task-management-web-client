@@ -201,6 +201,7 @@ const TaskForm = ({
                   onChange={(value) => changeSelect(value, 'project')}
                   id="project"
                   showArrow={false}
+                  className="devugo-selector"
                 >
                   {projects.data.map((project, index) => (
                     <Option key={index} value={project.id}>
@@ -221,6 +222,7 @@ const TaskForm = ({
                   value={formData.labels}
                   onChange={(value) => changeSelect(value, 'labels')}
                   id="labels"
+                  className="devugo-selector"
                 >
                   {labels.data.map((label, index) => (
                     <Option value={label.id} key={index}>

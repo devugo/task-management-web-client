@@ -82,13 +82,17 @@ $text-shadow: 2px 2px 4px var(--text-shadow-color);
   width: 100% !important;
 
   &-selector {
-    height: 50px !important;
     background-color: var(--input-bg-color) !important;
     border: none !important;
-    // border-color: var(--input-se);
 
     span.ant-select-selection-placeholder {
       color: var(--select-input-placeholder-color) !important;
+    }
+  }
+
+  &.devugo-selector {
+    .ant-select-selector {
+      height: 50px !important;
     }
   }
 }
